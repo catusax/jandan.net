@@ -17,5 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## API
 
+https://github.com/Blazers007/Jandan-React-Native/blob/master/src/static/Static.js
+
 wuliao :
 <http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments&page=0>
