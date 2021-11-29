@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../core/utils/log.dart';
 import '../init/splash.dart';
-import '../page/home/home.dart';
+import '../page/home/homepage.dart';
 
 final router = FluroRouter();
 
@@ -15,7 +15,7 @@ class RouteMaps {
     }));
     router.define("/home", handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-      return const MyHomePage();
+      return MyHomePage();
     }));
   }
 
