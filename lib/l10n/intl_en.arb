@@ -1,0 +1,11 @@
+{
+    "@_http错误代码": {
+        "comment": "asd"
+    },
+    "connect_timeout": "Connect Timeout",
+    "send_timeout": "Send Timeout",
+    "receive_timeout": "Ceceive Timeout",
+    "response": "Response Error",
+    "request_cancle": "Request Canceled",
+    "unknow_error": "Unknow Error"
+}
