@@ -1,23 +1,31 @@
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jandan/page/home/wuliao/wuliao_page.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'wuliao/wuliao_page.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   static const buttonMargin = 40.0; //左右边距
   static const buttonPadding = 15.0; //按钮内部上下边距
 
-  final RefreshController _wuliaorefreshController =
-      RefreshController(initialRefresh: false);
-
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+    final double pinnedHeaderHeight =
+        //statusBar height
+        statusBarHeight +
+            //pinned SliverAppBar height in header
+            kToolbarHeight;
     return Scaffold(
       body: DefaultTabController(
         length: 5,
-        child: NestedScrollView(
+        child: ExtendedNestedScrollView(
           floatHeaderSlivers: true,
+          onlyOneScrollInBody: true,
+          pinnedHeaderSliverHeightBuilder: () {
+            return pinnedHeaderHeight;
+          },
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
@@ -35,7 +43,7 @@ class MyHomePage extends StatelessWidget {
                   ],
                   onTap: (position) {
                     //TODO:双击刷新
-                    _wuliaorefreshController.requestRefresh();
+                    // _wuliaorefreshController.requestRefresh();
                   },
                 ),
               ),
@@ -45,7 +53,7 @@ class MyHomePage extends StatelessWidget {
             children: [
               const Icon(Icons.directions_car),
               const Icon(Icons.directions_car),
-              WuliaoPage(refreshController: _wuliaorefreshController),
+              WuliaoPage(),
               const Icon(Icons.directions_bike),
               const Icon(Icons.directions_bike),
             ],

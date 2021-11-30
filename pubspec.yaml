@@ -55,7 +55,9 @@ dependencies:
 
   ## UI
   oktoast: ^3.1.4
-  pull_to_refresh: ^2.0.0
+  cached_network_image: ^3.2.0
+  extended_nested_scroll_view: ^5.0.0
+  loading_more_list: ^4.1.0
 
 dev_dependencies:
   flutter_test:

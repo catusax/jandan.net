@@ -6,14 +6,14 @@ import 'package:flutter/foundation.dart';
 
 import 'comment.dart';
 
-class WuLiao {
+class Wuliao {
   final String status;
   final int current_page;
   final int total_comments;
   final int page_count;
   final int count;
   final List<Comment> comments;
-  WuLiao({
+  Wuliao({
     required this.status,
     required this.current_page,
     required this.total_comments,
@@ -22,7 +22,7 @@ class WuLiao {
     required this.comments,
   });
 
-  WuLiao copyWith({
+  Wuliao copyWith({
     String? status,
     int? current_page,
     int? total_comments,
@@ -30,7 +30,7 @@ class WuLiao {
     int? count,
     List<Comment>? comments,
   }) {
-    return WuLiao(
+    return Wuliao(
       status: status ?? this.status,
       current_page: current_page ?? this.current_page,
       total_comments: total_comments ?? this.total_comments,
@@ -51,8 +51,8 @@ class WuLiao {
     };
   }
 
-  factory WuLiao.fromMap(Map<String, dynamic> map) {
-    return WuLiao(
+  factory Wuliao.fromMap(Map<String, dynamic> map) {
+    return Wuliao(
       status: map['status'],
       current_page: map['current_page']?.toInt(),
       total_comments: map['total_comments']?.toInt(),
@@ -65,18 +65,18 @@ class WuLiao {
 
   String toJson() => json.encode(toMap());
 
-  factory WuLiao.fromJson(String source) => WuLiao.fromMap(json.decode(source));
+  factory Wuliao.fromJson(String source) => Wuliao.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'WuLiao(status: $status, current_page: $current_page, total_comments: $total_comments, page_count: $page_count, count: $count, comments: $comments)';
+    return 'Wuliao(status: $status, current_page: $current_page, total_comments: $total_comments, page_count: $page_count, count: $count, comments: $comments)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is WuLiao &&
+    return other is Wuliao &&
         other.status == status &&
         other.current_page == current_page &&
         other.total_comments == total_comments &&

@@ -6,16 +6,13 @@ import '../utils/log.dart';
 
 class XHttp {
   XHttp._internal();
-  static const auth =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.byP42WB_g-Jfh3bRCO3nNuuKAV_6toSUzhfBeW7POjY";
 
   ///网络请求配置
   static final Dio dio = Dio(
     BaseOptions(
-      baseUrl: "https://calibnet.filcoin.xyz:31415/api",
+      baseUrl: "https://i.jandan.net",
       connectTimeout: 5000,
       receiveTimeout: 3000,
-      headers: {"Authorization": auth},
     ),
   );
 
@@ -34,7 +31,6 @@ class XHttp {
       }
       return handler.next(response);
     }, onError: (DioError e, handler) {
-      Log.http.info("错误之前");
       handleError(e);
       return handler.next(e);
     }));
