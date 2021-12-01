@@ -5,27 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'wuliao/wuliao_page.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
   static const buttonMargin = 40.0; //左右边距
   static const buttonPadding = 15.0; //按钮内部上下边距
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
-    final double pinnedHeaderHeight =
-        //statusBar height
-        statusBarHeight +
-            //pinned SliverAppBar height in header
-            kToolbarHeight;
     return Scaffold(
       body: DefaultTabController(
         length: 5,
         child: ExtendedNestedScrollView(
           floatHeaderSlivers: true,
           onlyOneScrollInBody: true,
-          pinnedHeaderSliverHeightBuilder: () {
-            return pinnedHeaderHeight;
-          },
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(

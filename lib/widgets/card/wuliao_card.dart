@@ -26,7 +26,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.item.user_id,
+                widget.item.comment_author,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(widget.item.text_content),
