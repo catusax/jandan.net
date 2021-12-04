@@ -1,8 +1,11 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
 class Comment {
+  bool? ooxx;
   final String comment_ID;
   final String comment_post_ID;
   final String comment_author;
@@ -10,12 +13,13 @@ class Comment {
   final String comment_date_gmt;
   final String comment_content;
   final String user_id;
-  final String vote_positive;
-  final String vote_negative;
-  final String sub_comment_count;
+  String vote_positive;
+  String vote_negative;
+  String sub_comment_count;
   final String text_content;
   final List<String> pics;
   Comment({
+    this.ooxx,
     required this.comment_ID,
     required this.comment_post_ID,
     required this.comment_author,
@@ -31,6 +35,7 @@ class Comment {
   });
 
   Comment copyWith({
+    bool? ooxx,
     String? comment_ID,
     String? comment_post_ID,
     String? comment_author,
@@ -45,6 +50,7 @@ class Comment {
     List<String>? pics,
   }) {
     return Comment(
+      ooxx: ooxx ?? this.ooxx,
       comment_ID: comment_ID ?? this.comment_ID,
       comment_post_ID: comment_post_ID ?? this.comment_post_ID,
       comment_author: comment_author ?? this.comment_author,
@@ -62,6 +68,7 @@ class Comment {
 
   Map<String, dynamic> toMap() {
     return {
+      'ooxx': ooxx,
       'comment_ID': comment_ID,
       'comment_post_ID': comment_post_ID,
       'comment_author': comment_author,
@@ -79,6 +86,7 @@ class Comment {
 
   factory Comment.fromMap(Map<String, dynamic> map) {
     return Comment(
+      ooxx: map['ooxx'],
       comment_ID: map['comment_ID'],
       comment_post_ID: map['comment_post_ID'],
       comment_author: map['comment_author'],
@@ -101,7 +109,7 @@ class Comment {
 
   @override
   String toString() {
-    return 'Comment(comment_ID: $comment_ID, comment_post_ID: $comment_post_ID, comment_author: $comment_author, comment_date: $comment_date, comment_date_gmt: $comment_date_gmt, comment_content: $comment_content, user_id: $user_id, vote_positive: $vote_positive, vote_negative: $vote_negative, sub_comment_count: $sub_comment_count, text_content: $text_content, pics: $pics)';
+    return 'Comment(ooxx: $ooxx, comment_ID: $comment_ID, comment_post_ID: $comment_post_ID, comment_author: $comment_author, comment_date: $comment_date, comment_date_gmt: $comment_date_gmt, comment_content: $comment_content, user_id: $user_id, vote_positive: $vote_positive, vote_negative: $vote_negative, sub_comment_count: $sub_comment_count, text_content: $text_content, pics: $pics)';
   }
 
   @override
@@ -109,6 +117,7 @@ class Comment {
     if (identical(this, other)) return true;
 
     return other is Comment &&
+        other.ooxx == ooxx &&
         other.comment_ID == comment_ID &&
         other.comment_post_ID == comment_post_ID &&
         other.comment_author == comment_author &&
@@ -125,7 +134,8 @@ class Comment {
 
   @override
   int get hashCode {
-    return comment_ID.hashCode ^
+    return ooxx.hashCode ^
+        comment_ID.hashCode ^
         comment_post_ID.hashCode ^
         comment_author.hashCode ^
         comment_date.hashCode ^
