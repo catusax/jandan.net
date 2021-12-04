@@ -10,8 +10,10 @@ import '../../../widgets/card/wuliao_card.dart';
 class WuliaoPage extends StatefulWidget {
   const WuliaoPage({
     Key? key,
+    required this.scrollController,
   }) : super(key: key);
   // final RefreshController refreshController;
+  final ScrollController scrollController;
 
   @override
   State<WuliaoPage> createState() => _WuliaoPageState();
@@ -72,6 +74,7 @@ class _WuliaoPageState extends State<WuliaoPage>
         // enablePullUp: true,
         child: LoadingMoreList<Comment>(
           ListConfig<Comment>(
+            controller: widget.scrollController,
             sourceList: source,
             itemBuilder: (BuildContext c, Comment item, int idx) {
               return WuliaoCard(

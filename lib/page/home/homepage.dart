@@ -4,10 +4,18 @@ import 'package:flutter/widgets.dart';
 
 import 'wuliao/wuliao_page.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
   static const buttonMargin = 40.0; //左右边距
-  static const buttonPadding = 15.0; //按钮内部上下边距
+  static const buttonPadding = 15.0;
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final ScrollController scrollController = ScrollController();
+
+  int currentPosition = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,7 @@ class MyHomePage extends StatelessWidget {
       body: DefaultTabController(
         length: 5,
         child: ExtendedNestedScrollView(
+          controller: scrollController,
           floatHeaderSlivers: true,
           onlyOneScrollInBody: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -33,6 +42,15 @@ class MyHomePage extends StatelessWidget {
                     Tab(text: "树洞"),
                   ],
                   onTap: (position) {
+                    switch (position) {
+                      case 2:
+                        if (currentPosition == position) {
+                          scrollController.jumpTo(0);
+                        }
+                        break;
+                      default:
+                    }
+                    currentPosition = position;
                     //TODO:双击刷新
                     // _wuliaorefreshController.requestRefresh();
                   },
@@ -44,7 +62,9 @@ class MyHomePage extends StatelessWidget {
             children: [
               const Icon(Icons.directions_car),
               const Icon(Icons.directions_car),
-              WuliaoPage(),
+              WuliaoPage(
+                scrollController: scrollController,
+              ),
               const Icon(Icons.directions_bike),
               const Icon(Icons.directions_bike),
             ],
