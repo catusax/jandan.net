@@ -30,69 +30,36 @@ class _WuliaoPageState extends State<WuliaoPage>
   Widget build(BuildContext context) {
     super.build(context);
     return RefreshIndicator(
-        onRefresh: () async {
-          try {
-            final wuliao = await JandanApi.wuliao(page: 0);
-            source.clear();
-            setState(() {
-              source.addAll(wuliao.comments);
-              // comments = wuliao.comments;
-            });
-          } catch (e) {
-            Log.http.severe(e);
-          }
-        },
-        // onLoading: () async {
-        //   Log.log.fine("loading");
-        //   try {
-        //     final wuliao = await JandanApi.wuliao(page: currentPage + 1);
-        //     setState(() {
-        //       currentPage = wuliao.current_page;
-        //       comments.addAll(wuliao.comments);
-        //     });
-        //   } catch (e) {
-        //     Log.http.severe(e);
-        //   } finally {
-        //     widget.refreshController.refreshCompleted();
-        //   }
-        // },
-        // controller: widget.refreshController,
-        // enablePullDown: true,
-        // enablePullUp: true,
-        child: LoadingMoreList<Comment>(
-          ListConfig<Comment>(
-            controller: widget.scrollController,
-            sourceList: source,
-            itemBuilder: (BuildContext c, Comment item, int idx) {
-              return InkWell(
-                onTap: () {
-                  RouteMaps.navigateTo(context, TucaoPage.routeName,
-                      params: {TucaoPage.paramItem: item.toJson()});
-                },
-                child: WuliaoCard(
-                  item: item,
-                ),
-              );
-            },
-          ),
-        )
-
-        //  ListView.builder(
-        //     itemCount: comments.length,
-        //     itemBuilder: (context, idx) {
-        //       return Card(
-        //           child: Column(
-        //         children: [
-        //           Text(comments[idx].comment_content),
-        //           CachedNetworkImage(
-        //             imageUrl: comments[idx].pics.first,
-        //             placeholder: (context, url) => CircularProgressIndicator(),
-        //             errorWidget: (context, url, error) => Icon(Icons.error),
-        //           ),
-        //         ],
-        //       ));
-        //     }),
-        );
+      onRefresh: () async {
+        try {
+          final wuliao = await JandanApi.wuliao(page: 0);
+          source.clear();
+          setState(() {
+            source.addAll(wuliao.comments);
+            // comments = wuliao.comments;
+          });
+        } catch (e) {
+          Log.http.severe(e);
+        }
+      },
+      child: LoadingMoreList<Comment>(
+        ListConfig<Comment>(
+          controller: widget.scrollController,
+          sourceList: source,
+          itemBuilder: (BuildContext c, Comment item, int idx) {
+            return InkWell(
+              onTap: () {
+                RouteMaps.navigateTo(context, TucaoPage.routeName,
+                    params: {TucaoPage.paramItem: item.toJson()});
+              },
+              child: WuliaoCard(
+                item: item,
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 
   @override

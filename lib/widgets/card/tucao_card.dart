@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
@@ -124,8 +124,14 @@ class _TucaoCardState extends State<TucaoCard> {
                 )
               ],
             ),
-            Html(data: tucao.date),
-            Text(tucao.content),
+            Text(
+              timeago.format(
+                DateTime.parse(tucao.date),
+                locale: Localizations.localeOf(context).languageCode,
+              ),
+            ),
+            // Html(data: tucao.content.trim()),
+            Text(tucao.content.trim())
           ],
         ),
       ),

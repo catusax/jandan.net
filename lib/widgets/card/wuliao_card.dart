@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
 import '../../models/wuliao/comment.dart';
+import '../text/blod_text.dart';
 
 class WuliaoCard extends StatefulWidget {
   const WuliaoCard({Key? key, required this.item}) : super(key: key);
@@ -27,9 +29,12 @@ class _WuliaoCardState extends State<WuliaoCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SimpleBlodText(widget.item.comment_author),
             Text(
-              widget.item.comment_author,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              timeago.format(
+                DateTime.parse(widget.item.comment_date),
+                locale: Localizations.localeOf(context).languageCode,
+              ),
             ),
             Text(widget.item.text_content.trim()),
             _images(context),

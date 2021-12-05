@@ -31,18 +31,7 @@ class _TucaoPageState extends State<TucaoPage> {
   void initState() {
     super.initState();
     Log.log.fine("message");
-    () async {
-      try {
-        final tucaon = await JandanApi.getTucao(widget.item.comment_ID);
-        setState(() {
-          tucao = tucaon;
-        });
-      } catch (e) {
-        Log.http.severe(e);
-        SnackBarUtil.showSnackbar(context, Text(locator<S>().network_error));
-        rethrow;
-      }
-    }.call();
+    resresh();
   }
 
   @override
@@ -78,9 +67,14 @@ class _TucaoPageState extends State<TucaoPage> {
           WuliaoCard(item: widget.item),
           tucao == null || tucao!.data.list.isEmpty
               ? InkWell(
-                  child: Text(
-                    locator<S>().have_no_comment_refresh,
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  onTap: () {
+                    resresh();
+                  },
+                  child: Center(
+                    child: Text(
+                      locator<S>().have_no_comment_refresh,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
                   ),
                 )
               : const SizedBox.shrink(),
@@ -145,5 +139,20 @@ class _TucaoPageState extends State<TucaoPage> {
         ),
       ];
     }
+  }
+
+  void resresh() {
+    () async {
+      try {
+        final tucaon = await JandanApi.getTucao(widget.item.comment_ID);
+        setState(() {
+          tucao = tucaon;
+        });
+      } catch (e) {
+        Log.http.severe(e);
+        SnackBarUtil.showSnackbar(context, Text(locator<S>().network_error));
+        rethrow;
+      }
+    }.call();
   }
 }
