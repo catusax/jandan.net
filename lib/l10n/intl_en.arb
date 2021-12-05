@@ -7,5 +7,22 @@
     "receive_timeout": "Ceceive Timeout",
     "response": "Response Error",
     "request_cancle": "Request Canceled",
-    "unknow_error": "Unknow Error"
+    "unknow_error": "Unknow Error",
+    "@_homepage": {
+        "comment": "adad"
+    },
+    "jandan": "Jandan",
+    "share": "Share",
+    "add_to_fav": "Add To Favorities",
+    "copy_addr": "Copy Link Address",
+    "comments": "Comments",
+    "failed_to_vote": "Failed To Vote",
+    "@_Tab": {
+        "comment": "adad"
+    },
+    "news": "NEWS",
+    "tending": "TENDING",
+    "pics": "PICS",
+    "lomo": "LOMO",
+    "fml": "FML"
 }

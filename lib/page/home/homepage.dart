@@ -2,6 +2,8 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../generated/l10n.dart';
+import '../../init/locator.dart';
 import 'wuliao/wuliao_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -34,12 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 snap: true,
                 title: const Text("Jandan"),
                 bottom: TabBar(
-                  tabs: const [
-                    Tab(text: "新鲜事"),
-                    Tab(text: "热榜"),
-                    Tab(text: "无聊图"),
-                    Tab(text: "随手拍"),
-                    Tab(text: "树洞"),
+                  tabs: [
+                    Tab(text: locator<S>().news),
+                    Tab(text: locator<S>().tending),
+                    Tab(text: locator<S>().pics),
+                    Tab(text: locator<S>().lomo),
+                    Tab(text: locator<S>().fml),
                   ],
                   onTap: (position) {
                     switch (position) {
@@ -74,32 +76,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
-// return DefaultTabController(
-//       length: 5,
-//       child: Scaffold(
-//         appBar: AppBar(
-//           bottom: const TabBar(
-//             tabs: [
-//               Tab(text: "新鲜事"),
-//               Tab(text: "热榜"),
-//               Tab(text: "无聊图"),
-//               Tab(text: "随手拍"),
-//               Tab(text: "树洞"),
-//             ],
-//           ),
-//           title: const Text('Jandan'),
-//         ),
-//         body: TabBarView(
-//           children: [
-//             const Icon(Icons.directions_car),
-//             const Icon(Icons.directions_car),
-//             WuliaoPage(refreshController: _wuliaorefreshController),
-//             const Icon(Icons.directions_bike),
-//             const Icon(Icons.directions_bike),
-//           ],
-//         ),
-//       ),
-//     )

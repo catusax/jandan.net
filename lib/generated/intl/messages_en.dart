@@ -22,14 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add_to_fav": MessageLookupByLibrary.simpleMessage("Add To Favorities"),
+        "comments": MessageLookupByLibrary.simpleMessage("Comments"),
         "connect_timeout":
             MessageLookupByLibrary.simpleMessage("Connect Timeout"),
+        "copy_addr": MessageLookupByLibrary.simpleMessage("Copy Link Address"),
+        "failed_to_vote":
+            MessageLookupByLibrary.simpleMessage("Failed To Vote"),
+        "fml": MessageLookupByLibrary.simpleMessage("FML"),
+        "jandan": MessageLookupByLibrary.simpleMessage("Jandan"),
+        "lomo": MessageLookupByLibrary.simpleMessage("LOMO"),
+        "news": MessageLookupByLibrary.simpleMessage("NEWS"),
+        "pics": MessageLookupByLibrary.simpleMessage("PICS"),
         "receive_timeout":
             MessageLookupByLibrary.simpleMessage("Ceceive Timeout"),
         "request_cancle":
             MessageLookupByLibrary.simpleMessage("Request Canceled"),
         "response": MessageLookupByLibrary.simpleMessage("Response Error"),
         "send_timeout": MessageLookupByLibrary.simpleMessage("Send Timeout"),
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
+        "tending": MessageLookupByLibrary.simpleMessage("TENDING"),
         "unknow_error": MessageLookupByLibrary.simpleMessage("Unknow Error")
       };
 }

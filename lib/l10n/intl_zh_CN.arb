@@ -1,0 +1,28 @@
+{
+    "@_http错误代码": {
+        "comment": "asd"
+    },
+    "connect_timeout": "连接超时",
+    "send_timeout": "发送超时",
+    "receive_timeout": "接收超时",
+    "response": "相应错误",
+    "request_cancle": "请求被取消",
+    "unknow_error": "未知错误",
+    "@_homepage": {
+        "comment": "adad"
+    },
+    "jandan": "煎蛋",
+    "share": "分享",
+    "add_to_fav": "添加到收藏夹",
+    "copy_addr": "复制链接地址",
+    "comments": "吐槽",
+    "failed_to_vote": "投票失败",
+    "@_Tab": {
+        "comment": "adad"
+    },
+    "news": "新鲜事",
+    "tending": "热榜",
+    "pics": "无聊图",
+    "lomo": "随手拍",
+    "fml": "树洞"
+}

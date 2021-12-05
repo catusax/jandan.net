@@ -109,6 +109,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Jandan`
+  String get jandan {
+    return Intl.message(
+      'Jandan',
+      name: 'jandan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add To Favorities`
+  String get add_to_fav {
+    return Intl.message(
+      'Add To Favorities',
+      name: 'add_to_fav',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy Link Address`
+  String get copy_addr {
+    return Intl.message(
+      'Copy Link Address',
+      name: 'copy_addr',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message(
+      'Comments',
+      name: 'comments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed To Vote`
+  String get failed_to_vote {
+    return Intl.message(
+      'Failed To Vote',
+      name: 'failed_to_vote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NEWS`
+  String get news {
+    return Intl.message(
+      'NEWS',
+      name: 'news',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TENDING`
+  String get tending {
+    return Intl.message(
+      'TENDING',
+      name: 'tending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PICS`
+  String get pics {
+    return Intl.message(
+      'PICS',
+      name: 'pics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LOMO`
+  String get lomo {
+    return Intl.message(
+      'LOMO',
+      name: 'lomo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FML`
+  String get fml {
+    return Intl.message(
+      'FML',
+      name: 'fml',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -117,6 +227,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
     ];
   }
 
