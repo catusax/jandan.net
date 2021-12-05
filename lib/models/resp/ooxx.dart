@@ -1,40 +1,42 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 class OOXXResp {
-  final int code;
+  final int error;
   final String msg;
-  final String? data;
+  final int comment_id;
   OOXXResp({
-    required this.code,
+    required this.error,
     required this.msg,
-    this.data,
+    required this.comment_id,
   });
 
   OOXXResp copyWith({
-    int? code,
+    int? error,
     String? msg,
-    String? data,
+    int? comment_id,
   }) {
     return OOXXResp(
-      code: code ?? this.code,
+      error: error ?? this.error,
       msg: msg ?? this.msg,
-      data: data ?? this.data,
+      comment_id: comment_id ?? this.comment_id,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'code': code,
+      'error': error,
       'msg': msg,
-      'data': data,
+      'comment_id': comment_id,
     };
   }
 
   factory OOXXResp.fromMap(Map<String, dynamic> map) {
     return OOXXResp(
-      code: map['code'],
+      error: map['error'],
       msg: map['msg'],
-      data: map['data'] != null ? map['data'] : null,
+      comment_id: map['comment_id'],
     );
   }
 
@@ -44,18 +46,19 @@ class OOXXResp {
       OOXXResp.fromMap(json.decode(source));
 
   @override
-  String toString() => 'OOXXResp(code: $code, msg: $msg, data: $data)';
+  String toString() =>
+      'OOXXResp(error: $error, msg: $msg, comment_id: $comment_id)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is OOXXResp &&
-        other.code == code &&
+        other.error == error &&
         other.msg == msg &&
-        other.data == data;
+        other.comment_id == comment_id;
   }
 
   @override
-  int get hashCode => code.hashCode ^ msg.hashCode ^ data.hashCode;
+  int get hashCode => error.hashCode ^ msg.hashCode ^ comment_id.hashCode;
 }

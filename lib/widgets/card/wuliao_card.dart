@@ -10,10 +10,8 @@ import '../../init/locator.dart';
 import '../../models/wuliao/comment.dart';
 
 class WuliaoCard extends StatefulWidget {
-  const WuliaoCard({Key? key, required this.item, required this.idx})
-      : super(key: key);
+  const WuliaoCard({Key? key, required this.item}) : super(key: key);
   final Comment item;
-  final int idx;
 
   @override
   State<WuliaoCard> createState() => _WuliaoCardState();
@@ -65,21 +63,23 @@ class _WuliaoCardState extends State<WuliaoCard> {
   }
 
   Widget _image(BuildContext context, String url, {double? size}) {
-    return CachedNetworkImage(
-      imageUrl: url,
-      height: size,
-      width: size,
-      placeholder: (context, url) => SizedBox(
+    return Center(
+      child: CachedNetworkImage(
+        imageUrl: url,
         height: size,
-        width: double.infinity,
-        child: const Center(
-          child: SizedBox.square(
-            dimension: 30,
-            child: CircularProgressIndicator(),
+        width: size,
+        placeholder: (context, url) => SizedBox(
+          height: size,
+          width: double.infinity,
+          child: const Center(
+            child: SizedBox.square(
+              dimension: 30,
+              child: CircularProgressIndicator(),
+            ),
           ),
         ),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 
@@ -91,7 +91,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
             try {
               final res =
                   await JandanApi.ooxxComment(true, widget.item.comment_ID);
-              if (res.code == 0) {
+              if (res.error == 0) {
                 setState(() {
                   widget.item.ooxx =
                       true; // 暂时使用临时数据保存ooxx状态，刷新网页后不出现红色，与网页版一致，后续考虑数据库
@@ -125,7 +125,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
             try {
               final res =
                   await JandanApi.ooxxComment(false, widget.item.comment_ID);
-              if (res.code == 0) {
+              if (res.error == 0) {
                 setState(() {
                   widget.item.ooxx = false;
                   widget.item.vote_negative =
@@ -166,12 +166,14 @@ class _WuliaoCardState extends State<WuliaoCard> {
                           onTap: () {
                             Share.share(
                                 "https://jandan.net/t/${widget.item.comment_ID}");
+                            Navigator.of(context).pop();
                           },
                           title: Text(locator<S>().share),
                         ),
                         ListTile(
                           onTap: () {
                             //TODO: 收藏夹
+                            Navigator.of(context).pop();
                           },
                           title: Text(locator<S>().add_to_fav),
                         ),
@@ -183,6 +185,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
                                     "${widget.item.text_content} https://jandan.net/t/${widget.item.comment_ID}",
                               ),
                             );
+                            Navigator.of(context).pop();
                           },
                           title: Text(locator<S>().copy_addr),
                         )

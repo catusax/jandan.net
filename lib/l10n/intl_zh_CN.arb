@@ -1,7 +1,12 @@
 {
+    "@_通用": {
+        "comment": "adad"
+    },
+    "dismiss": "解除",
     "@_http错误代码": {
         "comment": "asd"
     },
+    "network_error": "网络错误",
     "connect_timeout": "连接超时",
     "send_timeout": "发送超时",
     "receive_timeout": "接收超时",
@@ -24,5 +29,13 @@
     "tending": "热榜",
     "pics": "无聊图",
     "lomo": "随手拍",
-    "fml": "树洞"
+    "fml": "树洞",
+    "@_tucao": {
+        "comment": "adad"
+    },
+    "hot_comment": "热门评论",
+    "latest_comment": "最新评论",
+    "have_no_comment_refresh": "还没有评论，点击刷新",
+    "copy_comment": "复制评论",
+    "reply": "回复"
 }

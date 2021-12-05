@@ -50,6 +50,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `dismiss`
+  String get dismiss {
+    return Intl.message(
+      'dismiss',
+      name: 'dismiss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network error`
+  String get network_error {
+    return Intl.message(
+      'Network error',
+      name: 'network_error',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Connect Timeout`
   String get connect_timeout {
     return Intl.message(
@@ -215,6 +235,56 @@ class S {
     return Intl.message(
       'FML',
       name: 'fml',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hot comment`
+  String get hot_comment {
+    return Intl.message(
+      'Hot comment',
+      name: 'hot_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latest comment`
+  String get latest_comment {
+    return Intl.message(
+      'Latest comment',
+      name: 'latest_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have no comment yet,click to refresh`
+  String get have_no_comment_refresh {
+    return Intl.message(
+      'Have no comment yet,click to refresh',
+      name: 'have_no_comment_refresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy comment`
+  String get copy_comment {
+    return Intl.message(
+      'Copy comment',
+      name: 'copy_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reply`
+  String get reply {
+    return Intl.message(
+      'Reply',
+      name: 'reply',
       desc: '',
       args: [],
     );

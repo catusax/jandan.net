@@ -1,7 +1,12 @@
 {
+    "@_通用": {
+        "comment": "adad"
+    },
+    "dismiss": "dismiss",
     "@_http错误代码": {
         "comment": "asd"
     },
+    "network_error": "Network error",
     "connect_timeout": "Connect Timeout",
     "send_timeout": "Send Timeout",
     "receive_timeout": "Ceceive Timeout",
@@ -24,5 +29,13 @@
     "tending": "TENDING",
     "pics": "PICS",
     "lomo": "LOMO",
-    "fml": "FML"
+    "fml": "FML",
+    "@_tucao": {
+        "comment": "adad"
+    },
+    "hot_comment": "Hot comment",
+    "latest_comment": "Latest comment",
+    "have_no_comment_refresh": "Have no comment yet,click to refresh",
+    "copy_comment": "Copy comment",
+    "reply": "Reply"
 }

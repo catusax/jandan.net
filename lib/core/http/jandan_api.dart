@@ -1,7 +1,8 @@
-import 'package:jandan/core/http/http.dart';
-import 'package:jandan/core/utils/log.dart';
-import 'package:jandan/models/resp/ooxx.dart';
-import 'package:jandan/models/wuliao/wuliao.dart';
+import '../../models/resp/ooxx.dart';
+import '../../models/wuliao/tucao.dart';
+import '../../models/wuliao/wuliao.dart';
+import '../utils/log.dart';
+import 'http.dart';
 
 class JandanApi {
   static Future<Wuliao> wuliao({int page = 0}) async {
@@ -12,9 +13,29 @@ class JandanApi {
   }
 
   static Future<OOXXResp> ooxxComment(bool positive, String commentId) async {
-    final resp = await XHttp.post("https://api.jandan.net/api/v1/vote/comment",
-        {"vote_type": positive ? "pos" : "neg", "comment_id": commentId});
+    final resp = await XHttp.post("https://jandan.net/api/comment/vote", {
+      "like_type": positive ? "pos" : "neg",
+      "comment_id": commentId,
+      "data_type": "comment"
+    });
     Log.log.fine(resp);
     return OOXXResp.fromMap(resp);
+  }
+
+  static Future<OOXXResp> ooxxTucao(bool positive, String commentId) async {
+    final resp = await XHttp.post("https://jandan.net/api/comment/vote", {
+      "like_type": positive ? "pos" : "neg",
+      "comment_id": commentId,
+      "data_type": "tucao"
+    });
+    Log.log.fine(resp);
+    return OOXXResp.fromMap(resp);
+  }
+
+  static Future<TuCao> getTucao(String commentId) async {
+    final resp =
+        await XHttp.get("https://api.jandan.net/api/v1/tucao/list/$commentId");
+    Log.log.fine(resp);
+    return TuCao.fromMap(resp);
   }
 }

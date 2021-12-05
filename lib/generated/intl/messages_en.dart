@@ -27,15 +27,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "connect_timeout":
             MessageLookupByLibrary.simpleMessage("Connect Timeout"),
         "copy_addr": MessageLookupByLibrary.simpleMessage("Copy Link Address"),
+        "copy_comment": MessageLookupByLibrary.simpleMessage("Copy comment"),
+        "dismiss": MessageLookupByLibrary.simpleMessage("dismiss"),
         "failed_to_vote":
             MessageLookupByLibrary.simpleMessage("Failed To Vote"),
         "fml": MessageLookupByLibrary.simpleMessage("FML"),
+        "have_no_comment_refresh": MessageLookupByLibrary.simpleMessage(
+            "Have no comment yet,click to refresh"),
+        "hot_comment": MessageLookupByLibrary.simpleMessage("Hot comment"),
         "jandan": MessageLookupByLibrary.simpleMessage("Jandan"),
+        "latest_comment":
+            MessageLookupByLibrary.simpleMessage("Latest comment"),
         "lomo": MessageLookupByLibrary.simpleMessage("LOMO"),
+        "network_error": MessageLookupByLibrary.simpleMessage("Network error"),
         "news": MessageLookupByLibrary.simpleMessage("NEWS"),
         "pics": MessageLookupByLibrary.simpleMessage("PICS"),
         "receive_timeout":
             MessageLookupByLibrary.simpleMessage("Ceceive Timeout"),
+        "reply": MessageLookupByLibrary.simpleMessage("Reply"),
         "request_cancle":
             MessageLookupByLibrary.simpleMessage("Request Canceled"),
         "response": MessageLookupByLibrary.simpleMessage("Response Error"),

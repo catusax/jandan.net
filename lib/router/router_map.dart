@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../core/utils/log.dart';
 import '../init/splash.dart';
+import '../models/wuliao/comment.dart';
 import '../page/home/homepage.dart';
+import '../page/home/wuliao/tucao_page.dart';
 
 final router = FluroRouter();
 
@@ -16,6 +18,12 @@ class RouteMaps {
     router.define("/home", handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
       return MyHomePage();
+    }));
+    router.define(TucaoPage.routeName, handler: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return TucaoPage(
+        item: Comment.fromJson(params['item']!.first),
+      );
     }));
   }
 
