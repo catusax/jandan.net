@@ -37,5 +37,11 @@
     "latest_comment": "Latest comment",
     "have_no_comment_refresh": "Have no comment yet,click to refresh",
     "copy_comment": "Copy comment",
-    "reply": "Reply"
+    "reply": "Reply",
+    "@_image_viewer": {
+        "comment": "adad"
+    },
+    "failed_to_save": "Failed to save image",
+    "save_success": "Successfully saved image",
+    "failed_to_share": "Failed to share image"
 }

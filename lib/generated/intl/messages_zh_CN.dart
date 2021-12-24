@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy_addr": MessageLookupByLibrary.simpleMessage("复制链接地址"),
         "copy_comment": MessageLookupByLibrary.simpleMessage("复制评论"),
         "dismiss": MessageLookupByLibrary.simpleMessage("解除"),
+        "failed_to_save": MessageLookupByLibrary.simpleMessage("保存图片失败"),
+        "failed_to_share": MessageLookupByLibrary.simpleMessage("分享图片失败"),
         "failed_to_vote": MessageLookupByLibrary.simpleMessage("投票失败"),
         "fml": MessageLookupByLibrary.simpleMessage("树洞"),
         "have_no_comment_refresh":
@@ -43,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reply": MessageLookupByLibrary.simpleMessage("回复"),
         "request_cancle": MessageLookupByLibrary.simpleMessage("请求被取消"),
         "response": MessageLookupByLibrary.simpleMessage("相应错误"),
+        "save_success": MessageLookupByLibrary.simpleMessage("保存图片成功"),
         "send_timeout": MessageLookupByLibrary.simpleMessage("发送超时"),
         "share": MessageLookupByLibrary.simpleMessage("分享"),
         "tending": MessageLookupByLibrary.simpleMessage("热榜"),

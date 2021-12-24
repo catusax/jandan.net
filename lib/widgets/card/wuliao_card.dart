@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jandan/page/image_viewer/image_viewer_page.dart';
+import 'package:jandan/router/router_map.dart';
+import 'package:jandan/utils/snackbar.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -50,7 +57,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
       case 0:
         return const SizedBox.shrink();
       case 1:
-        return _image(context, widget.item.pics.first);
+        return _image(context, widget.item.pics.first, 0);
       default:
         return GridView.builder(
             itemCount: widget.item.pics.length,
@@ -62,29 +69,32 @@ class _WuliaoCardState extends State<WuliaoCard> {
               crossAxisSpacing: 10,
             ),
             itemBuilder: (context, idx) {
-              return _image(context, widget.item.pics[idx]);
+              return _image(context, widget.item.pics[idx], idx);
             });
     }
   }
 
-  Widget _image(BuildContext context, String url, {double? size}) {
-    return Center(
-      child: CachedNetworkImage(
-        imageUrl: url,
-        height: size,
-        width: size,
-        placeholder: (context, url) => SizedBox(
+  Widget _image(BuildContext context, String url, int index, {double? size}) {
+    return InkWell(
+      child: Center(
+          child: Hero(
+        tag: url + index.toString(),
+        child: ExtendedImage.network(
+          url,
           height: size,
-          width: double.infinity,
-          child: const Center(
-            child: SizedBox.square(
-              dimension: 30,
-              child: CircularProgressIndicator(),
-            ),
-          ),
+          width: size,
+          cache: true,
+          cacheMaxAge: const Duration(days: 30),
         ),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
+      )),
+      onTap: () {
+        RouteMaps.navigateTo(context, ImageViewerPage.routeName,
+            params: {
+              ImageViewerPage.paramImages: json.encode(widget.item.pics),
+              ImageViewerPage.paramIndex: index.toString(),
+            },
+            transition: TransitionType.fadeIn);
+      },
     );
   }
 
@@ -104,8 +114,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
                       (int.parse(widget.item.vote_positive) + 1).toString();
                 });
               } else {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text(res.msg)));
+                SnackBarUtil.showSnackbar(context, Text(res.msg));
                 setState(() {
                   widget.item.ooxx = null;
                 });

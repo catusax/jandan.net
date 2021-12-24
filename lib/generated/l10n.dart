@@ -289,6 +289,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Failed to save image`
+  String get failed_to_save {
+    return Intl.message(
+      'Failed to save image',
+      name: 'failed_to_save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully saved image`
+  String get save_success {
+    return Intl.message(
+      'Successfully saved image',
+      name: 'save_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to share image`
+  String get failed_to_share {
+    return Intl.message(
+      'Failed to share image',
+      name: 'failed_to_share',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

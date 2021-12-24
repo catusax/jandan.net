@@ -29,6 +29,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy_addr": MessageLookupByLibrary.simpleMessage("Copy Link Address"),
         "copy_comment": MessageLookupByLibrary.simpleMessage("Copy comment"),
         "dismiss": MessageLookupByLibrary.simpleMessage("dismiss"),
+        "failed_to_save":
+            MessageLookupByLibrary.simpleMessage("Failed to save image"),
+        "failed_to_share":
+            MessageLookupByLibrary.simpleMessage("Failed to share image"),
         "failed_to_vote":
             MessageLookupByLibrary.simpleMessage("Failed To Vote"),
         "fml": MessageLookupByLibrary.simpleMessage("FML"),
@@ -48,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "request_cancle":
             MessageLookupByLibrary.simpleMessage("Request Canceled"),
         "response": MessageLookupByLibrary.simpleMessage("Response Error"),
+        "save_success":
+            MessageLookupByLibrary.simpleMessage("Successfully saved image"),
         "send_timeout": MessageLookupByLibrary.simpleMessage("Send Timeout"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "tending": MessageLookupByLibrary.simpleMessage("TENDING"),

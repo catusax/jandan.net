@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:jandan/page/image_viewer/image_viewer_page.dart';
 
 import '../core/utils/log.dart';
 import '../init/splash.dart';
@@ -23,6 +26,13 @@ class RouteMaps {
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
       return TucaoPage(
         item: Comment.fromJson(params['item']!.first),
+      );
+    }));
+    router.define(ImageViewerPage.routeName, handler: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return ImageViewerPage(
+        images: List<String>.from(json.decode(params['images']!.first)),
+        currentIndex: int.parse(params['currentIndex']!.first),
       );
     }));
   }

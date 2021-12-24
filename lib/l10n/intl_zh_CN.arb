@@ -37,5 +37,11 @@
     "latest_comment": "最新评论",
     "have_no_comment_refresh": "还没有评论，点击刷新",
     "copy_comment": "复制评论",
-    "reply": "回复"
+    "reply": "回复",
+    "@_image_viewer": {
+        "comment": "adad"
+    },
+    "failed_to_save": "保存图片失败",
+    "save_success": "保存图片成功",
+    "failed_to_share": "分享图片失败"
 }
