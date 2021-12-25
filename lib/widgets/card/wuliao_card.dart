@@ -102,11 +102,13 @@ class _WuliaoCardState extends State<WuliaoCard> {
     return Row(
       children: [
         InkWell(
+          //oo按钮
           onTap: () async {
+            if (widget.item.ooxx != null) return;
             try {
               final res =
                   await JandanApi.ooxxComment(true, widget.item.comment_ID);
-              if (res.error == 0) {
+              if (res.code == 0) {
                 setState(() {
                   widget.item.ooxx =
                       true; // 暂时使用临时数据保存ooxx状态，刷新网页后不出现红色，与网页版一致，后续考虑数据库
@@ -129,17 +131,21 @@ class _WuliaoCardState extends State<WuliaoCard> {
           },
           child: Text(
             "oo ${widget.item.vote_positive}",
-            style:
-                TextStyle(color: widget.item.ooxx == true ? Colors.red : null),
+            style: TextStyle(
+                color: widget.item.ooxx == true
+                    ? Theme.of(context).primaryColor
+                    : null),
           ),
         ),
         const Spacer(),
         InkWell(
+          //xx按钮
           onTap: () async {
+            if (widget.item.ooxx != null) return;
             try {
               final res =
                   await JandanApi.ooxxComment(false, widget.item.comment_ID);
-              if (res.error == 0) {
+              if (res.code == 0) {
                 setState(() {
                   widget.item.ooxx = false;
                   widget.item.vote_negative =
@@ -162,8 +168,10 @@ class _WuliaoCardState extends State<WuliaoCard> {
           },
           child: Text(
             "xx ${widget.item.vote_negative}",
-            style:
-                TextStyle(color: widget.item.ooxx == false ? Colors.red : null),
+            style: TextStyle(
+                color: widget.item.ooxx == false
+                    ? Theme.of(context).primaryColor
+                    : null),
           ),
         ),
         const Spacer(),

@@ -13,20 +13,19 @@ class JandanApi {
   }
 
   static Future<OOXXResp> ooxxComment(bool positive, String commentId) async {
-    final resp = await XHttp.post("https://jandan.net/api/comment/vote", {
-      "like_type": positive ? "pos" : "neg",
+    final resp =
+        await XHttp.post("https://api.jandan.net/api/v1/vote/comment", {
+      "vote_type": positive ? "pos" : "neg",
       "comment_id": commentId,
-      "data_type": "comment"
     });
     Log.log.fine(resp);
     return OOXXResp.fromMap(resp);
   }
 
   static Future<OOXXResp> ooxxTucao(bool positive, String commentId) async {
-    final resp = await XHttp.post("https://jandan.net/api/comment/vote", {
-      "like_type": positive ? "pos" : "neg",
+    final resp = await XHttp.post("https://api.jandan.net/api/v1/vote/tucao", {
+      "vote_type": positive ? "pos" : "neg",
       "comment_id": commentId,
-      "data_type": "tucao"
     });
     Log.log.fine(resp);
     return OOXXResp.fromMap(resp);

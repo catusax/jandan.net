@@ -69,10 +69,11 @@ class _TucaoCardState extends State<TucaoCard> {
                 const Spacer(),
                 InkWell(
                   onTap: () async {
+                    if (tucao.ooxx != null) return;
                     try {
                       final res = await JandanApi.ooxxTucao(
                           true, tucao.post_id.toString());
-                      if (res.error == 0) {
+                      if (res.code == 0) {
                         setState(() {
                           tucao.ooxx = true;
                           tucao.vote_positive++;
@@ -92,15 +93,22 @@ class _TucaoCardState extends State<TucaoCard> {
                       });
                     }
                   },
-                  child: Text("oo ${tucao.vote_positive}"),
+                  child: Text(
+                    "oo ${tucao.vote_positive}",
+                    style: TextStyle(
+                        color: tucao.ooxx == true
+                            ? Theme.of(context).primaryColor
+                            : null),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 InkWell(
                   onTap: () async {
+                    if (tucao.ooxx != null) return;
                     try {
                       final res = await JandanApi.ooxxTucao(
                           false, tucao.post_id.toString());
-                      if (res.error == 0) {
+                      if (res.code == 0) {
                         setState(() {
                           tucao.ooxx = false;
                           tucao.vote_negative++;
@@ -120,7 +128,13 @@ class _TucaoCardState extends State<TucaoCard> {
                       });
                     }
                   },
-                  child: Text("xx ${tucao.vote_negative}"),
+                  child: Text(
+                    "xx ${tucao.vote_negative}",
+                    style: TextStyle(
+                        color: tucao.ooxx == false
+                            ? Theme.of(context).primaryColor
+                            : null),
+                  ),
                 )
               ],
             ),
