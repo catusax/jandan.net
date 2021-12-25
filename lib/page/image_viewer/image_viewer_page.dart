@@ -50,19 +50,11 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
         ExtendedImageGesturePageView.builder(
           itemBuilder: (BuildContext context, int index) {
             var item = widget.images[index];
-            Widget image = ExtendedImage.network(
+            return ExtendedImage.network(
               item,
               fit: BoxFit.contain,
               mode: ExtendedImageMode.gesture,
             );
-            if (index == currentIndex) {
-              return Hero(
-                tag: item + index.toString(),
-                child: image,
-              );
-            } else {
-              return image;
-            }
           },
           itemCount: widget.images.length,
           onPageChanged: (int index) {

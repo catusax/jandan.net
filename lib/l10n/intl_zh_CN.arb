@@ -43,5 +43,6 @@
     },
     "failed_to_save": "保存图片失败",
     "save_success": "保存图片成功",
-    "failed_to_share": "分享图片失败"
+    "failed_to_share": "分享图片失败",
+    "tap_to_see_full_img": "点击查看长图"
 }

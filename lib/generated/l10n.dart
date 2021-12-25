@@ -319,6 +319,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Tap to see full image`
+  String get tap_to_see_full_img {
+    return Intl.message(
+      'Tap to see full image',
+      name: 'tap_to_see_full_img',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

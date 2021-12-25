@@ -50,9 +50,11 @@ class NewsCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: SizedBox(
-                width: 100,
-                child: ExtendedImage.network(post.custom_fields.thumb_c[0]),
+              child: ExtendedImage.network(
+                post.custom_fields.thumb_c[0],
+                height: 60,
+                width: 80,
+                fit: BoxFit.cover,
               ),
             )
           ],

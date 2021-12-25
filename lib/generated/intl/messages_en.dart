@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Successfully saved image"),
         "send_timeout": MessageLookupByLibrary.simpleMessage("Send Timeout"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
+        "tap_to_see_full_img":
+            MessageLookupByLibrary.simpleMessage("Tap to see full image"),
         "tending": MessageLookupByLibrary.simpleMessage("TENDING"),
         "unknow_error": MessageLookupByLibrary.simpleMessage("Unknow Error")
       };

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jandan/page/home/wuliao/tucao_page.dart';
-import 'package:jandan/router/router_map.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../core/utils/log.dart';
 import '../../../models/lomo/lomo.dart';
+import '../../../router/router_map.dart';
 import '../../../widgets/card/wuliao_card.dart';
+import '../wuliao/tucao_page.dart';
 
 class LomoPage extends StatefulWidget {
   const LomoPage({

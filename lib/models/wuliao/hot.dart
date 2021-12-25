@@ -128,7 +128,7 @@ class HotComment {
       'pics': pics,
       'parent_link': parent_link,
       'parent_title': parent_title,
-      'extra': extra.toMap(),
+      '_extra': extra.toMap(),
     };
   }
 
@@ -145,7 +145,7 @@ class HotComment {
       pics: List<String>.from(map['pics']),
       parent_link: map['parent_link'] ?? '',
       parent_title: map['parent_title'] ?? '',
-      extra: Extra.fromMap(map['extra']),
+      extra: Extra.fromMap(map['_extra']),
     );
   }
 

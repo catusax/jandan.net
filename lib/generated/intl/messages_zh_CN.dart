@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_success": MessageLookupByLibrary.simpleMessage("保存图片成功"),
         "send_timeout": MessageLookupByLibrary.simpleMessage("发送超时"),
         "share": MessageLookupByLibrary.simpleMessage("分享"),
+        "tap_to_see_full_img": MessageLookupByLibrary.simpleMessage("点击查看长图"),
         "tending": MessageLookupByLibrary.simpleMessage("热榜"),
         "unknow_error": MessageLookupByLibrary.simpleMessage("未知错误")
       };

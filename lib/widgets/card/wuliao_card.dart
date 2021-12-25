@@ -4,6 +4,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loading_more_list/loading_more_list.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -80,15 +81,52 @@ class _WuliaoCardState extends State<WuliaoCard> {
   Widget _image(BuildContext context, String url, int index, {double? size}) {
     return InkWell(
       child: Center(
-          child: Hero(
-        tag: url + index.toString(),
-        child: ExtendedImage.network(
-          url,
-          height: size,
-          width: size,
-          cache: true,
-          cacheMaxAge: const Duration(days: 30),
-        ),
+          child: ExtendedImage.network(
+        url,
+        height: size,
+        width: size,
+        cache: true,
+        cacheMaxAge: const Duration(days: 30),
+        loadStateChanged: (state) {
+          switch (state.extendedImageLoadState) {
+            case LoadState.loading:
+              return const SizedBox(
+                height: 80,
+                child: IndicatorWidget(IndicatorStatus.loadingMoreBusying),
+              );
+            case LoadState.completed:
+              final image = state.extendedImageInfo?.image;
+              if (image?.height != null && image!.height / image.width >= 1.5) {
+                return Stack(
+                  children: [
+                    ExtendedRawImage(
+                      image: image,
+                      width: double.infinity,
+                      fit: BoxFit.fitWidth,
+                      height: 300,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(locator<S>().tap_to_see_full_img),
+                        width: MediaQuery.of(context).size.width - 36,
+                        color: Colors.white60,
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return ExtendedRawImage(
+                  image: image,
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
+                );
+              }
+            default:
+          }
+        },
+        enableLoadState: true,
       )),
       onTap: () {
         RouteMaps.navigateTo(context, ImageViewerPage.routeName,
