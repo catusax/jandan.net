@@ -7,6 +7,7 @@ import 'package:jandan/core/utils/log.dart';
 import 'package:jandan/generated/l10n.dart';
 import 'package:jandan/init/locator.dart';
 import 'package:jandan/utils/snackbar.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -89,6 +90,11 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
                     Log.log.fine("save image" + suffix);
                     final file = await File(tempDir.path + suffix)
                         .writeAsBytes(imageData!);
+                    final permissionStatus =
+                        await Permission.manageExternalStorage.request();
+                    if (!permissionStatus.isGranted) {
+                      throw Exception("no permission");
+                    }
                     final result = await ImageGallerySaver.saveFile(file.path);
                     await file.delete();
                     if (result['isSuccess'] != true) {
