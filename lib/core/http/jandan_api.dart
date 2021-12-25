@@ -1,3 +1,4 @@
+import '../../models/lomo/lomo.dart';
 import '../../models/posts/news.dart';
 import '../../models/resp/ooxx.dart';
 import '../../models/wuliao/hot.dart';
@@ -31,6 +32,18 @@ class JandanApi {
         await XHttp.get("http://api.moyu.today/jandan/hot?category=recent");
     Log.log.fine(resp);
     return Hot.fromMap(resp);
+  }
+
+  /**
+   * startid 上一页最后一个条目的id
+   */
+  static Future<Lomo> lomo({String? startid}) async {
+    String param = "";
+    if (startid != null) param = "?start_id=" + startid;
+    final resp = await XHttp.get(
+        "https://api.jandan.net/api/v1/comment/list/21183" + param);
+    Log.log.fine(resp);
+    return Lomo.fromMap(resp);
   }
 
   static Future<OOXXResp> ooxxComment(bool positive, String commentId) async {

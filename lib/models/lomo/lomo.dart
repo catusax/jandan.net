@@ -7,7 +7,7 @@ import '../card_item.dart';
 class Lomo {
   final int code;
   final String msg;
-  final List<Data> data;
+  final List<LomoData> data;
   Lomo({
     required this.code,
     required this.msg,
@@ -17,7 +17,7 @@ class Lomo {
   Lomo copyWith({
     int? code,
     String? msg,
-    List<Data>? data,
+    List<LomoData>? data,
   }) {
     return Lomo(
       code: code ?? this.code,
@@ -38,7 +38,7 @@ class Lomo {
     return Lomo(
       code: map['code']?.toInt() ?? 0,
       msg: map['msg'] ?? '',
-      data: List<Data>.from(map['data']?.map((x) => Data.fromMap(x))),
+      data: List<LomoData>.from(map['data']?.map((x) => LomoData.fromMap(x))),
     );
   }
 
@@ -63,7 +63,7 @@ class Lomo {
   int get hashCode => code.hashCode ^ msg.hashCode ^ data.hashCode;
 }
 
-class Data {
+class LomoData {
   final int id;
   final int post_id;
   final String author;
@@ -77,7 +77,7 @@ class Data {
   final int vote_negative;
   final List<Image> images;
   final int sub_comment_count;
-  Data({
+  LomoData({
     required this.id,
     required this.post_id,
     required this.author,
@@ -93,7 +93,7 @@ class Data {
     required this.sub_comment_count,
   });
 
-  Data copyWith({
+  LomoData copyWith({
     int? id,
     int? post_id,
     String? author,
@@ -108,7 +108,7 @@ class Data {
     List<Image>? images,
     int? sub_comment_count,
   }) {
-    return Data(
+    return LomoData(
       id: id ?? this.id,
       post_id: post_id ?? this.post_id,
       author: author ?? this.author,
@@ -143,8 +143,8 @@ class Data {
     };
   }
 
-  factory Data.fromMap(Map<String, dynamic> map) {
-    return Data(
+  factory LomoData.fromMap(Map<String, dynamic> map) {
+    return LomoData(
       id: map['id']?.toInt() ?? 0,
       post_id: map['post_id']?.toInt() ?? 0,
       author: map['author'] ?? '',
@@ -163,7 +163,8 @@ class Data {
 
   String toJson() => json.encode(toMap());
 
-  factory Data.fromJson(String source) => Data.fromMap(json.decode(source));
+  factory LomoData.fromJson(String source) =>
+      LomoData.fromMap(json.decode(source));
 
   CardItem toCardItem() => CardItem(
       comment_ID: post_id.toString(),
@@ -185,7 +186,7 @@ class Data {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Data &&
+    return other is LomoData &&
         other.id == id &&
         other.post_id == post_id &&
         other.author == author &&

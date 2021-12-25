@@ -77,4 +77,10 @@ class LoadMoreListSource extends LoadingMoreBase<Comment> {
     if (currenPage == wuliao.page_count) return false;
     return true;
   }
+
+  @override
+  void clear() {
+    currenPage = 0;
+    super.clear();
+  }
 }

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../core/utils/log.dart';
-import '../../../models/posts/news.dart';
-import '../../../widgets/card/news_card.dart';
+import '../../../models/lomo/lomo.dart';
+import '../../../widgets/card/wuliao_card.dart';
 
-class NewsPage extends StatefulWidget {
-  const NewsPage({
+class LomoPage extends StatefulWidget {
+  const LomoPage({
     Key? key,
     required this.scrollController,
   }) : super(key: key);
@@ -16,13 +15,13 @@ class NewsPage extends StatefulWidget {
   final ScrollController scrollController;
 
   @override
-  State<NewsPage> createState() => _NewsPageState();
+  State<LomoPage> createState() => _LomoPageState();
 }
 
-class _NewsPageState extends State<NewsPage>
+class _LomoPageState extends State<LomoPage>
     with AutomaticKeepAliveClientMixin {
   final LoadMoreListSource source = LoadMoreListSource();
-  List<Post> posts = List.empty(growable: true);
+  List<LomoData> posts = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +29,28 @@ class _NewsPageState extends State<NewsPage>
     return RefreshIndicator(
       onRefresh: () async {
         try {
-          final news = await JandanApi.news(page: 0);
+          final lomo = await JandanApi.lomo();
           source.clear();
           setState(() {
-            source.addAll(news.posts);
+            source.addAll(lomo.data);
             // comments = wuliao.comments;
           });
         } catch (e) {
           Log.http.severe(e);
         }
       },
-      child: LoadingMoreList<Post>(
-        ListConfig<Post>(
+      child: LoadingMoreList<LomoData>(
+        ListConfig<LomoData>(
           controller: widget.scrollController,
           sourceList: source,
-          itemBuilder: (BuildContext c, Post item, int idx) {
+          itemBuilder: (BuildContext c, LomoData item, int idx) {
             return InkWell(
               onTap: () {
                 // RouteMaps.navigateTo(context, TucaoPage.routeName,
                 //     params: {TucaoPage.paramItem: item.toJson()});
               },
-              child: NewsCard(
-                post: item,
+              child: WuliaoCard(
+                item: item.toCardItem(),
               ),
             );
           },
@@ -64,22 +63,21 @@ class _NewsPageState extends State<NewsPage>
   bool get wantKeepAlive => true;
 }
 
-class LoadMoreListSource extends LoadingMoreBase<Post> {
-  int currenPage = 0;
+class LoadMoreListSource extends LoadingMoreBase<LomoData> {
+  String? lastid;
 
   LoadMoreListSource();
   @override
   Future<bool> loadData([bool isloadMoreAction = false]) async {
-    final news = await JandanApi.news(page: currenPage + 1);
-    currenPage++;
-    addAll(news.posts);
-    if (currenPage == news.pages) return false;
+    final lomo = await JandanApi.lomo(startid: lastid);
+    lastid = lomo.data.last.id.toString();
+    addAll(lomo.data);
     return true;
   }
 
   @override
   void clear() {
-    currenPage = 0;
+    lastid = null;
     super.clear();
   }
 }

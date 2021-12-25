@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
 import 'hot/hot_page.dart';
+import 'lomo/lomo_page.dart';
 import 'news/news_page.dart';
 import 'wuliao/wuliao_page.dart';
 
@@ -22,6 +23,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final ScrollController newsScrollController = ScrollController();
 
   final ScrollController hotScrollController = ScrollController();
+
+  final ScrollController lomoScrollController = ScrollController();
 
   int currentPosition = -1;
 
@@ -81,7 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
               WuliaoPage(
                 scrollController: wuliaoScrollController,
               ),
-              const Icon(Icons.directions_bike),
+              LomoPage(
+                scrollController: lomoScrollController,
+              ),
               const Icon(Icons.directions_bike),
             ],
           ),

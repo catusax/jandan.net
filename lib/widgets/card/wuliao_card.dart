@@ -10,6 +10,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
+import '../../init/themes.dart';
 import '../../models/card_item.dart';
 import '../../page/image_viewer/image_viewer_page.dart';
 import '../../router/router_map.dart';
@@ -40,8 +41,15 @@ class _WuliaoCardState extends State<WuliaoCard> {
                 DateTime.parse(widget.item.comment_date),
                 locale: Localizations.localeOf(context).languageCode,
               ),
+              style: const TextStyle(fontSize: Styles.fontSizeSmall),
             ),
-            Text(widget.item.text_content.trim()),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(widget.item.text_content
+                .replaceAll("#img#", "")
+                .replaceAll("[查看原图]", "")
+                .trim()),
             _images(context),
             _actionRows(context)
           ],
