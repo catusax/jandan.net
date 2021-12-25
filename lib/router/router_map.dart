@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../core/utils/log.dart';
 import '../init/splash.dart';
-import '../models/wuliao/comment.dart';
-import '../models/wuliao/hot.dart';
+import '../models/card_item.dart';
 import '../page/home/homepage.dart';
-import '../page/home/hot/hot_tucao_page.dart';
 import '../page/home/wuliao/tucao_page.dart';
 import '../page/image_viewer/image_viewer_page.dart';
 
@@ -27,13 +25,7 @@ class RouteMaps {
     router.define(TucaoPage.routeName, handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
       return TucaoPage(
-        item: Comment.fromJson(params['item']!.first),
-      );
-    }));
-    router.define(HotTucaoPage.routeName, handler: Handler(
-        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-      return HotTucaoPage(
-        item: HotComment.fromJson(params['item']!.first),
+        item: CardItem.fromJson(params['item']!.first),
       );
     }));
     router.define(ImageViewerPage.routeName, handler: Handler(

@@ -6,8 +6,8 @@ import '../../../core/utils/log.dart';
 import '../../../models/posts/news.dart';
 import '../../../models/wuliao/hot.dart';
 import '../../../router/router_map.dart';
-import '../../../widgets/card/hot_card.dart';
-import 'hot_tucao_page.dart';
+import '../../../widgets/card/wuliao_card.dart';
+import '../wuliao/tucao_page.dart';
 
 class HotPage extends StatefulWidget {
   const HotPage({
@@ -49,11 +49,11 @@ class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
           itemBuilder: (BuildContext c, HotComment item, int idx) {
             return InkWell(
               onTap: () {
-                RouteMaps.navigateTo(context, HotTucaoPage.routeName,
-                    params: {HotTucaoPage.paramItem: item.toJson()});
+                RouteMaps.navigateTo(context, TucaoPage.routeName,
+                    params: {TucaoPage.paramItem: item.toCardItem().toJson()});
               },
-              child: HotCard(
-                item: item,
+              child: WuliaoCard(
+                item: item.toCardItem(),
               ),
             );
           },

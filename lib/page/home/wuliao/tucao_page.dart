@@ -6,7 +6,7 @@ import '../../../core/utils/log.dart';
 import '../../../generated/l10n.dart';
 import '../../../init/locator.dart';
 import '../../../init/themes.dart';
-import '../../../models/wuliao/comment.dart';
+import '../../../models/card_item.dart';
 import '../../../models/wuliao/tucao.dart';
 import '../../../utils/snackbar.dart';
 import '../../../widgets/card/tucao_card.dart';
@@ -16,7 +16,7 @@ class TucaoPage extends StatefulWidget {
   const TucaoPage({Key? key, required this.item}) : super(key: key);
   static const routeName = "/wuliao_comment";
   static const paramItem = "item";
-  final Comment item;
+  final CardItem item;
 
   @override
   State<TucaoPage> createState() => _TucaoPageState();

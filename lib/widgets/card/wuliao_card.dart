@@ -10,7 +10,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
-import '../../models/wuliao/comment.dart';
+import '../../models/card_item.dart';
 import '../../page/image_viewer/image_viewer_page.dart';
 import '../../router/router_map.dart';
 import '../../utils/snackbar.dart';
@@ -18,7 +18,7 @@ import '../text/blod_text.dart';
 
 class WuliaoCard extends StatefulWidget {
   const WuliaoCard({Key? key, required this.item}) : super(key: key);
-  final Comment item;
+  final CardItem item;
 
   @override
   State<WuliaoCard> createState() => _WuliaoCardState();
@@ -110,8 +110,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
                 setState(() {
                   widget.item.ooxx =
                       true; // 暂时使用临时数据保存ooxx状态，刷新网页后不出现红色，与网页版一致，后续考虑数据库
-                  widget.item.vote_positive =
-                      (int.parse(widget.item.vote_positive) + 1).toString();
+                  widget.item.vote_positive++;
                 });
               } else {
                 SnackBarUtil.showSnackbar(context, Text(res.msg));
@@ -146,8 +145,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
               if (res.code == 0) {
                 setState(() {
                   widget.item.ooxx = false;
-                  widget.item.vote_negative =
-                      (int.parse(widget.item.vote_negative) + 1).toString();
+                  widget.item.vote_negative++;
                 });
               } else {
                 ScaffoldMessenger.of(context)

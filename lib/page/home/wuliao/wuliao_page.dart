@@ -49,10 +49,10 @@ class _WuliaoPageState extends State<WuliaoPage>
             return InkWell(
               onTap: () {
                 RouteMaps.navigateTo(context, TucaoPage.routeName,
-                    params: {TucaoPage.paramItem: item.toJson()});
+                    params: {TucaoPage.paramItem: item.toCardItem().toJson()});
               },
               child: WuliaoCard(
-                item: item,
+                item: item.toCardItem(),
               ),
             );
           },

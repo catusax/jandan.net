@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import '../card_item.dart';
+
 class Hot {
   final String status;
   final List<HotComment> comments;
@@ -56,7 +58,6 @@ class Hot {
 }
 
 class HotComment {
-  bool? ooxx;
   final String comment_ID;
   final String comment_author;
   final String comment_date;
@@ -70,7 +71,6 @@ class HotComment {
   final String parent_title;
   final Extra extra;
   HotComment({
-    this.ooxx,
     required this.comment_ID,
     required this.comment_author,
     required this.comment_date,
@@ -86,7 +86,6 @@ class HotComment {
   });
 
   HotComment copyWith({
-    bool? ooxx,
     String? comment_ID,
     String? comment_author,
     String? comment_date,
@@ -101,7 +100,6 @@ class HotComment {
     Extra? extra,
   }) {
     return HotComment(
-      ooxx: ooxx ?? this.ooxx,
       comment_ID: comment_ID ?? this.comment_ID,
       comment_author: comment_author ?? this.comment_author,
       comment_date: comment_date ?? this.comment_date,
@@ -119,7 +117,6 @@ class HotComment {
 
   Map<String, dynamic> toMap() {
     return {
-      'ooxx': ooxx,
       'comment_ID': comment_ID,
       'comment_author': comment_author,
       'comment_date': comment_date,
@@ -131,13 +128,12 @@ class HotComment {
       'pics': pics,
       'parent_link': parent_link,
       'parent_title': parent_title,
-      '_extra': extra.toMap(),
+      'extra': extra.toMap(),
     };
   }
 
   factory HotComment.fromMap(Map<String, dynamic> map) {
     return HotComment(
-      ooxx: map['ooxx'],
       comment_ID: map['comment_ID'] ?? '',
       comment_author: map['comment_author'] ?? '',
       comment_date: map['comment_date'] ?? '',
@@ -149,7 +145,7 @@ class HotComment {
       pics: List<String>.from(map['pics']),
       parent_link: map['parent_link'] ?? '',
       parent_title: map['parent_title'] ?? '',
-      extra: Extra.fromMap(map['_extra']),
+      extra: Extra.fromMap(map['extra']),
     );
   }
 
@@ -158,9 +154,20 @@ class HotComment {
   factory HotComment.fromJson(String source) =>
       HotComment.fromMap(json.decode(source));
 
+  CardItem toCardItem() => CardItem(
+      comment_ID: comment_ID,
+      comment_author: comment_author,
+      comment_date: comment_date,
+      user_id: user_id,
+      vote_positive: int.parse(vote_positive),
+      vote_negative: int.parse(vote_negative),
+      sub_comment_count: int.parse(sub_comment_count),
+      text_content: text_content,
+      pics: pics);
+
   @override
   String toString() {
-    return 'HotComment(ooxx: $ooxx, comment_ID: $comment_ID, comment_author: $comment_author, comment_date: $comment_date, user_id: $user_id, vote_positive: $vote_positive, vote_negative: $vote_negative, sub_comment_count: $sub_comment_count, text_content: $text_content, pics: $pics, parent_link: $parent_link, parent_title: $parent_title, _extra: $extra)';
+    return 'HotComment(comment_ID: $comment_ID, comment_author: $comment_author, comment_date: $comment_date, user_id: $user_id, vote_positive: $vote_positive, vote_negative: $vote_negative, sub_comment_count: $sub_comment_count, text_content: $text_content, pics: $pics, parent_link: $parent_link, parent_title: $parent_title, extra: $extra)';
   }
 
   @override
@@ -168,7 +175,6 @@ class HotComment {
     if (identical(this, other)) return true;
 
     return other is HotComment &&
-        other.ooxx == ooxx &&
         other.comment_ID == comment_ID &&
         other.comment_author == comment_author &&
         other.comment_date == comment_date &&
@@ -185,8 +191,7 @@ class HotComment {
 
   @override
   int get hashCode {
-    return ooxx.hashCode ^
-        comment_ID.hashCode ^
+    return comment_ID.hashCode ^
         comment_author.hashCode ^
         comment_date.hashCode ^
         user_id.hashCode ^
