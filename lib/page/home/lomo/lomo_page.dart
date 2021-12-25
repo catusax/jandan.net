@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jandan/page/home/wuliao/tucao_page.dart';
+import 'package:jandan/router/router_map.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 
 import '../../../core/http/jandan_api.dart';
@@ -54,8 +56,8 @@ class _LomoPageState extends State<LomoPage>
           itemBuilder: (BuildContext c, LomoData item, int idx) {
             return InkWell(
               onTap: () {
-                // RouteMaps.navigateTo(context, TucaoPage.routeName,
-                //     params: {TucaoPage.paramItem: item.toJson()});
+                RouteMaps.navigateTo(context, TucaoPage.routeName,
+                    params: {TucaoPage.paramItem: item.toCardItem().toJson()});
               },
               child: WuliaoCard(
                 item: item.toCardItem(),
