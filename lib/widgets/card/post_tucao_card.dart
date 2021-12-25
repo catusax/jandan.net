@@ -8,26 +8,26 @@ import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
 import '../../init/themes.dart';
-import '../../models/wuliao/tucao.dart';
+import '../../models/posts/post_comments.dart';
 import '../layout/comment_navigation_bar.dart';
 import '../text/blod_text.dart';
 
-class TucaoCard extends StatefulWidget {
-  const TucaoCard(
+class PostTucaoCard extends StatefulWidget {
+  const PostTucaoCard(
       {Key? key,
       required this.idx,
       required this.tucaoList,
       required this.commentController})
       : super(key: key);
   final int idx;
-  final List<TuCaoContent> tucaoList;
+  final List<PostCommentItem> tucaoList;
   final CommentController commentController;
 
   @override
-  _TucaoCardState createState() => _TucaoCardState();
+  _PostTucaoCardState createState() => _PostTucaoCardState();
 }
 
-class _TucaoCardState extends State<TucaoCard> {
+class _PostTucaoCardState extends State<PostTucaoCard> {
   @override
   Widget build(BuildContext context) {
     final tucao = widget.tucaoList[widget.idx];
@@ -37,16 +37,16 @@ class _TucaoCardState extends State<TucaoCard> {
           context: context,
           builder: (context) {
             return SimpleDialog(
-              title: Text(tucao.author),
+              title: Text(tucao.name),
               children: [
                 ListTile(
                   title: Text(locator<S>().reply),
                   onTap: () {
-                    widget.commentController.textEditingController.text = "";
                     widget.commentController.prefix =
-                        " #@[${tucao.author}]${tucao.post_id}# ";
+                        "@<a href='#comment-${tucao.id}'>${tucao.name}</a>: ";
                     widget.commentController.hintText =
-                        locator<S>().reply + tucao.author;
+                        locator<S>().reply + tucao.name;
+                    widget.commentController.textEditingController.text = "";
                     widget.commentController.refresh();
                     Navigator.of(context).pop();
                   },
@@ -71,14 +71,14 @@ class _TucaoCardState extends State<TucaoCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SimpleBlodText(tucao.author),
+                SimpleBlodText(tucao.name),
                 const Spacer(),
                 InkWell(
                   onTap: () async {
                     if (tucao.ooxx != null) return;
                     try {
-                      final res = await JandanApi.ooxxTucao(
-                          true, tucao.post_id.toString());
+                      final res =
+                          await JandanApi.ooxxTucao(true, tucao.id.toString());
                       if (res.code == 0) {
                         setState(() {
                           tucao.ooxx = true;
@@ -112,8 +112,8 @@ class _TucaoCardState extends State<TucaoCard> {
                   onTap: () async {
                     if (tucao.ooxx != null) return;
                     try {
-                      final res = await JandanApi.ooxxTucao(
-                          false, tucao.post_id.toString());
+                      final res =
+                          await JandanApi.ooxxTucao(false, tucao.id.toString());
                       if (res.code == 0) {
                         setState(() {
                           tucao.ooxx = false;

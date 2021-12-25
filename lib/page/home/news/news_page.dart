@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../core/utils/log.dart';
 import '../../../models/posts/news.dart';
+import '../../../router/router_map.dart';
 import '../../../widgets/card/news_card.dart';
+import 'news_detail_page.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({
@@ -47,8 +48,8 @@ class _NewsPageState extends State<NewsPage>
           itemBuilder: (BuildContext c, Post item, int idx) {
             return InkWell(
               onTap: () {
-                // RouteMaps.navigateTo(context, TucaoPage.routeName,
-                //     params: {TucaoPage.paramItem: item.toJson()});
+                RouteMaps.navigateTo(context, NewsDetailPage.routeName,
+                    params: {NewsDetailPage.paramPost: item.toJson()});
               },
               child: NewsCard(
                 post: item,

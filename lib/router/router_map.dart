@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import '../core/utils/log.dart';
 import '../init/splash.dart';
 import '../models/card_item.dart';
+import '../models/posts/news.dart';
 import '../page/home/homepage.dart';
+import '../page/home/news/news_detail_page.dart';
+import '../page/home/news/news_tucao_page.dart';
 import '../page/home/wuliao/tucao_page.dart';
 import '../page/image_viewer/image_viewer_page.dart';
 
@@ -28,11 +31,23 @@ class RouteMaps {
         item: CardItem.fromJson(params['item']!.first),
       );
     }));
+    router.define(NewsTucaoPage.routeName, handler: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return NewsTucaoPage(
+        post: Post.fromJson(params['post']!.first),
+      );
+    }));
     router.define(ImageViewerPage.routeName, handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
       return ImageViewerPage(
         images: List<String>.from(json.decode(params['images']!.first)),
         currentIndex: int.parse(params['currentIndex']!.first),
+      );
+    }));
+    router.define(NewsDetailPage.routeName, handler: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return NewsDetailPage(
+        post: Post.fromJson(params[NewsDetailPage.paramPost]!.first),
       );
     }));
   }

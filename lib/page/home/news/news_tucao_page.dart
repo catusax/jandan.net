@@ -5,27 +5,26 @@ import '../../../core/utils/log.dart';
 import '../../../generated/l10n.dart';
 import '../../../init/locator.dart';
 import '../../../init/themes.dart';
-import '../../../models/card_item.dart';
-import '../../../models/wuliao/tucao.dart';
+import '../../../models/posts/news.dart';
+import '../../../models/posts/post_comments.dart';
 import '../../../utils/snackbar.dart';
-import '../../../widgets/card/tucao_card.dart';
-import '../../../widgets/card/wuliao_card.dart';
+import '../../../widgets/card/post_tucao_card.dart';
 import '../../../widgets/layout/comment_navigation_bar.dart';
 
-class TucaoPage extends StatefulWidget {
-  const TucaoPage({Key? key, required this.item}) : super(key: key);
-  static const routeName = "/wuliao_comment";
-  static const paramItem = "item";
-  final CardItem item;
+class NewsTucaoPage extends StatefulWidget {
+  const NewsTucaoPage({Key? key, required this.post}) : super(key: key);
+  static const routeName = "/news_comment";
+  static const paramPost = "post";
+  final Post post;
 
   @override
-  State<TucaoPage> createState() => _TucaoPageState();
+  State<NewsTucaoPage> createState() => _NewsTucaoPageState();
 }
 
-class _TucaoPageState extends State<TucaoPage> {
+class _NewsTucaoPageState extends State<NewsTucaoPage> {
   final commentController = CommentController();
 
-  TuCao? tucao;
+  PostComments? tucao;
 
   @override
   void initState() {
@@ -47,8 +46,7 @@ class _TucaoPageState extends State<TucaoPage> {
           CommentNavigationBar(commentController: commentController),
       body: ListView(
         children: [
-          WuliaoCard(item: widget.item),
-          tucao == null || tucao!.data.list.isEmpty
+          tucao == null || tucao!.post.comments.isEmpty
               ? InkWell(
                   onTap: () {
                     resresh();
@@ -61,43 +59,14 @@ class _TucaoPageState extends State<TucaoPage> {
                   ),
                 )
               : const SizedBox.shrink(),
-          ..._hotComment(context),
           ..._normalComment(context),
         ],
       ),
     );
   }
 
-  List<Widget> _hotComment(BuildContext context) {
-    if (tucao == null || tucao!.data.hot.isEmpty) {
-      return [];
-    } else {
-      return [
-        Padding(
-          padding: Styles.padding,
-          child: Text(
-            locator<S>().hot_comment,
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        ListView.builder(
-          itemCount: tucao!.data.hot.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, idx) {
-            return TucaoCard(
-              idx: idx,
-              tucaoList: tucao!.data.hot,
-              commentController: commentController,
-            );
-          },
-        ),
-      ];
-    }
-  }
-
   List<Widget> _normalComment(BuildContext context) {
-    if (tucao == null || tucao!.data.list.isEmpty) {
+    if (tucao == null || tucao!.post.comments.isEmpty) {
       return [];
     } else {
       return [
@@ -109,13 +78,13 @@ class _TucaoPageState extends State<TucaoPage> {
           ),
         ),
         ListView.builder(
-          itemCount: tucao!.data.list.length,
+          itemCount: tucao!.post.comments.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, idx) {
-            return TucaoCard(
+            return PostTucaoCard(
               idx: idx,
-              tucaoList: tucao!.data.list,
+              tucaoList: tucao!.post.comments,
               commentController: commentController,
             );
           },
@@ -127,7 +96,7 @@ class _TucaoPageState extends State<TucaoPage> {
   void resresh() {
     () async {
       try {
-        final tucaon = await JandanApi.getTucao(widget.item.comment_ID);
+        final tucaon = await JandanApi.getNewsTucao(widget.post.id);
         setState(() {
           tucao = tucaon;
         });

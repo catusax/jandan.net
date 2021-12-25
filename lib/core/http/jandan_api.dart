@@ -1,5 +1,7 @@
 import '../../models/lomo/lomo.dart';
 import '../../models/posts/news.dart';
+import '../../models/posts/post.dart';
+import '../../models/posts/post_comments.dart';
 import '../../models/resp/ooxx.dart';
 import '../../models/wuliao/hot.dart';
 import '../../models/wuliao/tucao.dart';
@@ -25,6 +27,16 @@ class JandanApi {
     });
     Log.log.fine(resp);
     return News.fromMap(resp);
+  }
+
+  static Future<PostContent> postContent(int id) async {
+    final resp = await XHttp.get("/", {
+      "oxwlxojflwblxbsapi": "get_post",
+      "include": "content,date,modified",
+      "id": id,
+    });
+    Log.log.fine(resp);
+    return PostContent.fromMap(resp);
   }
 
   static Future<Hot> hot() async {
@@ -70,5 +82,27 @@ class JandanApi {
         await XHttp.get("https://api.jandan.net/api/v1/tucao/list/$commentId");
     Log.log.fine(resp);
     return TuCao.fromMap(resp);
+  }
+
+  static Future<PostComments> getNewsTucao(int id) async {
+    final resp = await XHttp.get("/", {
+      "oxwlxojflwblxbsapi": "get_post",
+      "include": "comments",
+      "id": id,
+    });
+    Log.log.fine(resp);
+    return PostComments.fromMap(resp);
+  }
+
+  static Future<String> tucao(
+      String postId, String author, String email, String comment) async {
+    final resp = await XHttp.get("/jandan-comment.php", {
+      "comment_post_ID": postId,
+      "author": author,
+      "email": email,
+      "comment": comment,
+    });
+    Log.log.fine(resp);
+    return resp;
   }
 }
