@@ -1,5 +1,6 @@
 import '../../models/posts/news.dart';
 import '../../models/resp/ooxx.dart';
+import '../../models/wuliao/hot.dart';
 import '../../models/wuliao/tucao.dart';
 import '../../models/wuliao/wuliao.dart';
 import '../utils/log.dart';
@@ -23,6 +24,13 @@ class JandanApi {
     });
     Log.log.fine(resp);
     return News.fromMap(resp);
+  }
+
+  static Future<Hot> hot() async {
+    final resp =
+        await XHttp.get("http://api.moyu.today/jandan/hot?category=recent");
+    Log.log.fine(resp);
+    return Hot.fromMap(resp);
   }
 
   static Future<OOXXResp> ooxxComment(bool positive, String commentId) async {
