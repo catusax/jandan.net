@@ -37,11 +37,11 @@ class JandanApi {
   /**
    * startid 上一页最后一个条目的id
    */
-  static Future<Lomo> lomo({String? startid}) async {
+  static Future<Lomo> lomo(String commentId, {String? startid}) async {
     String param = "";
     if (startid != null) param = "?start_id=" + startid;
     final resp = await XHttp.get(
-        "https://api.jandan.net/api/v1/comment/list/21183" + param);
+        "https://api.jandan.net/api/v1/comment/list/" + commentId + param);
     Log.log.fine(resp);
     return Lomo.fromMap(resp);
   }

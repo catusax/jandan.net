@@ -10,9 +10,11 @@ class LomoPage extends StatefulWidget {
   const LomoPage({
     Key? key,
     required this.scrollController,
+    required this.commentId,
   }) : super(key: key);
   // final RefreshController refreshController;
   final ScrollController scrollController;
+  final String commentId;
 
   @override
   State<LomoPage> createState() => _LomoPageState();
@@ -20,8 +22,14 @@ class LomoPage extends StatefulWidget {
 
 class _LomoPageState extends State<LomoPage>
     with AutomaticKeepAliveClientMixin {
-  final LoadMoreListSource source = LoadMoreListSource();
+  late LoadMoreListSource source;
   List<LomoData> posts = List.empty(growable: true);
+
+  @override
+  void initState() {
+    source = LoadMoreListSource(widget.commentId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,7 @@ class _LomoPageState extends State<LomoPage>
     return RefreshIndicator(
       onRefresh: () async {
         try {
-          final lomo = await JandanApi.lomo();
+          final lomo = await JandanApi.lomo(widget.commentId);
           source.clear();
           setState(() {
             source.addAll(lomo.data);
@@ -65,11 +73,12 @@ class _LomoPageState extends State<LomoPage>
 
 class LoadMoreListSource extends LoadingMoreBase<LomoData> {
   String? lastid;
+  final String commentId;
 
-  LoadMoreListSource();
+  LoadMoreListSource(this.commentId);
   @override
   Future<bool> loadData([bool isloadMoreAction = false]) async {
-    final lomo = await JandanApi.lomo(startid: lastid);
+    final lomo = await JandanApi.lomo(commentId, startid: lastid);
     lastid = lomo.data.last.id.toString();
     addAll(lomo.data);
     return true;

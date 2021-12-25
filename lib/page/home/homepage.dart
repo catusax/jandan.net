@@ -26,6 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final ScrollController lomoScrollController = ScrollController();
 
+  final ScrollController fmlScrollController = ScrollController();
+
   int currentPosition = -1;
 
   @override
@@ -85,9 +87,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 scrollController: wuliaoScrollController,
               ),
               LomoPage(
+                commentId: "21183",
                 scrollController: lomoScrollController,
               ),
-              const Icon(Icons.directions_bike),
+              LomoPage(
+                commentId: "102312",
+                scrollController: fmlScrollController,
+              ),
             ],
           ),
         ),

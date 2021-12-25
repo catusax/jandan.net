@@ -167,7 +167,7 @@ class LomoData {
       LomoData.fromMap(json.decode(source));
 
   CardItem toCardItem() => CardItem(
-      comment_ID: post_id.toString(),
+      comment_ID: id.toString(),
       comment_author: author,
       comment_date: date,
       user_id: user_id,

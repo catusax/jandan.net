@@ -46,10 +46,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
             const SizedBox(
               height: 5,
             ),
-            Text(widget.item.text_content
-                .replaceAll("#img#", "")
-                .replaceAll("[查看原图]", "")
-                .trim()),
+            Text(cleanText(widget.item.text_content)),
             _images(context),
             _actionRows(context)
           ],
@@ -208,7 +205,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
                         Clipboard.setData(
                           ClipboardData(
                             text:
-                                "${widget.item.text_content} https://jandan.net/t/${widget.item.comment_ID}",
+                                "${cleanText(widget.item.text_content)} https://jandan.net/t/${widget.item.comment_ID}",
                           ),
                         );
                         Navigator.of(context).pop();
@@ -225,4 +222,8 @@ class _WuliaoCardState extends State<WuliaoCard> {
       ],
     );
   }
+}
+
+String cleanText(String text) {
+  return text.replaceAll("#img#", "").replaceAll("[查看原图]", "").trim();
 }
