@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:jandan/page/image_viewer/image_viewer_page.dart';
 
 import '../core/utils/log.dart';
 import '../init/splash.dart';
 import '../models/wuliao/comment.dart';
 import '../page/home/homepage.dart';
 import '../page/home/wuliao/tucao_page.dart';
+import '../page/image_viewer/image_viewer_page.dart';
 
 final router = FluroRouter();
 

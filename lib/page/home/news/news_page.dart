@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../core/utils/log.dart';
-import '../../../models/wuliao/comment.dart';
-import '../../../router/router_map.dart';
-import '../../../widgets/card/wuliao_card.dart';
-import 'tucao_page.dart';
+import '../../../models/posts/news.dart';
+import '../../../widgets/card/news_card.dart';
 
-class WuliaoPage extends StatefulWidget {
-  const WuliaoPage({
+class NewsPage extends StatefulWidget {
+  const NewsPage({
     Key? key,
     required this.scrollController,
   }) : super(key: key);
@@ -17,13 +16,13 @@ class WuliaoPage extends StatefulWidget {
   final ScrollController scrollController;
 
   @override
-  State<WuliaoPage> createState() => _WuliaoPageState();
+  State<NewsPage> createState() => _NewsPageState();
 }
 
-class _WuliaoPageState extends State<WuliaoPage>
+class _NewsPageState extends State<NewsPage>
     with AutomaticKeepAliveClientMixin {
   final LoadMoreListSource source = LoadMoreListSource();
-  List<Comment> comments = List.empty(growable: true);
+  List<Post> posts = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -31,28 +30,28 @@ class _WuliaoPageState extends State<WuliaoPage>
     return RefreshIndicator(
       onRefresh: () async {
         try {
-          final wuliao = await JandanApi.wuliao(page: 0);
+          final news = await JandanApi.news(page: 0);
           source.clear();
           setState(() {
-            source.addAll(wuliao.comments);
+            source.addAll(news.posts);
             // comments = wuliao.comments;
           });
         } catch (e) {
           Log.http.severe(e);
         }
       },
-      child: LoadingMoreList<Comment>(
-        ListConfig<Comment>(
+      child: LoadingMoreList<Post>(
+        ListConfig<Post>(
           controller: widget.scrollController,
           sourceList: source,
-          itemBuilder: (BuildContext c, Comment item, int idx) {
+          itemBuilder: (BuildContext c, Post item, int idx) {
             return InkWell(
               onTap: () {
-                RouteMaps.navigateTo(context, TucaoPage.routeName,
-                    params: {TucaoPage.paramItem: item.toJson()});
+                // RouteMaps.navigateTo(context, TucaoPage.routeName,
+                //     params: {TucaoPage.paramItem: item.toJson()});
               },
-              child: WuliaoCard(
-                item: item,
+              child: NewsCard(
+                post: item,
               ),
             );
           },
@@ -65,16 +64,16 @@ class _WuliaoPageState extends State<WuliaoPage>
   bool get wantKeepAlive => true;
 }
 
-class LoadMoreListSource extends LoadingMoreBase<Comment> {
+class LoadMoreListSource extends LoadingMoreBase<Post> {
   int currenPage = 0;
 
   LoadMoreListSource();
   @override
   Future<bool> loadData([bool isloadMoreAction = false]) async {
-    final wuliao = await JandanApi.wuliao(page: currenPage + 1);
-    currenPage = wuliao.current_page;
-    addAll(wuliao.comments);
-    if (currenPage == wuliao.page_count) return false;
+    final news = await JandanApi.news(page: currenPage + 1);
+    currenPage++;
+    addAll(news.posts);
+    if (currenPage == news.pages) return false;
     return true;
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
+import 'news/news_page.dart';
 import 'wuliao/wuliao_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,7 +16,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final ScrollController scrollController = ScrollController();
+  final ScrollController wuliaoScrollController = ScrollController();
+
+  final ScrollController newsScrollController = ScrollController();
 
   int currentPosition = -1;
 
@@ -25,7 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: DefaultTabController(
         length: 5,
         child: ExtendedNestedScrollView(
-          controller: scrollController,
           floatHeaderSlivers: true,
           onlyOneScrollInBody: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -47,7 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     switch (position) {
                       case 2:
                         if (currentPosition == position) {
-                          scrollController.jumpTo(0);
+                          wuliaoScrollController.jumpTo(0);
+                        }
+                        break;
+                      case 0:
+                        if (currentPosition == position) {
+                          newsScrollController.jumpTo(0);
                         }
                         break;
                       default:
@@ -62,10 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           body: TabBarView(
             children: [
-              const Icon(Icons.directions_car),
+              NewsPage(
+                scrollController: newsScrollController,
+              ),
               const Icon(Icons.directions_car),
               WuliaoPage(
-                scrollController: scrollController,
+                scrollController: wuliaoScrollController,
               ),
               const Icon(Icons.directions_bike),
               const Icon(Icons.directions_bike),

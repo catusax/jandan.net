@@ -14,9 +14,9 @@ class Styles {
       Styles.wigetHorizontalMargin,
       Styles.wigetVerticalMargin);
 
-  static const double fontSizeSmall = 12;
-  static const double fontSizeMiddle = 20;
-  static const double fontSizeBig = 30;
+  static const double fontSizeSmall = 10;
+  static const double fontSizeMiddle = 15;
+  static const double fontSizeBig = 20;
 
   static const Color normalBg = Color(0x20A2D2FF);
   static const Color minerlBg = Color(0x20fee440);

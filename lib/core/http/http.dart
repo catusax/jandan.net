@@ -21,7 +21,7 @@ class XHttp {
     //添加拦截器
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options, handler) {
-      Log.http.fine("Request: ${options.path} ?? ${options.data}");
+      Log.http.fine("Request: ${options.uri} ?? ${options.data}");
       return handler.next(options);
     }, onResponse: (Response response, handler) {
       if (response.requestOptions.responseType == ResponseType.json) {
@@ -62,6 +62,8 @@ class XHttp {
             request: e.requestOptions.toString());
       default:
         Log.http.severe("未知错误");
+        Log.http.severe(e.type);
+        Log.http.severe(e.requestOptions.uri);
         throw NetWorkException(locator<S>().unknow_error,
             request: e.requestOptions.toString(),
             response: e.response.toString());

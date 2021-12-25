@@ -1,14 +1,9 @@
 import 'dart:convert';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:jandan/page/image_viewer/image_viewer_page.dart';
-import 'package:jandan/router/router_map.dart';
-import 'package:jandan/utils/snackbar.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -16,6 +11,9 @@ import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
 import '../../models/wuliao/comment.dart';
+import '../../page/image_viewer/image_viewer_page.dart';
+import '../../router/router_map.dart';
+import '../../utils/snackbar.dart';
 import '../text/blod_text.dart';
 
 class WuliaoCard extends StatefulWidget {
@@ -178,44 +176,46 @@ class _WuliaoCardState extends State<WuliaoCard> {
         Text("${locator<S>().comments} ${widget.item.sub_comment_count}"),
         const Spacer(flex: 10),
         IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return ListView(
-                      children: [
-                        ListTile(
-                          onTap: () {
-                            Share.share(
-                                "https://jandan.net/t/${widget.item.comment_ID}");
-                            Navigator.of(context).pop();
-                          },
-                          title: Text(locator<S>().share),
-                        ),
-                        ListTile(
-                          onTap: () {
-                            //TODO: 收藏夹
-                            Navigator.of(context).pop();
-                          },
-                          title: Text(locator<S>().add_to_fav),
-                        ),
-                        ListTile(
-                          onTap: () {
-                            Clipboard.setData(
-                              ClipboardData(
-                                text:
-                                    "${widget.item.text_content} https://jandan.net/t/${widget.item.comment_ID}",
-                              ),
-                            );
-                            Navigator.of(context).pop();
-                          },
-                          title: Text(locator<S>().copy_addr),
-                        )
-                      ],
-                    );
-                  });
-            },
-            icon: const Icon(Icons.more_horiz_rounded))
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return ListView(
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        Share.share(
+                            "https://jandan.net/t/${widget.item.comment_ID}");
+                        Navigator.of(context).pop();
+                      },
+                      title: Text(locator<S>().share),
+                    ),
+                    ListTile(
+                      onTap: () {
+                        //TODO: 收藏夹
+                        Navigator.of(context).pop();
+                      },
+                      title: Text(locator<S>().add_to_fav),
+                    ),
+                    ListTile(
+                      onTap: () {
+                        Clipboard.setData(
+                          ClipboardData(
+                            text:
+                                "${widget.item.text_content} https://jandan.net/t/${widget.item.comment_ID}",
+                          ),
+                        );
+                        Navigator.of(context).pop();
+                      },
+                      title: Text(locator<S>().copy_addr),
+                    )
+                  ],
+                );
+              },
+            );
+          },
+          icon: const Icon(Icons.more_horiz_rounded),
+        )
       ],
     );
   }

@@ -3,13 +3,14 @@ import 'dart:io';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:jandan/core/utils/log.dart';
-import 'package:jandan/generated/l10n.dart';
-import 'package:jandan/init/locator.dart';
-import 'package:jandan/utils/snackbar.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:path_provider/path_provider.dart';
+
+import '../../core/utils/log.dart';
+import '../../generated/l10n.dart';
+import '../../init/locator.dart';
+import '../../utils/snackbar.dart';
 
 class ImageViewerPage extends StatefulWidget {
   const ImageViewerPage(
