@@ -12,6 +12,7 @@ import '../page/home/news/news_detail_page.dart';
 import '../page/home/news/news_tucao_page.dart';
 import '../page/home/wuliao/tucao_page.dart';
 import '../page/image_viewer/image_viewer_page.dart';
+import '../page/setting/easter_egg.dart';
 import '../page/setting/setting_page.dart';
 
 final router = FluroRouter();
@@ -54,6 +55,10 @@ class RouteMaps {
     router.define(SettingPage.routeName, handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
       return const SettingPage();
+    }));
+    router.define(EasterEggPage.routeName, handler: Handler(
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+      return const EasterEggPage();
     }));
   }
 
