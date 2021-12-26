@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import '../../core/utils/log.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
 import '../../utils/snackbar.dart';
+
+typedef DoubleClickAnimationListener = void Function();
 
 class ImageViewerPage extends StatefulWidget {
   const ImageViewerPage(
@@ -28,12 +31,26 @@ class ImageViewerPage extends StatefulWidget {
   State<ImageViewerPage> createState() => _ImageViewerPageState();
 }
 
-class _ImageViewerPageState extends State<ImageViewerPage> {
+class _ImageViewerPageState extends State<ImageViewerPage>
+    with TickerProviderStateMixin {
   late int currentIndex;
+
+//https://github.com/fluttercandies/extended_image/blob/02031d799bd7ea175138b5a593aabfc46055c5da/example/lib/common/widget/pic_swiper.dart
+  late AnimationController _doubleClickAnimationController;
+  late AnimationController _slideEndAnimationController;
+  Animation<double>? _doubleClickAnimation;
+  late DoubleClickAnimationListener _doubleClickAnimationListener;
+  List<double> doubleTapScales = <double>[1.0, 2.0];
 
   @override
   void initState() {
     currentIndex = widget.currentIndex;
+    _doubleClickAnimationController = AnimationController(
+        duration: const Duration(milliseconds: 150), vsync: this);
+    _slideEndAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 150),
+    );
     super.initState();
   }
 
@@ -54,6 +71,65 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
               item,
               fit: BoxFit.contain,
               mode: ExtendedImageMode.gesture,
+              initGestureConfigHandler: (ExtendedImageState state) {
+                double? initialScale = 1.0;
+
+                if (state.extendedImageInfo != null) {
+                  initialScale = initScale(
+                      size: MediaQuery.of(context).size,
+                      initialScale: initialScale,
+                      imageSize: Size(
+                          state.extendedImageInfo!.image.width.toDouble(),
+                          state.extendedImageInfo!.image.height.toDouble()));
+                }
+                return GestureConfig(
+                  inPageView: true,
+                  initialScale: initialScale!,
+                  maxScale: max(initialScale, 5.0),
+                  animationMaxScale: max(initialScale, 5.0),
+                  initialAlignment: InitialAlignment.center,
+                  //you can cache gesture state even though page view page change.
+                  //remember call clearGestureDetailsCache() method at the right time.(for example,this page dispose)
+                  cacheGesture: false,
+                );
+              },
+              onDoubleTap: (ExtendedImageGestureState state) {
+                ///you can use define pointerDownPosition as you can,
+                ///default value is double tap pointer down postion.
+                final Offset? pointerDownPosition = state.pointerDownPosition;
+                final double? begin = state.gestureDetails!.totalScale;
+                double end;
+
+                //remove old
+                _doubleClickAnimation
+                    ?.removeListener(_doubleClickAnimationListener);
+
+                //stop pre
+                _doubleClickAnimationController.stop();
+
+                //reset to use
+                _doubleClickAnimationController.reset();
+
+                if (begin == doubleTapScales[0]) {
+                  end = doubleTapScales[1];
+                } else {
+                  end = doubleTapScales[0];
+                }
+
+                _doubleClickAnimationListener = () {
+                  //print(_animation.value);
+                  state.handleDoubleTap(
+                      scale: _doubleClickAnimation!.value,
+                      doubleTapPosition: pointerDownPosition);
+                };
+                _doubleClickAnimation = _doubleClickAnimationController
+                    .drive(Tween<double>(begin: begin, end: end));
+
+                _doubleClickAnimation!
+                    .addListener(_doubleClickAnimationListener);
+
+                _doubleClickAnimationController.forward();
+              },
             );
           },
           itemCount: widget.images.length,
@@ -135,4 +211,34 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
       ]),
     );
   }
+
+  @override
+  void dispose() {
+    _doubleClickAnimationController.dispose();
+    _slideEndAnimationController.dispose();
+    clearGestureDetailsCache();
+    //cancelToken?.cancel();
+    super.dispose();
+  }
+}
+
+double? initScale(
+    {required Size imageSize, required Size size, double? initialScale}) {
+  final double n1 = imageSize.height / imageSize.width;
+  final double n2 = size.height / size.width;
+  if (n1 > n2) {
+    final FittedSizes fittedSizes =
+        applyBoxFit(BoxFit.contain, imageSize, size);
+    //final Size sourceSize = fittedSizes.source;
+    final Size destinationSize = fittedSizes.destination;
+    return size.width / destinationSize.width;
+  } else if (n1 / n2 < 1 / 4) {
+    final FittedSizes fittedSizes =
+        applyBoxFit(BoxFit.contain, imageSize, size);
+    //final Size sourceSize = fittedSizes.source;
+    final Size destinationSize = fittedSizes.destination;
+    return size.height / destinationSize.height;
+  }
+
+  return initialScale;
 }

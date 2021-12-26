@@ -17,6 +17,7 @@ import '../../router/router_map.dart';
 import '../../utils/assets.dart';
 import '../../utils/provider.dart';
 import '../../utils/snackbar.dart';
+import '../layout/position.dart';
 import '../text/blod_text.dart';
 
 class WuliaoCard extends StatefulWidget {
@@ -38,27 +39,23 @@ class _WuliaoCardState extends State<WuliaoCard> {
     }
     return Card(
       margin: const EdgeInsets.all(8),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SimpleBlodText(widget.item.comment_author),
-            Text(
-              timeago.format(
-                DateTime.parse(widget.item.comment_date),
-                locale: Localizations.localeOf(context).languageCode,
-              ),
-              style: const TextStyle(fontSize: Styles.fontSizeSmall),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SimpleBlodText(widget.item.comment_author)
+              .withPadding(top: 10, left: 10, right: 10),
+          Text(
+            timeago.format(
+              DateTime.parse(widget.item.comment_date),
+              locale: Localizations.localeOf(context).languageCode,
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(cleanText(widget.item.text_content)),
-            _images(context),
-            _actionRows(context)
-          ],
-        ),
+            style: const TextStyle(fontSize: Styles.fontSizeSmall),
+          ).withPadding(top: 10, left: 10, right: 10),
+          Text(cleanText(widget.item.text_content))
+              .withPadding(top: 10, left: 10, right: 10, bottom: 10),
+          _images(context),
+          _actionRows(context).withPadding(left: 10, right: 5, top: 0)
+        ],
       ),
     );
   }
@@ -68,30 +65,30 @@ class _WuliaoCardState extends State<WuliaoCard> {
       case 0:
         return const SizedBox.shrink();
       case 1:
-        return _image(context, widget.item.pics.first, 0);
+        return _image(context, widget.item.pics.first, 0, true);
       default:
         return GridView.builder(
-            itemCount: widget.item.pics.length,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-            ),
-            itemBuilder: (context, idx) {
-              return _image(context, widget.item.pics[idx], idx);
-            });
+          itemCount: widget.item.pics.length,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          itemBuilder: (context, idx) {
+            return _image(context, widget.item.pics[idx], idx, false);
+          },
+        ).withPadding(top: 0, left: 10, right: 10, bottom: 0);
     }
   }
 
-  Widget _image(BuildContext context, String url, int index, {double? size}) {
+  Widget _image(
+      BuildContext context, String url, int index, bool showMoreText) {
     return InkWell(
       child: Center(
           child: ExtendedImage.network(
         url,
-        height: size,
-        width: size,
         cache: true,
         cacheMaxAge: const Duration(days: 30),
         loadStateChanged: (state) {
@@ -115,15 +112,17 @@ class _WuliaoCardState extends State<WuliaoCard> {
                       fit: BoxFit.fitWidth,
                       height: 300,
                     ),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(locator<S>().tap_to_see_full_img),
-                        width: MediaQuery.of(context).size.width - 36,
-                        color: Colors.white60,
-                      ),
-                    ),
+                    showMoreText
+                        ? Positioned(
+                            bottom: 0,
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(locator<S>().tap_to_see_full_img),
+                              width: MediaQuery.of(context).size.width - 36,
+                              color: Colors.white60,
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ],
                 );
               } else {
