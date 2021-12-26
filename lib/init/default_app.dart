@@ -64,6 +64,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
           theme: ThemeData(
+            brightness: appTheme.brightness,
             primarySwatch: appTheme.themeColor,
             textTheme: const TextTheme(button: TextStyle(color: Colors.black)),
             buttonTheme: const ButtonThemeData(

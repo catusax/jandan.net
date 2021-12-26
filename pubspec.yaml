@@ -59,7 +59,7 @@ dependencies:
   cached_network_image: ^3.2.0
   extended_image: ^6.0.1
   extended_nested_scroll_view: ^5.0.0
-  loading_more_list: ^4.1.0
+  infinite_scroll_pagination: ^3.1.0
   flutter_html: ^2.2.0
 
 

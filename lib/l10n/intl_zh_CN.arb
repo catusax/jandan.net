@@ -30,6 +30,12 @@
     "pics": "无聊图",
     "lomo": "随手拍",
     "fml": "树洞",
+    "@_home": {
+        "comment": "adad"
+    },
+    "darkmode": "黑暗模式",
+    "setting": "设置",
+    "favorities": "收藏夹",
     "@_tucao": {
         "comment": "adad"
     },
@@ -44,5 +50,6 @@
     "failed_to_save": "保存图片失败",
     "save_success": "保存图片成功",
     "failed_to_share": "分享图片失败",
-    "tap_to_see_full_img": "点击查看长图"
+    "tap_to_see_full_img": "点击查看长图",
+    "load_failed": "图片加载失败，点击重试"
 }

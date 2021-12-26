@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Styles {
   static const double wigetVerticalMargin = 10; //组件之间的间距，组件都使用container
-  static const double wigetHorizontalMargin = 25; //组件到页面两边的间距
+  static const double wigetHorizontalMargin = 15; //组件到页面两边的间距
   static const double bottomButtonHeight = 120; //最后一个按钮的容器高度
 
   static const padding = EdgeInsets.fromLTRB(

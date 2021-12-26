@@ -240,6 +240,36 @@ class S {
     );
   }
 
+  /// `darkmode`
+  String get darkmode {
+    return Intl.message(
+      'darkmode',
+      name: 'darkmode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `setting`
+  String get setting {
+    return Intl.message(
+      'setting',
+      name: 'setting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorities`
+  String get favorities {
+    return Intl.message(
+      'Favorities',
+      name: 'favorities',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hot comment`
   String get hot_comment {
     return Intl.message(
@@ -325,6 +355,16 @@ class S {
     return Intl.message(
       'Tap to see full image',
       name: 'tap_to_see_full_img',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `load image failed, click to reload`
+  String get load_failed {
+    return Intl.message(
+      'load image failed, click to reload',
+      name: 'load_failed',
       desc: '',
       args: [],
     );

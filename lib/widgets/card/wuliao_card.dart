@@ -4,7 +4,6 @@ import 'package:extended_image/extended_image.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:loading_more_list/loading_more_list.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -15,6 +14,7 @@ import '../../init/themes.dart';
 import '../../models/card_item.dart';
 import '../../page/image_viewer/image_viewer_page.dart';
 import '../../router/router_map.dart';
+import '../../utils/assets.dart';
 import '../../utils/snackbar.dart';
 import '../text/blod_text.dart';
 
@@ -90,9 +90,12 @@ class _WuliaoCardState extends State<WuliaoCard> {
         loadStateChanged: (state) {
           switch (state.extendedImageLoadState) {
             case LoadState.loading:
-              return const SizedBox(
+              return SizedBox(
                 height: 80,
-                child: IndicatorWidget(IndicatorStatus.loadingMoreBusying),
+                child: Image.asset(
+                  Assets.assetsLoadLoading,
+                  color: Theme.of(context).primaryColor,
+                ),
               );
             case LoadState.completed:
               final image = state.extendedImageInfo?.image;
@@ -123,7 +126,29 @@ class _WuliaoCardState extends State<WuliaoCard> {
                   fit: BoxFit.fitWidth,
                 );
               }
-            default:
+            case LoadState.failed:
+              return GestureDetector(
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    Image.asset(
+                      Assets.assetsLoadFailed,
+                    ),
+                    Positioned(
+                      bottom: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Text(
+                        locator<S>().load_failed,
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
+                ),
+                onTap: () {
+                  state.reLoadImage();
+                },
+              );
           }
         },
         enableLoadState: true,

@@ -77,17 +77,20 @@ class AppTheme with ChangeNotifier {
     notifyListeners();
   }
 
-  void setBrightness(bool isLight) {
-    notifyListeners();
-  }
-
-  void changeBrightness(bool isDark) {
+  void setBrightness(bool isDark) {
     _brightness = isDark ? Brightness.dark : Brightness.light;
     SPUtils.saveBrightness(isDark);
     notifyListeners();
   }
 
-  get themeColor => _themeColor;
+  void changeBrightness() {
+    _brightness =
+        _brightness == Brightness.light ? Brightness.dark : Brightness.light;
+    SPUtils.saveBrightness(_brightness == Brightness.dark);
+    notifyListeners();
+  }
 
-  get brightness => _brightness;
+  MaterialColor get themeColor => _themeColor;
+
+  Brightness get brightness => _brightness;
 }

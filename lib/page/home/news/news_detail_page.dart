@@ -14,6 +14,7 @@ import '../../../models/posts/news.dart';
 import '../../../models/posts/post.dart';
 import '../../../router/router_map.dart';
 import '../../../utils/snackbar.dart';
+import '../../../widgets/layout/position.dart';
 import '../../image_viewer/image_viewer_page.dart';
 import 'news_tucao_page.dart';
 
@@ -115,60 +116,56 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
   }
 
   Widget buildBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-      child: ListView(
-        children: [
-          ExtendedImage.network(
-            widget.post.custom_fields.thumb_c[0],
-            height: 200,
-            fit: BoxFit.cover,
+    return ListView(
+      children: [
+        ExtendedImage.network(
+          widget.post.custom_fields.thumb_c[0],
+          height: 200,
+          fit: BoxFit.cover,
+        ),
+        Text(
+          widget.post.title,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: Styles.fontSizeBig),
+        ).withPadding(top: 10),
+        Text(
+          widget.post.author.name +
+              " " +
+              timeago.format(
+                DateTime.parse(widget.post.date),
+                locale: Localizations.localeOf(context).languageCode,
+              ),
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: Styles.fontSizeSmall,
           ),
-          const SizedBox(height: 20),
-          Text(
-            widget.post.title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: Styles.fontSizeBig),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            widget.post.author.name +
-                " " +
-                timeago.format(
-                  DateTime.parse(widget.post.date),
-                  locale: Localizations.localeOf(context).languageCode,
-                ),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: Styles.fontSizeSmall,
-            ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            widget.post.excerpt,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: Styles.fontSizeMiddle),
-          ),
-          const SizedBox(height: 15),
-          postContent == null
-              ? const SizedBox.shrink()
-              : Html(
-                  data: postContent?.post.content,
-                  onLinkTap: (url, context, attributes, element) {
-                    if (url != null) {
-                      launch(url);
-                    }
-                  },
-                  onImageTap: (url, renderContext, attributes, element) {
-                    RouteMaps.navigateTo(context, ImageViewerPage.routeName,
-                        params: {
-                          ImageViewerPage.paramImages: [url],
-                          ImageViewerPage.paramIndex: 0
-                        });
-                  },
-                )
-        ],
-      ),
+        ).withPadding(),
+        Text(
+          widget.post.excerpt,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: Styles.fontSizeMiddle),
+        ).withPadding(),
+        postContent == null
+            ? const SizedBox.shrink()
+            : Html(
+                data: postContent?.post.content,
+                onLinkTap: (url, context, attributes, element) {
+                  if (url != null) {
+                    launch(url);
+                  }
+                },
+                onImageTap: (url, renderContext, attributes, element) {
+                  RouteMaps.navigateTo(
+                    context,
+                    ImageViewerPage.routeName,
+                    params: {
+                      ImageViewerPage.paramImages: [url],
+                      ImageViewerPage.paramIndex: 0
+                    },
+                  );
+                },
+              ).withPadding(),
+      ],
     );
   }
 }

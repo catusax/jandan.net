@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Connect Timeout"),
         "copy_addr": MessageLookupByLibrary.simpleMessage("Copy Link Address"),
         "copy_comment": MessageLookupByLibrary.simpleMessage("Copy comment"),
+        "darkmode": MessageLookupByLibrary.simpleMessage("darkmode"),
         "dismiss": MessageLookupByLibrary.simpleMessage("dismiss"),
         "failed_to_save":
             MessageLookupByLibrary.simpleMessage("Failed to save image"),
@@ -35,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Failed to share image"),
         "failed_to_vote":
             MessageLookupByLibrary.simpleMessage("Failed To Vote"),
+        "favorities": MessageLookupByLibrary.simpleMessage("Favorities"),
         "fml": MessageLookupByLibrary.simpleMessage("FML"),
         "have_no_comment_refresh": MessageLookupByLibrary.simpleMessage(
             "Have no comment yet,click to refresh"),
@@ -42,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "jandan": MessageLookupByLibrary.simpleMessage("Jandan"),
         "latest_comment":
             MessageLookupByLibrary.simpleMessage("Latest comment"),
+        "load_failed": MessageLookupByLibrary.simpleMessage(
+            "load image failed, click to reload"),
         "lomo": MessageLookupByLibrary.simpleMessage("LOMO"),
         "network_error": MessageLookupByLibrary.simpleMessage("Network error"),
         "news": MessageLookupByLibrary.simpleMessage("NEWS"),
@@ -55,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_success":
             MessageLookupByLibrary.simpleMessage("Successfully saved image"),
         "send_timeout": MessageLookupByLibrary.simpleMessage("Send Timeout"),
+        "setting": MessageLookupByLibrary.simpleMessage("setting"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "tap_to_see_full_img":
             MessageLookupByLibrary.simpleMessage("Tap to see full image"),

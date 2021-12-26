@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
+import '../../utils/provider.dart';
 import 'hot/hot_page.dart';
 import 'lomo/lomo_page.dart';
 import 'news/news_page.dart';
@@ -40,6 +41,39 @@ class _MyHomePageState extends State<MyHomePage> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      //TODO: 发帖页面
+                    },
+                    icon: const Icon(Icons.add),
+                  ),
+                  PopupMenuButton(
+                    icon: const Icon(Icons.more_vert_rounded),
+                    itemBuilder: (BuildContext context) => [
+                      PopupMenuItem(
+                        child: ListTile(
+                          title: Text(locator<S>().darkmode),
+                          onTap: () {
+                            Store.value<AppTheme>(context).changeBrightness();
+                          },
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: ListTile(
+                          title: Text(locator<S>().favorities),
+                        ),
+                        onTap: () {},
+                      ),
+                      PopupMenuItem(
+                        child: ListTile(
+                          title: Text(locator<S>().setting),
+                        ),
+                        onTap: () {},
+                      )
+                    ],
+                  )
+                ],
                 pinned: true,
                 floating: true,
                 snap: true,

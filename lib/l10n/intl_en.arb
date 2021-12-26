@@ -30,6 +30,12 @@
     "pics": "PICS",
     "lomo": "LOMO",
     "fml": "FML",
+    "@_home": {
+        "comment": "adad"
+    },
+    "darkmode": "darkmode",
+    "setting": "setting",
+    "favorities": "Favorities",
     "@_tucao": {
         "comment": "adad"
     },
@@ -44,5 +50,6 @@
     "failed_to_save": "Failed to save image",
     "save_success": "Successfully saved image",
     "failed_to_share": "Failed to share image",
-    "tap_to_see_full_img": "Tap to see full image"
+    "tap_to_see_full_img": "Tap to see full image",
+    "load_failed": "load image failed, click to reload"
 }

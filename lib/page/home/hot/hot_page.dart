@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loading_more_list/loading_more_list.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../core/http/jandan_api.dart';
-import '../../../core/utils/log.dart';
-import '../../../models/posts/news.dart';
 import '../../../models/wuliao/hot.dart';
 import '../../../router/router_map.dart';
 import '../../../widgets/card/wuliao_card.dart';
@@ -22,56 +20,57 @@ class HotPage extends StatefulWidget {
 }
 
 class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
-  final LoadMoreListSource source = LoadMoreListSource();
-  List<Post> posts = List.empty(growable: true);
+  final PagingController<int, HotComment> _pagingController =
+      PagingController(firstPageKey: 0);
+
+  @override
+  void initState() {
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+    super.initState();
+  }
+
+  Future<void> _fetchPage(int _page) async {
+    try {
+      final hots = await JandanApi.hot();
+      _pagingController.appendLastPage(hots.comments);
+    } catch (e) {
+      _pagingController.error = e;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return RefreshIndicator(
-      onRefresh: () async {
-        try {
-          final hots = await JandanApi.hot();
-          source.clear();
-          setState(() {
-            source.addAll(hots.comments);
-            // comments = wuliao.comments;
-          });
-        } catch (e) {
-          Log.http.severe(e);
-          rethrow;
-        }
-      },
-      child: LoadingMoreList<HotComment>(
-        ListConfig<HotComment>(
-          controller: widget.scrollController,
-          sourceList: source,
-          itemBuilder: (BuildContext c, HotComment item, int idx) {
-            return InkWell(
-              onTap: () {
-                RouteMaps.navigateTo(context, TucaoPage.routeName,
-                    params: {TucaoPage.paramItem: item.toCardItem().toJson()});
-              },
-              child: WuliaoCard(
-                item: item.toCardItem(),
-              ),
-            );
-          },
+      onRefresh: () => Future.sync(
+        () => _pagingController.refresh(),
+      ),
+      child: PagedListView(
+        scrollController: widget.scrollController,
+        pagingController: _pagingController,
+        builderDelegate: PagedChildBuilderDelegate<HotComment>(
+          itemBuilder: (context, item, index) => InkWell(
+            onTap: () {
+              RouteMaps.navigateTo(context, TucaoPage.routeName,
+                  params: {TucaoPage.paramItem: item.toCardItem().toJson()});
+            },
+            child: WuliaoCard(
+              item: item.toCardItem(),
+            ),
+          ),
         ),
       ),
     );
   }
 
   @override
-  bool get wantKeepAlive => true;
-}
-
-class LoadMoreListSource extends LoadingMoreBase<HotComment> {
-  LoadMoreListSource();
-  @override
-  Future<bool> loadData([bool isloadMoreAction = false]) async {
-    final hots = await JandanApi.hot();
-    addAll(hots.comments);
-    return false;
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
