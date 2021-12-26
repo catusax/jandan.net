@@ -3,6 +3,8 @@
         "comment": "adad"
     },
     "dismiss": "dismiss",
+    "cancle": "cancle",
+    "confirm": "confirm",
     "@_http错误代码": {
         "comment": "asd"
     },
@@ -51,5 +53,20 @@
     "save_success": "Successfully saved image",
     "failed_to_share": "Failed to share image",
     "tap_to_see_full_img": "Tap to see full image",
-    "load_failed": "load image failed, click to reload"
+    "load_failed": "load image failed, click to reload",
+    "@_setting": {
+        "comment": "adad"
+    },
+    "general_setting": "General",
+    "other": "Other",
+    "identity": "Identity",
+    "identity_msg": "Identity to comment",
+    "nickname": "Nick name",
+    "email": "Email",
+    "version": "Version",
+    "hide_unwelcome": "Hide unwelcome",
+    "hide_unwelcome_msg": "Hide comment has more than 10 xx and xx > oo",
+    "theme": "Theme",
+    "theme_color": "Theme color",
+    "about": "About"
 }

@@ -103,6 +103,7 @@ class Comment {
       Comment.fromMap(json.decode(source));
 
   CardItem toCardItem() => CardItem(
+      comment_post_ID: "26402",
       comment_ID: comment_ID,
       comment_author: comment_author,
       comment_date: comment_date,

@@ -22,14 +22,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "add_to_fav": MessageLookupByLibrary.simpleMessage("Add To Favorities"),
+        "cancle": MessageLookupByLibrary.simpleMessage("cancle"),
         "comments": MessageLookupByLibrary.simpleMessage("Comments"),
+        "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
         "connect_timeout":
             MessageLookupByLibrary.simpleMessage("Connect Timeout"),
         "copy_addr": MessageLookupByLibrary.simpleMessage("Copy Link Address"),
         "copy_comment": MessageLookupByLibrary.simpleMessage("Copy comment"),
         "darkmode": MessageLookupByLibrary.simpleMessage("darkmode"),
         "dismiss": MessageLookupByLibrary.simpleMessage("dismiss"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "failed_to_save":
             MessageLookupByLibrary.simpleMessage("Failed to save image"),
         "failed_to_share":
@@ -38,9 +42,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Failed To Vote"),
         "favorities": MessageLookupByLibrary.simpleMessage("Favorities"),
         "fml": MessageLookupByLibrary.simpleMessage("FML"),
+        "general_setting": MessageLookupByLibrary.simpleMessage("General"),
         "have_no_comment_refresh": MessageLookupByLibrary.simpleMessage(
             "Have no comment yet,click to refresh"),
+        "hide_unwelcome":
+            MessageLookupByLibrary.simpleMessage("Hide unwelcome"),
+        "hide_unwelcome_msg": MessageLookupByLibrary.simpleMessage(
+            "Hide comment has more than 10 xx and xx > oo"),
         "hot_comment": MessageLookupByLibrary.simpleMessage("Hot comment"),
+        "identity": MessageLookupByLibrary.simpleMessage("Identity"),
+        "identity_msg":
+            MessageLookupByLibrary.simpleMessage("Identity to comment"),
         "jandan": MessageLookupByLibrary.simpleMessage("Jandan"),
         "latest_comment":
             MessageLookupByLibrary.simpleMessage("Latest comment"),
@@ -49,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lomo": MessageLookupByLibrary.simpleMessage("LOMO"),
         "network_error": MessageLookupByLibrary.simpleMessage("Network error"),
         "news": MessageLookupByLibrary.simpleMessage("NEWS"),
+        "nickname": MessageLookupByLibrary.simpleMessage("Nick name"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "pics": MessageLookupByLibrary.simpleMessage("PICS"),
         "receive_timeout":
             MessageLookupByLibrary.simpleMessage("Ceceive Timeout"),
@@ -64,6 +78,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tap_to_see_full_img":
             MessageLookupByLibrary.simpleMessage("Tap to see full image"),
         "tending": MessageLookupByLibrary.simpleMessage("TENDING"),
-        "unknow_error": MessageLookupByLibrary.simpleMessage("Unknow Error")
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "theme_color": MessageLookupByLibrary.simpleMessage("Theme color"),
+        "unknow_error": MessageLookupByLibrary.simpleMessage("Unknow Error"),
+        "version": MessageLookupByLibrary.simpleMessage("Version")
       };
 }

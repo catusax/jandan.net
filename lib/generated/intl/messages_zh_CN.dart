@@ -22,27 +22,39 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("关于"),
         "add_to_fav": MessageLookupByLibrary.simpleMessage("添加到收藏夹"),
+        "cancle": MessageLookupByLibrary.simpleMessage("取消"),
         "comments": MessageLookupByLibrary.simpleMessage("吐槽"),
+        "confirm": MessageLookupByLibrary.simpleMessage("确认"),
         "connect_timeout": MessageLookupByLibrary.simpleMessage("连接超时"),
         "copy_addr": MessageLookupByLibrary.simpleMessage("复制链接地址"),
         "copy_comment": MessageLookupByLibrary.simpleMessage("复制评论"),
         "darkmode": MessageLookupByLibrary.simpleMessage("黑暗模式"),
         "dismiss": MessageLookupByLibrary.simpleMessage("解除"),
+        "email": MessageLookupByLibrary.simpleMessage("邮箱"),
         "failed_to_save": MessageLookupByLibrary.simpleMessage("保存图片失败"),
         "failed_to_share": MessageLookupByLibrary.simpleMessage("分享图片失败"),
         "failed_to_vote": MessageLookupByLibrary.simpleMessage("投票失败"),
         "favorities": MessageLookupByLibrary.simpleMessage("收藏夹"),
         "fml": MessageLookupByLibrary.simpleMessage("树洞"),
+        "general_setting": MessageLookupByLibrary.simpleMessage("普通设置"),
         "have_no_comment_refresh":
             MessageLookupByLibrary.simpleMessage("还没有评论，点击刷新"),
+        "hide_unwelcome": MessageLookupByLibrary.simpleMessage("隐藏不受欢迎的内容"),
+        "hide_unwelcome_msg":
+            MessageLookupByLibrary.simpleMessage("隐藏 xx>=10 且 xx>oo的内容"),
         "hot_comment": MessageLookupByLibrary.simpleMessage("热门评论"),
+        "identity": MessageLookupByLibrary.simpleMessage("游客身份"),
+        "identity_msg": MessageLookupByLibrary.simpleMessage("用于评论的身份"),
         "jandan": MessageLookupByLibrary.simpleMessage("煎蛋"),
         "latest_comment": MessageLookupByLibrary.simpleMessage("最新评论"),
         "load_failed": MessageLookupByLibrary.simpleMessage("图片加载失败，点击重试"),
         "lomo": MessageLookupByLibrary.simpleMessage("随手拍"),
         "network_error": MessageLookupByLibrary.simpleMessage("网络错误"),
         "news": MessageLookupByLibrary.simpleMessage("新鲜事"),
+        "nickname": MessageLookupByLibrary.simpleMessage("昵称"),
+        "other": MessageLookupByLibrary.simpleMessage("其它"),
         "pics": MessageLookupByLibrary.simpleMessage("无聊图"),
         "receive_timeout": MessageLookupByLibrary.simpleMessage("接收超时"),
         "reply": MessageLookupByLibrary.simpleMessage("回复"),
@@ -54,6 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("分享"),
         "tap_to_see_full_img": MessageLookupByLibrary.simpleMessage("点击查看长图"),
         "tending": MessageLookupByLibrary.simpleMessage("热榜"),
-        "unknow_error": MessageLookupByLibrary.simpleMessage("未知错误")
+        "theme": MessageLookupByLibrary.simpleMessage("主题"),
+        "theme_color": MessageLookupByLibrary.simpleMessage("主题颜色"),
+        "unknow_error": MessageLookupByLibrary.simpleMessage("未知错误"),
+        "version": MessageLookupByLibrary.simpleMessage("版本")
       };
 }

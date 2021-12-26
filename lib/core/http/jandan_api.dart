@@ -3,6 +3,7 @@ import '../../models/posts/news.dart';
 import '../../models/posts/post.dart';
 import '../../models/posts/post_comments.dart';
 import '../../models/resp/ooxx.dart';
+import '../../models/tucao.dart';
 import '../../models/wuliao/hot.dart';
 import '../../models/wuliao/tucao.dart';
 import '../../models/wuliao/wuliao.dart';
@@ -92,8 +93,30 @@ class JandanApi {
     return PostComments.fromMap(resp);
   }
 
-  static Future<String> tucao(
-      String postId, String author, String email, String comment) async {
+  /// 无聊图下面的吐槽
+  static Future<TuCaoResp> tucao(
+      {required String postId,
+      required String author,
+      required String commentId,
+      required String email,
+      required String comment}) async {
+    final resp = await XHttp.get("/jandan-tucao.php", {
+      "comment_post_ID": postId,
+      "author": author,
+      "comment_id": commentId,
+      "email": email,
+      "comment": comment,
+    });
+    Log.log.fine(resp);
+    return TuCaoResp.fromMap(resp);
+  }
+
+  /// 新鲜事的评论
+  static Future<String> comment(
+      {required String postId,
+      required String author,
+      required String email,
+      required String comment}) async {
     final resp = await XHttp.get("/jandan-comment.php", {
       "comment_post_ID": postId,
       "author": author,
@@ -103,4 +126,12 @@ class JandanApi {
     Log.log.fine(resp);
     return resp;
   }
+}
+
+enum CommentType {
+  /// 无聊图下面的吐槽
+  tucao,
+
+  /// 新鲜事的评论
+  comment
 }

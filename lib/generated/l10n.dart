@@ -60,6 +60,26 @@ class S {
     );
   }
 
+  /// `cancle`
+  String get cancle {
+    return Intl.message(
+      'cancle',
+      name: 'cancle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `confirm`
+  String get confirm {
+    return Intl.message(
+      'confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Network error`
   String get network_error {
     return Intl.message(
@@ -365,6 +385,126 @@ class S {
     return Intl.message(
       'load image failed, click to reload',
       name: 'load_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General`
+  String get general_setting {
+    return Intl.message(
+      'General',
+      name: 'general_setting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get other {
+    return Intl.message(
+      'Other',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity`
+  String get identity {
+    return Intl.message(
+      'Identity',
+      name: 'identity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Identity to comment`
+  String get identity_msg {
+    return Intl.message(
+      'Identity to comment',
+      name: 'identity_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nick name`
+  String get nickname {
+    return Intl.message(
+      'Nick name',
+      name: 'nickname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get version {
+    return Intl.message(
+      'Version',
+      name: 'version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide unwelcome`
+  String get hide_unwelcome {
+    return Intl.message(
+      'Hide unwelcome',
+      name: 'hide_unwelcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide comment has more than 10 xx and xx > oo`
+  String get hide_unwelcome_msg {
+    return Intl.message(
+      'Hide comment has more than 10 xx and xx > oo',
+      name: 'hide_unwelcome_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme color`
+  String get theme_color {
+    return Intl.message(
+      'Theme color',
+      name: 'theme_color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
       desc: '',
       args: [],
     );

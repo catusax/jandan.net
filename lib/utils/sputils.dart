@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/identity.dart';
+
 class SPUtils {
   /// 内部构造方法，可避免外部暴露构造函数，进行实例化
   SPUtils._internal();
@@ -61,5 +63,17 @@ class SPUtils {
       return false;
     }
     return _spf!.getBool('key_hide_unwelcome')!;
+  }
+
+  ///用户身份
+  static Future<bool> saveIdentity(Identity identity) {
+    return _spf!.setString('key_identity', identity.toJson());
+  }
+
+  static Identity? getIdentity() {
+    if (!_spf!.containsKey('key_identity')) {
+      return null;
+    }
+    return Identity.fromJson(_spf!.getString('key_identity')!);
   }
 }

@@ -156,16 +156,32 @@ class HotComment {
   factory HotComment.fromJson(String source) =>
       HotComment.fromMap(json.decode(source));
 
-  CardItem toCardItem() => CardItem(
-      comment_ID: comment_ID,
-      comment_author: comment_author,
-      comment_date: comment_date,
-      user_id: user_id,
-      vote_positive: int.parse(vote_positive),
-      vote_negative: int.parse(vote_negative),
-      sub_comment_count: int.parse(sub_comment_count),
-      text_content: text_content,
-      pics: pics);
+  CardItem toCardItem() {
+    String comment_post_ID = "";
+    switch (parent_title) {
+      case "@无聊图":
+        comment_post_ID = "26402";
+        break;
+      case "@随手拍":
+        comment_post_ID = "21183";
+        break;
+      case "@树洞":
+        comment_post_ID = "102312";
+        break;
+      default:
+    }
+    return CardItem(
+        comment_post_ID: comment_post_ID,
+        comment_ID: comment_ID,
+        comment_author: comment_author,
+        comment_date: comment_date,
+        user_id: user_id,
+        vote_positive: int.parse(vote_positive),
+        vote_negative: int.parse(vote_negative),
+        sub_comment_count: int.parse(sub_comment_count),
+        text_content: text_content,
+        pics: pics);
+  }
 
   @override
   String toString() {

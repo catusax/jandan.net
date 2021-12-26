@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 //用来在卡片上展示的数据
 class CardItem {
   bool? ooxx; // 用来标记本地ooxx状态
+  final String comment_post_ID;
   final String comment_ID;
   final String comment_author;
   final String comment_date;
@@ -18,6 +19,7 @@ class CardItem {
   final List<String> pics;
   CardItem({
     this.ooxx,
+    required this.comment_post_ID,
     required this.comment_ID,
     required this.comment_author,
     required this.comment_date,
@@ -31,6 +33,7 @@ class CardItem {
 
   CardItem copyWith({
     bool? ooxx,
+    String? comment_post_ID,
     String? comment_ID,
     String? comment_author,
     String? comment_date,
@@ -43,6 +46,7 @@ class CardItem {
   }) {
     return CardItem(
       ooxx: ooxx ?? this.ooxx,
+      comment_post_ID: comment_post_ID ?? this.comment_post_ID,
       comment_ID: comment_ID ?? this.comment_ID,
       comment_author: comment_author ?? this.comment_author,
       comment_date: comment_date ?? this.comment_date,
@@ -58,6 +62,7 @@ class CardItem {
   Map<String, dynamic> toMap() {
     return {
       'ooxx': ooxx,
+      'comment_post_ID': comment_post_ID,
       'comment_ID': comment_ID,
       'comment_author': comment_author,
       'comment_date': comment_date,
@@ -73,6 +78,7 @@ class CardItem {
   factory CardItem.fromMap(Map<String, dynamic> map) {
     return CardItem(
       ooxx: map['ooxx'],
+      comment_post_ID: map['comment_post_ID'] ?? '',
       comment_ID: map['comment_ID'] ?? '',
       comment_author: map['comment_author'] ?? '',
       comment_date: map['comment_date'] ?? '',
@@ -92,7 +98,7 @@ class CardItem {
 
   @override
   String toString() {
-    return 'CardItem(ooxx: $ooxx, comment_ID: $comment_ID, comment_author: $comment_author, comment_date: $comment_date, user_id: $user_id, vote_positive: $vote_positive, vote_negative: $vote_negative, sub_comment_count: $sub_comment_count, text_content: $text_content, pics: $pics)';
+    return 'CardItem(ooxx: $ooxx, comment_post_ID: $comment_post_ID, comment_ID: $comment_ID, comment_author: $comment_author, comment_date: $comment_date, user_id: $user_id, vote_positive: $vote_positive, vote_negative: $vote_negative, sub_comment_count: $sub_comment_count, text_content: $text_content, pics: $pics)';
   }
 
   @override
@@ -101,6 +107,7 @@ class CardItem {
 
     return other is CardItem &&
         other.ooxx == ooxx &&
+        other.comment_post_ID == comment_post_ID &&
         other.comment_ID == comment_ID &&
         other.comment_author == comment_author &&
         other.comment_date == comment_date &&
@@ -115,6 +122,7 @@ class CardItem {
   @override
   int get hashCode {
     return ooxx.hashCode ^
+        comment_post_ID.hashCode ^
         comment_ID.hashCode ^
         comment_author.hashCode ^
         comment_date.hashCode ^

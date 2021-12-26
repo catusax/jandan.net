@@ -32,9 +32,7 @@ class _TucaoPageState extends State<TucaoPage> {
     super.initState();
     Log.log.fine("message");
     resresh();
-    commentController.refresh = () {
-      setState(() {});
-    };
+    commentController.refresh = resresh();
   }
 
   @override
@@ -43,8 +41,12 @@ class _TucaoPageState extends State<TucaoPage> {
       appBar: AppBar(
         title: Text(locator<S>().comments),
       ),
-      bottomNavigationBar:
-          CommentNavigationBar(commentController: commentController),
+      bottomNavigationBar: CommentNavigationBar(
+        commentController: commentController,
+        commentType: CommentType.tucao,
+        commentId: widget.item.comment_ID,
+        commentPostId: widget.item.comment_post_ID,
+      ),
       body: ListView(
         children: [
           WuliaoCard(item: widget.item),
@@ -124,7 +126,7 @@ class _TucaoPageState extends State<TucaoPage> {
     }
   }
 
-  void resresh() {
+  resresh() {
     () async {
       try {
         final tucaon = await JandanApi.getTucao(widget.item.comment_ID);

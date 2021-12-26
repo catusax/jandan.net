@@ -3,6 +3,8 @@
         "comment": "adad"
     },
     "dismiss": "解除",
+    "cancle": "取消",
+    "confirm": "确认",
     "@_http错误代码": {
         "comment": "asd"
     },
@@ -51,5 +53,20 @@
     "save_success": "保存图片成功",
     "failed_to_share": "分享图片失败",
     "tap_to_see_full_img": "点击查看长图",
-    "load_failed": "图片加载失败，点击重试"
+    "load_failed": "图片加载失败，点击重试",
+    "@_setting": {
+        "comment": "adad"
+    },
+    "general_setting": "普通设置",
+    "other": "其它",
+    "identity": "游客身份",
+    "identity_msg": "用于评论的身份",
+    "nickname": "昵称",
+    "email": "邮箱",
+    "version": "版本",
+    "hide_unwelcome": "隐藏不受欢迎的内容",
+    "hide_unwelcome_msg": "隐藏 xx>=10 且 xx>oo的内容",
+    "theme": "主题",
+    "theme_color": "主题颜色",
+    "about": "关于"
 }
