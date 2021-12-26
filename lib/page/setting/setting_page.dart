@@ -126,14 +126,18 @@ showColorPickerDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        scrollable: true,
         title: Text(locator<S>().theme_color),
-        content: BlockPicker(
-          pickerColor: Store.value<AppSetting>(context).themeColor,
-          onColorChanged: (color) {
-            Store.value<AppSetting>(context).setColor(color);
-            Navigator.of(context).pop();
-          },
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            BlockPicker(
+              pickerColor: Store.value<AppSetting>(context).themeColor,
+              onColorChanged: (color) {
+                Store.value<AppSetting>(context).setColor(color);
+                Navigator.of(context).pop();
+              },
+            )
+          ],
         ),
       );
     },

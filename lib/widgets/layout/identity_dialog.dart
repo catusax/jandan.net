@@ -16,6 +16,7 @@ void showidentityDialog(BuildContext context) async {
       return AlertDialog(
         title: Text(locator<S>().identity),
         content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               decoration: InputDecoration(hintText: locator<S>().nickname),
