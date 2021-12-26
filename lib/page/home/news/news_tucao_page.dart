@@ -31,7 +31,7 @@ class _NewsTucaoPageState extends State<NewsTucaoPage> {
     super.initState();
     Log.log.fine("message");
     resresh();
-    commentController.refresh = resresh();
+    commentController.refresh = resresh;
   }
 
   @override

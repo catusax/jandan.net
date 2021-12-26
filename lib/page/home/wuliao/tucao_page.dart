@@ -32,7 +32,7 @@ class _TucaoPageState extends State<TucaoPage> {
     super.initState();
     Log.log.fine("message");
     resresh();
-    commentController.refresh = resresh();
+    commentController.refresh = resresh;
   }
 
   @override
