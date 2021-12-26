@@ -3,27 +3,27 @@ import 'package:timeago/timeago.dart';
 class CNTimeMessage extends LookupMessages {
   @override
   String aDay(int hours) {
-    return "一天前";
+    return "1天前";
   }
 
   @override
   String aboutAMinute(int minutes) {
-    return "一分钟前";
+    return "1分钟前";
   }
 
   @override
   String aboutAMonth(int days) {
-    return "一个月前";
+    return "1个月前";
   }
 
   @override
   String aboutAYear(int year) {
-    return "一年前";
+    return "1年前";
   }
 
   @override
   String aboutAnHour(int minutes) {
-    return "一小时前";
+    return "1小时前";
   }
 
   @override

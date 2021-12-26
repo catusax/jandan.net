@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          title: 'ImFIl',
+          title: 'Jandan',
           onGenerateRoute: router.generator,
         );
       },
