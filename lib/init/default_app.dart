@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppTheme>(
+    return Consumer<AppSetting>(
       builder: (context, appTheme, _) {
         return MaterialApp(
           localizationsDelegates: const [

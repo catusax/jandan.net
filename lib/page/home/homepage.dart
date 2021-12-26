@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
+import '../../router/router_map.dart';
 import '../../utils/provider.dart';
+import '../setting/setting_page.dart';
 import 'hot/hot_page.dart';
 import 'lomo/lomo_page.dart';
 import 'news/news_page.dart';
@@ -38,7 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ExtendedNestedScrollView(
           floatHeaderSlivers: true,
           onlyOneScrollInBody: true,
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
+          headerSliverBuilder:
+              (headerSliverBuildercontext, innerBoxIsScrolled) {
             return [
               SliverAppBar(
                 actions: [
@@ -50,12 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   PopupMenuButton(
                     icon: const Icon(Icons.more_vert_rounded),
-                    itemBuilder: (BuildContext context) => [
+                    itemBuilder: (BuildContext popupMenuContext) => [
                       PopupMenuItem(
                         child: ListTile(
                           title: Text(locator<S>().darkmode),
                           onTap: () {
-                            Store.value<AppTheme>(context).changeBrightness();
+                            Store.value<AppSetting>(context).changeBrightness();
                           },
                         ),
                       ),
@@ -69,7 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ListTile(
                           title: Text(locator<S>().setting),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(popupMenuContext).pop();
+                          //TODO: BUG,需要navigate两遍才能进入页面，不知道为什么
+                          RouteMaps.navigateTo(context, SettingPage.routeName,
+                              params: {});
+                          RouteMaps.navigateTo(
+                              headerSliverBuildercontext, SettingPage.routeName,
+                              params: {});
+                          // RouteMaps.navigateTo(
+                          //     popupMenuContext, SettingPage.routeName,
+                          //     params: {});
+                        },
                       )
                     ],
                   )

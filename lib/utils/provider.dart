@@ -13,7 +13,8 @@ class Store {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (_) => AppTheme(getDefaultTheme(), getDefaultBrightness())),
+            create: (_) => AppSetting(getDefaultTheme(), getDefaultBrightness(),
+                getDefaultHideUnwelcome())),
       ],
       child: child,
     );
@@ -36,15 +37,19 @@ class Store {
 }
 
 MaterialColor getDefaultTheme() {
-  return AppTheme.materialColors[SPUtils.getThemeIndex()];
+  return AppSetting.materialColors[SPUtils.getThemeIndex()];
 }
 
 Brightness getDefaultBrightness() {
   return SPUtils.getBrightness();
 }
 
+bool getDefaultHideUnwelcome() {
+  return SPUtils.getHideUnwelcome();
+}
+
 ///主题
-class AppTheme with ChangeNotifier {
+class AppSetting with ChangeNotifier {
   static final List<MaterialColor> materialColors = [
     Colors.blue,
     Colors.lightBlue,
@@ -64,7 +69,9 @@ class AppTheme with ChangeNotifier {
 
   Brightness _brightness;
 
-  AppTheme(this._themeColor, this._brightness);
+  bool _hideUnwelcome;
+
+  AppSetting(this._themeColor, this._brightness, this._hideUnwelcome);
 
   void setColor(MaterialColor color) {
     _themeColor = color;
@@ -90,7 +97,15 @@ class AppTheme with ChangeNotifier {
     notifyListeners();
   }
 
+  void setHideUnwelcome(bool hide) {
+    _hideUnwelcome = hide;
+    SPUtils.saveHideUnwelcome(hide);
+    notifyListeners();
+  }
+
   MaterialColor get themeColor => _themeColor;
 
   Brightness get brightness => _brightness;
+
+  bool get hideUnwelcome => _hideUnwelcome;
 }

@@ -115,9 +115,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  # assets:
-  # - assets/drawable/
-  # - assets/icon/
+  assets:
+  - assets/
+  - assets/load/
 
 flutter_intl:
   enabled: true

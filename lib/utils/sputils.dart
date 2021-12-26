@@ -44,10 +44,22 @@ class SPUtils {
     return _spf!.setBool('key_agree_privacy', isAgree);
   }
 
-  static bool isAgreePrivacy() {
+  static bool getisAgreePrivacy() {
     if (!_spf!.containsKey('key_agree_privacy')) {
       return false;
     }
     return _spf!.getBool('key_agree_privacy')!;
+  }
+
+  ///是否隐藏不受欢迎内容
+  static Future<bool> saveHideUnwelcome(bool isAgree) {
+    return _spf!.setBool('key_hide_unwelcome', isAgree);
+  }
+
+  static bool getHideUnwelcome() {
+    if (!_spf!.containsKey('key_hide_unwelcome')) {
+      return false;
+    }
+    return _spf!.getBool('key_hide_unwelcome')!;
   }
 }

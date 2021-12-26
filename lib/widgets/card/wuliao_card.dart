@@ -15,6 +15,7 @@ import '../../models/card_item.dart';
 import '../../page/image_viewer/image_viewer_page.dart';
 import '../../router/router_map.dart';
 import '../../utils/assets.dart';
+import '../../utils/provider.dart';
 import '../../utils/snackbar.dart';
 import '../text/blod_text.dart';
 
@@ -29,6 +30,12 @@ class WuliaoCard extends StatefulWidget {
 class _WuliaoCardState extends State<WuliaoCard> {
   @override
   Widget build(BuildContext context) {
+    //过滤不受欢迎的内容
+    if (widget.item.vote_negative >= 10 &&
+        widget.item.vote_negative > widget.item.vote_positive &&
+        Store.value<AppSetting>(context).hideUnwelcome) {
+      return const SizedBox.shrink();
+    }
     return Card(
       margin: const EdgeInsets.all(8),
       child: Padding(
