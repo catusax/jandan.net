@@ -1,6 +1,5 @@
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';

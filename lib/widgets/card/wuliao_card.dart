@@ -234,6 +234,8 @@ class _WuliaoCardState extends State<WuliaoCard> {
                     ListTile(
                       onTap: () {
                         //TODO: 收藏夹
+                        SnackBarUtil.showSnackbar(
+                            context, const Text("暂不支持收藏夹"));
                         Navigator.of(context).pop();
                       },
                       title: Text(locator<S>().add_to_fav),

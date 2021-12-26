@@ -23,7 +23,7 @@ class RouteMaps {
     }));
     router.define("/home", handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-      return MyHomePage();
+      return const MyHomePage();
     }));
     router.define(TucaoPage.routeName, handler: Handler(
         handlerFunc: (BuildContext? context, Map<String, List<String>> params) {

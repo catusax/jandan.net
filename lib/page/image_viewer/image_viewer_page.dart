@@ -73,7 +73,6 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
               IconButton(
                 iconSize: 20,
                 onPressed: () async {
-                  // TODO: 安卓保存文件权限 https://pub.dev/packages/image_gallery_saver
                   final imageData =
                       await getNetworkImageData(widget.images[currentIndex]);
                   try {

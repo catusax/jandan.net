@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
 
   //倒计时
   void countDown(BuildContext context) {
-    var _duration = const Duration(seconds: 2);
+    var _duration = const Duration(milliseconds: 100);
     Future.delayed(_duration, () {
       goHomePage(context);
     });

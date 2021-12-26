@@ -46,9 +46,7 @@ class JandanApi {
     return Hot.fromMap(resp);
   }
 
-  /**
-   * startid 上一页最后一个条目的id
-   */
+  /// startid 上一页最后一个条目的id
   static Future<Lomo> lomo(String commentId, {String? startid}) async {
     String param = "";
     if (startid != null) param = "?start_id=" + startid;
