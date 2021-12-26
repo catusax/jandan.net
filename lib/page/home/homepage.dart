@@ -59,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           title: Text(locator<S>().darkmode),
                           onTap: () {
                             Store.value<AppSetting>(context).changeBrightness();
+                            Navigator.of(popupMenuContext).pop();
                           },
                         ),
                       ),
@@ -93,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 snap: true,
                 title: const Text("Jandan"),
                 bottom: TabBar(
+                  indicatorColor: Theme.of(context).primaryColor,
                   tabs: [
                     Tab(text: locator<S>().news),
                     Tab(text: locator<S>().tending),

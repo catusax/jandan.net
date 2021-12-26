@@ -66,22 +66,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: appTheme.brightness,
             primarySwatch: appTheme.themeColor,
-            textTheme: const TextTheme(button: TextStyle(color: Colors.black)),
-            buttonTheme: const ButtonThemeData(
-              buttonColor: Colors.teal,
-              textTheme: ButtonTextTheme.normal,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(appTheme.themeColor),
-                foregroundColor: MaterialStateProperty.all(Colors.white),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100))),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.all(16),
-                ),
-              ),
-            ),
+            primaryColor: appTheme.themeColor,
+            primaryColorBrightness: Brightness.dark,
           ),
           title: 'Jandan',
           onGenerateRoute: router.generator,

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/identity.dart';
@@ -16,17 +17,17 @@ class SPUtils {
   }
 
   ///主题
-  static Future<bool> saveThemeIndex(int value) {
+  static Future<bool> saveThemeColor(int value) {
     return _spf!.setInt('key_theme_color', value);
   }
 
-  static int getThemeIndex() {
+  static int getThemeColor() {
     if (_spf!.containsKey('key_theme_color')) {
-      return _spf!.getInt('key_theme_color') == null
+      return _spf!.getInt('key_theme_color') != null
           ? _spf!.getInt('key_theme_color')!
-          : 0;
+          : Colors.blue.value;
     }
-    return 0;
+    return Colors.blue.value;
   }
 
   ///深色模式

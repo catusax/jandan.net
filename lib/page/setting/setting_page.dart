@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
@@ -20,18 +21,20 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  String version = "";
+  String version = "1.0.0";
   Timer timer = Timer(const Duration(seconds: 0), () {});
   int clickTimes = 0;
 
   @override
   void initState() {
-    () async {
-      final packageinfo = await PackageInfo.fromPlatform();
-      setState(() {
-        version = "${packageinfo.version} [${packageinfo.buildNumber}]";
-      });
-    }.call();
+    //TODO: 修复版本号问题
+
+    // () async {
+    //   final packageinfo = await PackageInfo.fromPlatform();
+    //   setState(() {
+    //     version = "${packageinfo.version} [${packageinfo.buildNumber}]";
+    //   });
+    // }.call();
 
     super.initState();
   }
@@ -53,17 +56,24 @@ class _SettingPageState extends State<SettingPage> {
             locator<S>().general_setting,
             style: titleStyle,
           ).withPadding(),
+          // 隐藏不欢迎
           ListTile(
             title: Text(locator<S>().hide_unwelcome),
             subtitle: Text(locator<S>().hide_unwelcome_msg),
-            trailing: Switch(
-              value: Store.value<AppSetting>(context).hideUnwelcome,
-              onChanged: (value) {
-                Store.value<AppSetting>(context).setHideUnwelcome(value);
+            trailing: Consumer<AppSetting>(
+              builder: (context, appSetting, _) {
+                return Switch(
+                  activeColor: Theme.of(context).primaryColor,
+                  value: appSetting.hideUnwelcome,
+                  onChanged: (value) {
+                    appSetting.setHideUnwelcome(value);
+                  },
+                );
               },
             ),
             onTap: () {},
           ),
+          // 身份
           ListTile(
             title: Text(locator<S>().identity),
             subtitle: Text(locator<S>().identity_msg),
@@ -71,8 +81,17 @@ class _SettingPageState extends State<SettingPage> {
               showidentityDialog(context);
             },
           ),
+          // 主题
+          ListTile(
+            title: Text(locator<S>().theme),
+            subtitle: Text(locator<S>().theme_color),
+            onTap: () {
+              showColorPickerDialog(context);
+            },
+          ),
           const Divider(),
           Text(locator<S>().other, style: titleStyle).withPadding(),
+          // 关于
           ListTile(
             title: Text(locator<S>().about),
             onTap: () {
@@ -80,6 +99,7 @@ class _SettingPageState extends State<SettingPage> {
             },
           ),
           ListTile(
+            // 版本号
             title: Text(locator<S>().version),
             subtitle: Text(version),
             onTap: () {
@@ -99,4 +119,23 @@ class _SettingPageState extends State<SettingPage> {
       ),
     );
   }
+}
+
+showColorPickerDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        scrollable: true,
+        title: Text(locator<S>().theme_color),
+        content: BlockPicker(
+          pickerColor: Store.value<AppSetting>(context).themeColor,
+          onColorChanged: (color) {
+            Store.value<AppSetting>(context).setColor(color);
+            Navigator.of(context).pop();
+          },
+        ),
+      );
+    },
+  );
 }

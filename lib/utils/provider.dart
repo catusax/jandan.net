@@ -37,7 +37,7 @@ class Store {
 }
 
 MaterialColor getDefaultTheme() {
-  return AppSetting.materialColors[SPUtils.getThemeIndex()];
+  return MaterialColor(SPUtils.getThemeColor(), AppSetting.colorswatch);
 }
 
 Brightness getDefaultBrightness() {
@@ -50,6 +50,19 @@ bool getDefaultHideUnwelcome() {
 
 ///主题
 class AppSetting with ChangeNotifier {
+  static Map<int, Color> colorswatch = {
+    50: const Color.fromRGBO(136, 14, 79, .1),
+    100: const Color.fromRGBO(136, 14, 79, .2),
+    200: const Color.fromRGBO(136, 14, 79, .3),
+    300: const Color.fromRGBO(136, 14, 79, .4),
+    400: const Color.fromRGBO(136, 14, 79, .5),
+    500: const Color.fromRGBO(136, 14, 79, .6),
+    600: const Color.fromRGBO(136, 14, 79, .7),
+    700: const Color.fromRGBO(136, 14, 79, .8),
+    800: const Color.fromRGBO(136, 14, 79, .9),
+    900: const Color.fromRGBO(136, 14, 79, 1),
+  };
+
   static final List<MaterialColor> materialColors = [
     Colors.blue,
     Colors.lightBlue,
@@ -62,7 +75,7 @@ class AppSetting with ChangeNotifier {
     Colors.lightGreen,
     Colors.green,
     Colors.teal,
-    Colors.lime
+    Colors.lime,
   ];
 
   MaterialColor _themeColor;
@@ -73,14 +86,9 @@ class AppSetting with ChangeNotifier {
 
   AppSetting(this._themeColor, this._brightness, this._hideUnwelcome);
 
-  void setColor(MaterialColor color) {
-    _themeColor = color;
-    notifyListeners();
-  }
-
-  void changeColor(int index) {
-    _themeColor = materialColors[index];
-    SPUtils.saveThemeIndex(index);
+  void setColor(Color color) {
+    _themeColor = MaterialColor(color.value, colorswatch);
+    SPUtils.saveThemeColor(color.value);
     notifyListeners();
   }
 
