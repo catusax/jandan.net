@@ -41,30 +41,40 @@ class _TucaoPageState extends State<TucaoPage> {
       appBar: AppBar(
         title: Text(locator<S>().comments),
       ),
-      bottomNavigationBar: CommentNavigationBar(
-        commentController: commentController,
-        commentType: CommentType.tucao,
-        commentId: widget.item.comment_ID,
-        commentPostId: widget.item.comment_post_ID,
-      ),
-      body: ListView(
+      body: Stack(
         children: [
-          WuliaoCard(item: widget.item),
-          tucao == null || tucao!.data.list.isEmpty
-              ? InkWell(
-                  onTap: () {
-                    resresh();
-                  },
-                  child: Center(
-                    child: Text(
-                      locator<S>().have_no_comment_refresh,
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink(),
-          ..._hotComment(context),
-          ..._normalComment(context),
+          ListView(
+            children: [
+              WuliaoCard(item: widget.item),
+              tucao == null || tucao!.data.list.isEmpty
+                  ? InkWell(
+                      onTap: () {
+                        resresh();
+                      },
+                      child: Center(
+                        child: Text(
+                          locator<S>().have_no_comment_refresh,
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              ..._hotComment(context),
+              ..._normalComment(context),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CommentNavigationBar(
+              commentController: commentController,
+              commentType: CommentType.tucao,
+              commentId: widget.item.comment_ID,
+              commentPostId: widget.item.comment_post_ID,
+            ),
+          )
         ],
       ),
     );

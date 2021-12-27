@@ -40,28 +40,38 @@ class _NewsTucaoPageState extends State<NewsTucaoPage> {
       appBar: AppBar(
         title: Text(locator<S>().comments),
       ),
-      bottomNavigationBar: CommentNavigationBar(
-        commentController: commentController,
-        commentType: CommentType.comment,
-        commentPostId: widget.post.id.toString(),
-        commentId: "",
-      ),
-      body: ListView(
+      body: Stack(
         children: [
-          tucao == null || tucao!.post.comments.isEmpty
-              ? InkWell(
-                  onTap: () {
-                    resresh();
-                  },
-                  child: Center(
-                    child: Text(
-                      locator<S>().have_no_comment_refresh,
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ),
-                )
-              : const SizedBox.shrink(),
-          ..._normalComment(context),
+          ListView(
+            children: [
+              tucao == null || tucao!.post.comments.isEmpty
+                  ? InkWell(
+                      onTap: () {
+                        resresh();
+                      },
+                      child: Center(
+                        child: Text(
+                          locator<S>().have_no_comment_refresh,
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+              ..._normalComment(context),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CommentNavigationBar(
+              commentController: commentController,
+              commentType: CommentType.comment,
+              commentPostId: widget.post.id.toString(),
+              commentId: "",
+            ),
+          )
         ],
       ),
     );
