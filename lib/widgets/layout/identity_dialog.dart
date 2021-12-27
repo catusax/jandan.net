@@ -25,7 +25,7 @@ void showidentityDialog(BuildContext context) async {
             TextField(
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(hintText: locator<S>().email),
-              controller: nameController,
+              controller: mailController,
             )
           ],
         ),
@@ -52,7 +52,7 @@ void showidentityDialog(BuildContext context) async {
                       ? Colors.black54
                       : Colors.white54),
             ),
-            onPressed: () {
+            onPressed: () async {
               if (nameController.text.isNotEmpty &&
                   mailController.text.isNotEmpty) {
                 SPUtils.saveIdentity(Identity(
