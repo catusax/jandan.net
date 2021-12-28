@@ -63,6 +63,8 @@ class CommentNavigationBar extends StatelessWidget {
                                 commentController.textEditingController.text);
                         if (resp != "0") {
                           SnackBarUtil.showSnackbar(context, Text(resp));
+                        } else {
+                          commentController.reset();
                         }
                       }
                       break;
@@ -77,6 +79,8 @@ class CommentNavigationBar extends StatelessWidget {
                             commentId: commentId);
                         if (resp.code != 0) {
                           SnackBarUtil.showSnackbar(context, Text(resp.msg));
+                        } else {
+                          commentController.reset();
                         }
                       }
                   }
@@ -95,6 +99,12 @@ class CommentController {
   String prefix = "";
   String hintText = locator<S>().reply;
   late Function() refresh;
+
+  reset() {
+    prefix = "";
+    hintText = locator<S>().reply;
+    textEditingController.text = "";
+  }
 
   CommentController();
 }

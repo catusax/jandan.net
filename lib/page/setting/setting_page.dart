@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:jandan/init/themes.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
@@ -9,7 +10,6 @@ import '../../init/locator.dart';
 import '../../router/router_map.dart';
 import '../../utils/provider.dart';
 import '../../widgets/layout/identity_dialog.dart';
-import '../../widgets/layout/position.dart';
 import 'easter_egg.dart';
 
 class SettingPage extends StatefulWidget {
@@ -52,10 +52,14 @@ class _SettingPageState extends State<SettingPage> {
       ),
       body: ListView(
         children: [
-          Text(
-            locator<S>().general_setting,
-            style: titleStyle,
-          ).withPadding(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
+                Styles.wigetHorizontalMargin, 0),
+            child: Text(
+              locator<S>().general_setting,
+              style: titleStyle,
+            ),
+          ),
           // 隐藏不欢迎
           ListTile(
             title: Text(locator<S>().hide_unwelcome),
@@ -90,7 +94,11 @@ class _SettingPageState extends State<SettingPage> {
             },
           ),
           const Divider(),
-          Text(locator<S>().other, style: titleStyle).withPadding(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
+                Styles.wigetHorizontalMargin, 0),
+            child: Text(locator<S>().other, style: titleStyle),
+          ),
           // 关于
           ListTile(
             title: Text(locator<S>().about),

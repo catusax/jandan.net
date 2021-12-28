@@ -158,8 +158,7 @@ class _ImageViewerPageState extends State<ImageViewerPage>
                     Log.log.fine("save image" + suffix);
                     final file = await File(tempDir.path + suffix)
                         .writeAsBytes(imageData!);
-                    final permissionStatus =
-                        await Permission.manageExternalStorage.request();
+                    final permissionStatus = await Permission.storage.request();
                     if (!permissionStatus.isGranted) {
                       throw Exception("no permission");
                     }

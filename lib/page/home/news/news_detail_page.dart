@@ -14,7 +14,6 @@ import '../../../models/posts/news.dart';
 import '../../../models/posts/post.dart';
 import '../../../router/router_map.dart';
 import '../../../utils/snackbar.dart';
-import '../../../widgets/layout/position.dart';
 import '../../image_viewer/image_viewer_page.dart';
 import 'news_tucao_page.dart';
 
@@ -123,48 +122,65 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
           height: 200,
           fit: BoxFit.cover,
         ),
-        Text(
-          widget.post.title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: Styles.fontSizeBig),
-        ).withPadding(top: 10),
-        Text(
-          widget.post.author.name +
-              " " +
-              timeago.format(
-                DateTime.parse(widget.post.date),
-                locale: Localizations.localeOf(context).languageCode,
-              ),
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: Styles.fontSizeSmall,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
+              Styles.wigetHorizontalMargin, 0),
+          child: Text(
+            widget.post.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: Styles.fontSizeBig),
           ),
-        ).withPadding(),
-        Text(
-          widget.post.excerpt,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: Styles.fontSizeMiddle),
-        ).withPadding(),
-        postContent == null
-            ? const SizedBox.shrink()
-            : Html(
-                data: postContent?.post.content,
-                onLinkTap: (url, context, attributes, element) {
-                  if (url != null) {
-                    launch(url);
-                  }
-                },
-                onImageTap: (url, renderContext, attributes, element) {
-                  RouteMaps.navigateTo(
-                    context,
-                    ImageViewerPage.routeName,
-                    params: {
-                      ImageViewerPage.paramImages: [url],
-                      ImageViewerPage.paramIndex: 0
-                    },
-                  );
-                },
-              ).withPadding(),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
+              Styles.wigetHorizontalMargin, 0),
+          child: Text(
+            widget.post.author.name +
+                " " +
+                timeago.format(
+                  DateTime.parse(widget.post.date),
+                  locale: Localizations.localeOf(context).languageCode,
+                ),
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: Styles.fontSizeSmall,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
+              Styles.wigetHorizontalMargin, 0),
+          child: Text(
+            widget.post.excerpt,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: Styles.fontSizeMiddle),
+          ),
+        ),
+        Visibility(
+          visible: postContent != null,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
+                Styles.wigetHorizontalMargin, 0),
+            child: Html(
+              data: postContent?.post.content,
+              onLinkTap: (url, context, attributes, element) {
+                if (url != null) {
+                  launch(url);
+                }
+              },
+              onImageTap: (url, renderContext, attributes, element) {
+                RouteMaps.navigateTo(
+                  context,
+                  ImageViewerPage.routeName,
+                  params: {
+                    ImageViewerPage.paramImages: [url],
+                    ImageViewerPage.paramIndex: 0
+                  },
+                );
+              },
+            ),
+          ),
+        ),
       ],
     );
   }

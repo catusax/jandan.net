@@ -17,7 +17,6 @@ import '../../router/router_map.dart';
 import '../../utils/assets.dart';
 import '../../utils/provider.dart';
 import '../../utils/snackbar.dart';
-import '../layout/position.dart';
 import '../text/blod_text.dart';
 
 const double cardMargin = 8;
@@ -34,30 +33,37 @@ class _WuliaoCardState extends State<WuliaoCard> {
   @override
   Widget build(BuildContext context) {
     //过滤不受欢迎的内容
-    if (widget.item.vote_negative >= 10 &&
-        widget.item.vote_negative > widget.item.vote_positive &&
-        Store.value<AppSetting>(context).hideUnwelcome) {
-      return const SizedBox.shrink();
-    }
-    return Card(
-      margin: const EdgeInsets.all(cardMargin),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SimpleBlodText(widget.item.comment_author)
-              .withPadding(top: 10, left: 10, right: 10),
-          Text(
-            timeago.format(
-              DateTime.parse(widget.item.comment_date),
-              locale: Localizations.localeOf(context).languageCode,
+    return Visibility(
+      visible: widget.item.vote_negative <= 10 ||
+          widget.item.vote_negative < widget.item.vote_positive ||
+          Store.value<AppSetting>(context).hideUnwelcome,
+      child: Card(
+        margin: const EdgeInsets.all(cardMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: SimpleBlodText(widget.item.comment_author)),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: Text(
+                timeago.format(
+                  DateTime.parse(widget.item.comment_date),
+                  locale: Localizations.localeOf(context).languageCode,
+                ),
+                style: const TextStyle(fontSize: Styles.fontSizeSmall),
+              ),
             ),
-            style: const TextStyle(fontSize: Styles.fontSizeSmall),
-          ).withPadding(top: 10, left: 10, right: 10),
-          Text(cleanText(widget.item.text_content))
-              .withPadding(top: 10, left: 10, right: 10, bottom: 10),
-          _images(context),
-          _actionRows(context).withPadding(left: 10, right: 5, top: 0)
-        ],
+            Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text(cleanText(widget.item.text_content))),
+            _images(context),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                child: _actionRows(context))
+          ],
+        ),
       ),
     );
   }
@@ -69,19 +75,22 @@ class _WuliaoCardState extends State<WuliaoCard> {
       case 1:
         return _image(context, widget.item.pics.first, 0, true);
       default:
-        return GridView.builder(
-          itemCount: widget.item.pics.length,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
+        return Padding(
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: GridView.builder(
+            itemCount: widget.item.pics.length,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+            ),
+            itemBuilder: (context, idx) {
+              return _image(context, widget.item.pics[idx], idx, false);
+            },
           ),
-          itemBuilder: (context, idx) {
-            return _image(context, widget.item.pics[idx], idx, false);
-          },
-        ).withPadding(top: 0, left: 10, right: 10, bottom: 0);
+        );
     }
   }
 
@@ -105,27 +114,28 @@ class _WuliaoCardState extends State<WuliaoCard> {
               );
             case LoadState.completed:
               final image = state.extendedImageInfo?.image;
-              if (image?.height != null && image!.height / image.width >= 1.5) {
+              if (image?.height != null && image!.height / image.width >= 2) {
                 return Stack(
                   children: [
                     ExtendedRawImage(
                       image: image,
                       width: double.infinity,
                       fit: BoxFit.fitWidth,
-                      height: 300,
+                      height: MediaQuery.of(context).size.width * 1.5,
                     ),
-                    showMoreText
-                        ? Positioned(
-                            bottom: 0,
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(locator<S>().tap_to_see_full_img),
-                              width: MediaQuery.of(context).size.width -
-                                  (cardMargin * 2),
-                              color: Colors.white60,
-                            ),
-                          )
-                        : const SizedBox.shrink(),
+                    Visibility(
+                      visible: showMoreText,
+                      child: Positioned(
+                        bottom: 0,
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Text(locator<S>().tap_to_see_full_img),
+                          width: MediaQuery.of(context).size.width -
+                              (cardMargin * 2),
+                          color: Colors.white60,
+                        ),
+                      ),
+                    )
                   ],
                 );
               } else {
@@ -176,7 +186,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
   Widget _actionRows(BuildContext context) {
     return Row(
       children: [
-        InkWell(
+        GestureDetector(
           //oo按钮
           onTap: () async {
             if (widget.item.ooxx != null) return;
@@ -212,7 +222,7 @@ class _WuliaoCardState extends State<WuliaoCard> {
           ),
         ),
         const Spacer(),
-        InkWell(
+        GestureDetector(
           //xx按钮
           onTap: () async {
             if (widget.item.ooxx != null) return;
