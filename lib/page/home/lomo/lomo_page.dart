@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:jandan/models/card_item.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../models/lomo/lomo.dart';
@@ -23,7 +24,7 @@ class LomoPage extends StatefulWidget {
 
 class _LomoPageState extends State<LomoPage>
     with AutomaticKeepAliveClientMixin {
-  final PagingController<int, LomoData> _pagingController =
+  final PagingController<int, CardItem> _pagingController =
       PagingController(firstPageKey: 0);
 
   @override
@@ -38,7 +39,9 @@ class _LomoPageState extends State<LomoPage>
     try {
       final lomo = await JandanApi.lomo(widget.commentId,
           startid: _page == 0 ? null : _page.toString());
-      _pagingController.appendPage(lomo.data, lomo.data.last.id);
+      _pagingController.appendPage(
+          lomo.data.map<CardItem>((e) => e.toCardItem()).toList(),
+          lomo.data.last.id);
     } catch (e) {
       _pagingController.error = e;
     }
@@ -55,14 +58,14 @@ class _LomoPageState extends State<LomoPage>
         cacheExtent: MediaQuery.of(context).size.height * 2,
         scrollController: widget.scrollController,
         pagingController: _pagingController,
-        builderDelegate: PagedChildBuilderDelegate<LomoData>(
+        builderDelegate: PagedChildBuilderDelegate<CardItem>(
           itemBuilder: (context, item, index) => InkWell(
             onTap: () {
               RouteMaps.navigateTo(context, TucaoPage.routeName,
-                  params: {TucaoPage.paramItem: item.toCardItem().toJson()});
+                  params: {TucaoPage.paramItem: item.toJson()});
             },
             child: WuliaoCard(
-              item: item.toCardItem(),
+              item: item,
             ),
           ),
         ),

@@ -186,14 +186,19 @@ class _ImageViewerPageState extends State<ImageViewerPage>
                   final imageData =
                       await getNetworkImageData(widget.images[currentIndex]);
                   try {
-                    Directory tempDir = await getTemporaryDirectory();
-                    final suffix = widget.images[currentIndex]
-                        .substring(widget.images[currentIndex].length - 3);
-                    final file = await File(tempDir.path + "share." + suffix)
+                    final tempDir = await getTemporaryDirectory();
+                    final shareDir = Directory(tempDir.path + "/share");
+                    shareDir.createSync();
+                    final suffix = widget.images[currentIndex].substring(
+                        widget.images[currentIndex].length - 36); //hash+后缀 32+4
+                    final file = await File(shareDir.path + "/" + suffix)
                         .writeAsBytes(imageData!);
+
+                    Log.log.fine("sharedir::::" + file.path);
                     await Share.shareFiles(
                       [file.path],
                     );
+                    await file.delete();
                   } catch (e) {
                     SnackBarUtil.showSnackbar(
                         context, Text(locator<S>().failed_to_share));
