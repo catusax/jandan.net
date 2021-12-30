@@ -53,10 +53,12 @@ class _WuliaoPageState extends State<WuliaoPage>
         () => _pagingController.refresh(),
       ),
       child: PagedListView(
+        cacheExtent: MediaQuery.of(context).size.height * 2,
+        addAutomaticKeepAlives: true,
         scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<Comment>(
-          itemBuilder: (context, item, index) => InkWell(
+          itemBuilder: (context, item, index) => GestureDetector(
             onTap: () {
               RouteMaps.navigateTo(context, TucaoPage.routeName,
                   params: {TucaoPage.paramItem: item.toCardItem().toJson()});

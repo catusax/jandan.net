@@ -62,6 +62,7 @@ class _TucaoPageState extends State<TucaoPage> {
                   : const SizedBox.shrink(),
               ..._hotComment(context),
               ..._normalComment(context),
+              const SizedBox(height: 30)
             ],
           ),
           Positioned(

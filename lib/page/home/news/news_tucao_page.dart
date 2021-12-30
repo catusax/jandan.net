@@ -59,6 +59,7 @@ class _NewsTucaoPageState extends State<NewsTucaoPage> {
                     )
                   : const SizedBox.shrink(),
               ..._normalComment(context),
+              const SizedBox(height: 30)
             ],
           ),
           Positioned(

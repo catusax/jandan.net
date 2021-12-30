@@ -52,6 +52,7 @@ class _LomoPageState extends State<LomoPage>
         () => _pagingController.refresh(),
       ),
       child: PagedListView(
+        cacheExtent: MediaQuery.of(context).size.height * 2,
         scrollController: widget.scrollController,
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<LomoData>(
