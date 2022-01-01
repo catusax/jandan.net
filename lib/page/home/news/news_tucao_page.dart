@@ -49,9 +49,11 @@ class _NewsTucaoPageState extends State<NewsTucaoPage> {
                       onTap: () {
                         resresh();
                       },
-                      child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
                         child: Text(
                           locator<S>().have_no_comment_refresh,
+                          textAlign: TextAlign.center,
                           style:
                               TextStyle(color: Theme.of(context).primaryColor),
                         ),
