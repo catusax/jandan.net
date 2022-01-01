@@ -156,9 +156,8 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
             style: const TextStyle(fontSize: Styles.fontSizeMiddle),
           ),
         ),
-        Visibility(
-          visible: postContent != null,
-          child: Padding(
+        if (postContent != null)
+          Padding(
             padding: const EdgeInsets.fromLTRB(Styles.wigetHorizontalMargin, 10,
                 Styles.wigetHorizontalMargin, 0),
             child: Html(
@@ -180,7 +179,6 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
               },
             ),
           ),
-        ),
       ],
     );
   }

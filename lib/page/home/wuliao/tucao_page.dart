@@ -46,22 +46,20 @@ class _TucaoPageState extends State<TucaoPage> {
           ListView(
             children: [
               WuliaoCard(item: widget.item),
-              tucao == null || tucao!.data.list.isEmpty
-                  ? InkWell(
-                      onTap: () {
-                        resresh();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Text(
-                          locator<S>().have_no_comment_refresh,
-                          textAlign: TextAlign.center,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
+              if (tucao == null || tucao!.data.list.isEmpty)
+                InkWell(
+                  onTap: () {
+                    resresh();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      locator<S>().have_no_comment_refresh,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                  ),
+                ),
               ..._hotComment(context),
               ..._normalComment(context),
               const SizedBox(height: 30)

@@ -44,22 +44,20 @@ class _NewsTucaoPageState extends State<NewsTucaoPage> {
         children: [
           ListView(
             children: [
-              tucao == null || tucao!.post.comments.isEmpty
-                  ? InkWell(
-                      onTap: () {
-                        resresh();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Text(
-                          locator<S>().have_no_comment_refresh,
-                          textAlign: TextAlign.center,
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
+              if (tucao == null || tucao!.post.comments.isEmpty)
+                InkWell(
+                  onTap: () {
+                    resresh();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      locator<S>().have_no_comment_refresh,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                  ),
+                ),
               ..._normalComment(context),
               const SizedBox(height: 30)
             ],
