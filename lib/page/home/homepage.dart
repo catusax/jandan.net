@@ -34,120 +34,107 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-//https://gist.github.com/iRbouh/219a81b3f2e32c3ef725972b45627f2e
-//https://dartpad.dev/?id=4b3ed2ac8284bc6931b930c5c75b0d32
-
-      body: CustomScrollView(
-        slivers: [],
-        child: ExtendedNestedScrollView(
-          floatHeaderSlivers: true,
-          onlyOneScrollInBody: true,
-          headerSliverBuilder:
-              (headerSliverBuildercontext, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      //TODO: 发帖页面
-                    },
-                    icon: const Icon(Icons.add),
+    //TODO: https://gist.github.com/iRbouh/219a81b3f2e32c3ef725972b45627f2e
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  //TODO: 发帖页面
+                },
+                icon: const Icon(Icons.add),
+              ),
+              PopupMenuButton(
+                icon: const Icon(Icons.more_vert_rounded),
+                itemBuilder: (BuildContext popupMenuContext) => [
+                  PopupMenuItem(
+                    child: ListTile(
+                      title: Text(locator<S>().darkmode),
+                      onTap: () {
+                        Store.value<AppSetting>(context).changeBrightness();
+                        Navigator.of(popupMenuContext).pop();
+                      },
+                    ),
                   ),
-                  PopupMenuButton(
-                    icon: const Icon(Icons.more_vert_rounded),
-                    itemBuilder: (BuildContext popupMenuContext) => [
-                      PopupMenuItem(
-                        child: ListTile(
-                          title: Text(locator<S>().darkmode),
-                          onTap: () {
-                            Store.value<AppSetting>(context).changeBrightness();
-                            Navigator.of(popupMenuContext).pop();
-                          },
-                        ),
-                      ),
-                      PopupMenuItem(
-                        child: ListTile(
-                          title: Text(locator<S>().favorities),
-                        ),
-                        onTap: () {},
-                      ),
-                      PopupMenuItem(
-                        child: ListTile(
-                          title: Text(locator<S>().setting),
-                        ),
-                        onTap: () {
-                          Navigator.of(popupMenuContext).pop();
-                          //TODO: BUG,需要navigate两遍才能进入页面，不知道为什么
-                          RouteMaps.navigateTo(context, SettingPage.routeName,
-                              params: {});
-                          RouteMaps.navigateTo(
-                              headerSliverBuildercontext, SettingPage.routeName,
-                              params: {});
-                          // RouteMaps.navigateTo(
-                          //     popupMenuContext, SettingPage.routeName,
-                          //     params: {});
-                        },
-                      )
-                    ],
+                  PopupMenuItem(
+                    child: ListTile(
+                      title: Text(locator<S>().favorities),
+                    ),
+                    onTap: () {},
+                  ),
+                  PopupMenuItem(
+                    child: ListTile(
+                      title: Text(locator<S>().setting),
+                    ),
+                    onTap: () {
+                      Navigator.of(popupMenuContext).pop();
+                      //TODO: BUG,需要navigate两遍才能进入页面，不知道为什么
+                      RouteMaps.navigateTo(context, SettingPage.routeName,
+                          params: {});
+                      RouteMaps.navigateTo(context, SettingPage.routeName,
+                          params: {});
+                      // RouteMaps.navigateTo(
+                      //     popupMenuContext, SettingPage.routeName,
+                      //     params: {});
+                    },
                   )
                 ],
-                pinned: false,
-                floating: true,
-                snap: false,
-                title: const Text("Jandan"),
-                bottom: TabBar(
-                  indicatorColor: Theme.of(context).primaryColor,
-                  tabs: [
-                    Tab(text: locator<S>().news),
-                    Tab(text: locator<S>().tending),
-                    Tab(text: locator<S>().pics),
-                    Tab(text: locator<S>().lomo),
-                    Tab(text: locator<S>().fml),
-                  ],
-                  onTap: (position) {
-                    switch (position) {
-                      case 2:
-                        if (currentPosition == position) {
-                          wuliaoScrollController.jumpTo(0);
-                        }
-                        break;
-                      case 0:
-                        if (currentPosition == position) {
-                          newsScrollController.jumpTo(0);
-                        }
-                        break;
-                      default:
-                    }
-                    currentPosition = position;
-                    //TODO:双击刷新
-                    // _wuliaorefreshController.requestRefresh();
-                  },
-                ),
-              ),
-            ];
-          },
-          body: TabBarView(
-            children: [
-              NewsPage(
-                scrollController: newsScrollController,
-              ),
-              HotPage(
-                scrollController: hotScrollController,
-              ),
-              WuliaoPage(
-                scrollController: wuliaoScrollController,
-              ),
-              LomoPage(
-                commentId: "21183",
-                scrollController: lomoScrollController,
-              ),
-              LomoPage(
-                commentId: "102312",
-                scrollController: fmlScrollController,
-              ),
+              )
             ],
-          ),
+            title: const Text("Jandan"),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(30),
+              child: TabBar(
+                indicatorColor: Theme.of(context).primaryColor,
+                tabs: [
+                  Tab(text: locator<S>().news),
+                  Tab(text: locator<S>().tending),
+                  Tab(text: locator<S>().pics),
+                  Tab(text: locator<S>().lomo),
+                  Tab(text: locator<S>().fml),
+                ],
+                onTap: (position) {
+                  switch (position) {
+                    case 2:
+                      if (currentPosition == position) {
+                        wuliaoScrollController.jumpTo(0);
+                      }
+                      break;
+                    case 0:
+                      if (currentPosition == position) {
+                        newsScrollController.jumpTo(0);
+                      }
+                      break;
+                    default:
+                  }
+                  currentPosition = position;
+                  //TODO:双击刷新
+                  // _wuliaorefreshController.requestRefresh();
+                },
+              ),
+            )),
+        body: TabBarView(
+          children: [
+            NewsPage(
+              scrollController: newsScrollController,
+            ),
+            HotPage(
+              scrollController: hotScrollController,
+            ),
+            WuliaoPage(
+              scrollController: wuliaoScrollController,
+            ),
+            LomoPage(
+              commentId: "21183",
+              scrollController: lomoScrollController,
+            ),
+            LomoPage(
+              commentId: "102312",
+              scrollController: fmlScrollController,
+            ),
+          ],
         ),
       ),
     );

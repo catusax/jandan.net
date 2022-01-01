@@ -38,7 +38,6 @@ dependencies:
   fluro: ^2.0.3
   flutter_localizations:
     sdk: flutter
-  flutter_bloc: ^8.0.0 # bloc 设计模式 https://bloclibrary.dev/#/gettingstarted
   provider: ^6.0.1
   shared_preferences: ^2.0.8
   path_provider: ^2.0.6
