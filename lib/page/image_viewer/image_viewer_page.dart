@@ -37,7 +37,6 @@ class _ImageViewerPageState extends State<ImageViewerPage>
 
 //https://github.com/fluttercandies/extended_image/blob/02031d799bd7ea175138b5a593aabfc46055c5da/example/lib/common/widget/pic_swiper.dart
   late AnimationController _doubleClickAnimationController;
-  late AnimationController _slideEndAnimationController;
   Animation<double>? _doubleClickAnimation;
   late DoubleClickAnimationListener _doubleClickAnimationListener;
   List<double> doubleTapScales = <double>[1.0, 2.0];
@@ -47,10 +46,6 @@ class _ImageViewerPageState extends State<ImageViewerPage>
     currentIndex = widget.currentIndex;
     _doubleClickAnimationController = AnimationController(
         duration: const Duration(milliseconds: 150), vsync: this);
-    _slideEndAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 150),
-    );
     super.initState();
   }
 
@@ -219,7 +214,6 @@ class _ImageViewerPageState extends State<ImageViewerPage>
   @override
   void dispose() {
     _doubleClickAnimationController.dispose();
-    _slideEndAnimationController.dispose();
     clearGestureDetailsCache();
     //cancelToken?.cancel();
     super.dispose();

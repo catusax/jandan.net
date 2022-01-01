@@ -35,8 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(
-        length: 5,
+//https://gist.github.com/iRbouh/219a81b3f2e32c3ef725972b45627f2e
+//https://dartpad.dev/?id=4b3ed2ac8284bc6931b930c5c75b0d32
+
+      body: CustomScrollView(
+        slivers: [],
         child: ExtendedNestedScrollView(
           floatHeaderSlivers: true,
           onlyOneScrollInBody: true,
@@ -89,9 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   )
                 ],
-                pinned: true,
+                pinned: false,
                 floating: true,
-                snap: true,
+                snap: false,
                 title: const Text("Jandan"),
                 bottom: TabBar(
                   indicatorColor: Theme.of(context).primaryColor,
