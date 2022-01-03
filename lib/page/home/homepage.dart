@@ -1,4 +1,3 @@
-import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
@@ -85,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             title: const Text("Jandan"),
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(30),
+              preferredSize: const Size.fromHeight(30),
               child: TabBar(
                 indicatorColor: Theme.of(context).primaryColor,
                 tabs: [

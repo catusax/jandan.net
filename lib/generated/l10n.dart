@@ -470,10 +470,10 @@ class S {
     );
   }
 
-  /// `Hide comment has more than 10 xx and xx > oo`
+  /// `Hide comment that xx >=5 && xx >= oo`
   String get hide_unwelcome_msg {
     return Intl.message(
-      'Hide comment has more than 10 xx and xx > oo',
+      'Hide comment that xx >=5 && xx >= oo',
       name: 'hide_unwelcome_msg',
       desc: '',
       args: [],

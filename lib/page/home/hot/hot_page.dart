@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:jandan/models/card_item.dart';
+import 'package:jandan/utils/provider.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../router/router_map.dart';
@@ -34,8 +35,14 @@ class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
   Future<void> _fetchPage(int _page) async {
     try {
       final hots = await JandanApi.hot();
-      _pagingController.appendLastPage(
-          hots.comments.map<CardItem>((e) => e.toCardItem()).toList());
+      var itemList =
+          hots.comments.map<CardItem>((e) => e.toCardItem()).toList();
+      if (Store.value<AppSetting>(context).hideUnwelcome) {
+        itemList.removeWhere((element) =>
+            element.vote_negative >= 5 &&
+            element.vote_negative >= element.vote_positive);
+      }
+      _pagingController.appendLastPage(itemList);
     } catch (e) {
       _pagingController.error = e;
     }

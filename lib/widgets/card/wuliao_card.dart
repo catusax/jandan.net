@@ -15,7 +15,6 @@ import '../../models/card_item.dart';
 import '../../page/image_viewer/image_viewer_page.dart';
 import '../../router/router_map.dart';
 import '../../utils/assets.dart';
-import '../../utils/provider.dart';
 import '../../utils/snackbar.dart';
 import '../text/blod_text.dart';
 
@@ -33,37 +32,32 @@ class _WuliaoCardState extends State<WuliaoCard> {
   @override
   Widget build(BuildContext context) {
     //过滤不受欢迎的内容
-    return Visibility(
-      visible: widget.item.vote_negative <= 10 ||
-          widget.item.vote_negative < widget.item.vote_positive ||
-          Store.value<AppSetting>(context).hideUnwelcome,
-      child: Card(
-        margin: const EdgeInsets.all(cardMargin),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: SimpleBlodText(widget.item.comment_author)),
-            Padding(
+    return Card(
+      margin: const EdgeInsets.all(cardMargin),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
               padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: Text(
-                timeago.format(
-                  DateTime.parse(widget.item.comment_date),
-                  locale: Localizations.localeOf(context).languageCode,
-                ),
-                style: const TextStyle(fontSize: Styles.fontSizeSmall),
+              child: SimpleBlodText(widget.item.comment_author)),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            child: Text(
+              timeago.format(
+                DateTime.parse(widget.item.comment_date),
+                locale: Localizations.localeOf(context).languageCode,
               ),
+              style: const TextStyle(fontSize: Styles.fontSizeSmall),
             ),
-            Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(cleanText(widget.item.text_content))),
-            _images(context),
-            Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
-                child: _actionRows(context))
-          ],
-        ),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(cleanText(widget.item.text_content))),
+          _images(context),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+              child: _actionRows(context))
+        ],
       ),
     );
   }

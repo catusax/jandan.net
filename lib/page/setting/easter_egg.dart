@@ -30,7 +30,7 @@ class _EasterEggPageState extends State<EasterEggPage> {
         onTap: () {
           setState(() {
             final num = Random().nextInt(12);
-            imageColor = AppSetting.materialColors[num] as Color;
+            imageColor = AppSetting.materialColors[num];
           });
         },
         onLongPress: () {

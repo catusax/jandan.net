@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:jandan/models/card_item.dart';
+import 'package:jandan/utils/provider.dart';
 
 import '../../../core/http/jandan_api.dart';
-import '../../../models/wuliao/comment.dart';
 import '../../../router/router_map.dart';
 import '../../../widgets/card/wuliao_card.dart';
 import 'tucao_page.dart';
@@ -36,8 +36,14 @@ class _WuliaoPageState extends State<WuliaoPage>
   Future<void> _fetchPage(int _page) async {
     try {
       final wuliao = await JandanApi.wuliao(page: _page);
-      final itemList =
+      var itemList =
           wuliao.comments.map<CardItem>((e) => e.toCardItem()).toList();
+      if (Store.value<AppSetting>(context).hideUnwelcome) {
+        itemList.removeWhere((element) =>
+            element.vote_negative >= 5 &&
+            element.vote_negative >= element.vote_positive);
+      }
+
       if (_page == wuliao.page_count) {
         _pagingController.appendLastPage(itemList);
       } else {

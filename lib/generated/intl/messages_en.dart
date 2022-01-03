@@ -48,7 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hide_unwelcome":
             MessageLookupByLibrary.simpleMessage("Hide unwelcome"),
         "hide_unwelcome_msg": MessageLookupByLibrary.simpleMessage(
-            "Hide comment has more than 10 xx and xx > oo"),
+            "Hide comment that xx >=5 && xx >= oo"),
         "hot_comment": MessageLookupByLibrary.simpleMessage("Hot comment"),
         "identity": MessageLookupByLibrary.simpleMessage("Identity"),
         "identity_msg":

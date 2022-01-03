@@ -77,8 +77,8 @@ class _PostTucaoCardState extends State<PostTucaoCard> {
                   onTap: () async {
                     if (tucao.ooxx != null) return;
                     try {
-                      final res =
-                          await JandanApi.ooxxTucao(true, tucao.id.toString());
+                      final res = await JandanApi.ooxxComment(
+                          true, tucao.id.toString());
                       if (res.code == 0) {
                         setState(() {
                           tucao.ooxx = true;
@@ -112,8 +112,8 @@ class _PostTucaoCardState extends State<PostTucaoCard> {
                   onTap: () async {
                     if (tucao.ooxx != null) return;
                     try {
-                      final res =
-                          await JandanApi.ooxxTucao(false, tucao.id.toString());
+                      final res = await JandanApi.ooxxComment(
+                          false, tucao.id.toString());
                       if (res.code == 0) {
                         setState(() {
                           tucao.ooxx = false;

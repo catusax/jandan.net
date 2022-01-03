@@ -65,7 +65,7 @@
     "email": "Email",
     "version": "Version",
     "hide_unwelcome": "Hide unwelcome",
-    "hide_unwelcome_msg": "Hide comment has more than 10 xx and xx > oo",
+    "hide_unwelcome_msg": "Hide comment that xx >=5 && xx >= oo",
     "theme": "Theme",
     "theme_color": "Theme color",
     "about": "About"

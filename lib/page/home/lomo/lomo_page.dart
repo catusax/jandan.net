@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:jandan/models/card_item.dart';
+import 'package:jandan/utils/provider.dart';
 
 import '../../../core/http/jandan_api.dart';
-import '../../../models/lomo/lomo.dart';
 import '../../../router/router_map.dart';
 import '../../../widgets/card/wuliao_card.dart';
 import '../wuliao/tucao_page.dart';
@@ -39,9 +39,15 @@ class _LomoPageState extends State<LomoPage>
     try {
       final lomo = await JandanApi.lomo(widget.commentId,
           startid: _page == 0 ? null : _page.toString());
-      _pagingController.appendPage(
-          lomo.data.map<CardItem>((e) => e.toCardItem()).toList(),
-          lomo.data.last.id);
+
+      var itemList = lomo.data.map<CardItem>((e) => e.toCardItem()).toList();
+      if (Store.value<AppSetting>(context).hideUnwelcome) {
+        itemList.removeWhere((element) =>
+            element.vote_negative >= 5 &&
+            element.vote_negative >= element.vote_positive);
+      }
+
+      _pagingController.appendPage(itemList, lomo.data.last.id);
     } catch (e) {
       _pagingController.error = e;
     }

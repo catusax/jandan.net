@@ -1,3 +1,5 @@
+import 'package:jandan/models/resp/ooxx_tucao_resp.dart';
+
 import '../../models/lomo/lomo.dart';
 import '../../models/posts/news.dart';
 import '../../models/posts/post.dart';
@@ -67,13 +69,14 @@ class JandanApi {
     return OOXXResp.fromMap(resp);
   }
 
-  static Future<OOXXResp> ooxxTucao(bool positive, String commentId) async {
-    final resp = await XHttp.post("https://api.jandan.net/api/v1/vote/tucao", {
-      "vote_type": positive ? "pos" : "neg",
+  static Future<OOXXTucaoResp> ooxxTucao(bool positive, int commentId) async {
+    final resp = await XHttp.post("/jandan-vote.php", {
+      "data_type": "tucao",
       "comment_id": commentId,
+      "like_type": positive ? "pos" : "neg",
     });
     Log.log.fine(resp);
-    return OOXXResp.fromMap(resp);
+    return OOXXTucaoResp.fromMap(resp);
   }
 
   static Future<TuCao> getTucao(String commentId) async {

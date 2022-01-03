@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("还没有评论，点击刷新"),
         "hide_unwelcome": MessageLookupByLibrary.simpleMessage("隐藏不受欢迎的内容"),
         "hide_unwelcome_msg":
-            MessageLookupByLibrary.simpleMessage("隐藏 xx>=10 且 xx>oo的内容"),
+            MessageLookupByLibrary.simpleMessage("隐藏 xx>=5 && xx>oo的内容"),
         "hot_comment": MessageLookupByLibrary.simpleMessage("热门评论"),
         "identity": MessageLookupByLibrary.simpleMessage("游客身份"),
         "identity_msg": MessageLookupByLibrary.simpleMessage("用于评论的身份"),

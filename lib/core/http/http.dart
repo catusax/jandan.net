@@ -13,6 +13,9 @@ class XHttp {
       baseUrl: "https://i.jandan.net",
       connectTimeout: 5000,
       receiveTimeout: 3000,
+      headers: {
+        "User-Agent": "Jandan Android App V5.2.0.0",
+      },
     ),
   );
 
@@ -86,9 +89,9 @@ class XHttp {
   }
 
   ///post 表单请求
-  static Future post(String url, [Map<String, dynamic>? params]) async {
+  static Future post(String url, Map<String, dynamic> params) async {
     try {
-      Response response = await dio.post(url, queryParameters: params);
+      Response response = await dio.post(url, data: FormData.fromMap(params));
       return response.data;
     } on DioError catch (e) {
       handleError(e);
