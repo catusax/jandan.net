@@ -6,8 +6,8 @@ import '../../router/router_map.dart';
 import '../../utils/provider.dart';
 import '../setting/setting_page.dart';
 import 'hot/hot_page.dart';
-import 'lomo/lomo_page.dart';
 import 'news/news_page.dart';
+import 'wuliao/lomo_page.dart';
 import 'wuliao/wuliao_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -122,8 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
             HotPage(
               scrollController: hotScrollController,
             ),
-            WuliaoPage(
-              scrollController: wuliaoScrollController,
+            LomoPage(
+              commentId: "26402",
+              scrollController: lomoScrollController,
             ),
             LomoPage(
               commentId: "21183",

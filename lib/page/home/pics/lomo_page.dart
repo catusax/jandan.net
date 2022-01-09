@@ -6,10 +6,10 @@ import 'package:jandan/utils/provider.dart';
 import '../../../core/http/jandan_api.dart';
 import '../../../router/router_map.dart';
 import '../../../widgets/card/wuliao_card.dart';
-import '../wuliao/tucao_page.dart';
+import 'tucao_page.dart';
 
-class LomoPage extends StatefulWidget {
-  const LomoPage({
+class PicsPage extends StatefulWidget {
+  const PicsPage({
     Key? key,
     required this.scrollController,
     required this.commentId,
@@ -19,10 +19,10 @@ class LomoPage extends StatefulWidget {
   final String commentId;
 
   @override
-  State<LomoPage> createState() => _LomoPageState();
+  State<PicsPage> createState() => _PicsPageState();
 }
 
-class _LomoPageState extends State<LomoPage>
+class _PicsPageState extends State<PicsPage>
     with AutomaticKeepAliveClientMixin {
   final PagingController<int, CardItem> _pagingController =
       PagingController(firstPageKey: 0);

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:jandan/models/card_item.dart';
-import 'package:jandan/utils/provider.dart';
 
 import '../../../core/http/jandan_api.dart';
+import '../../../models/card_item.dart';
 import '../../../router/router_map.dart';
+import '../../../utils/provider.dart';
 import '../../../widgets/card/wuliao_card.dart';
-import '../wuliao/tucao_page.dart';
+import '../pics/tucao_page.dart';
 
 class HotPage extends StatefulWidget {
   const HotPage({

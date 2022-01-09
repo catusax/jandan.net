@@ -10,7 +10,7 @@ import '../models/posts/news.dart';
 import '../page/home/homepage.dart';
 import '../page/home/news/news_detail_page.dart';
 import '../page/home/news/news_tucao_page.dart';
-import '../page/home/wuliao/tucao_page.dart';
+import '../page/home/pics/tucao_page.dart';
 import '../page/image_viewer/image_viewer_page.dart';
 import '../page/setting/easter_egg.dart';
 import '../page/setting/setting_page.dart';
