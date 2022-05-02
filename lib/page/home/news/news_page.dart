@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../models/posts/news.dart';
-import '../../../router/router_map.dart';
 import '../../../widgets/card/news_card.dart';
 import 'news_detail_page.dart';
 
@@ -59,8 +59,11 @@ class _NewsPageState extends State<NewsPage>
         builderDelegate: PagedChildBuilderDelegate<Post>(
           itemBuilder: (context, item, index) => InkWell(
             onTap: () {
-              RouteMaps.navigateTo(context, NewsDetailPage.routeName,
-                  params: {NewsDetailPage.paramPost: item.toJson()});
+              Navigator.of(context).push(
+                CupertinoPageRoute(builder: (builder) {
+                  return NewsDetailPage(post: item);
+                }),
+              );
             },
             child: NewsCard(
               post: item,

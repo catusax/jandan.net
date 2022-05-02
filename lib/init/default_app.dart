@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:jandan/init/splash.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../core/http/http.dart';
 import '../generated/l10n.dart';
-import '../router/router_map.dart';
 import '../utils/provider.dart';
 import '../utils/sputils.dart';
 import 'locator.dart';
@@ -42,7 +42,6 @@ class DefaultApp {
 
   /// 程序初始化操作
   static void initApp() {
-    RouteMaps().defineRoutes();
     XHttp.init();
     timeago.setLocaleMessages('zh', CNTimeMessage());
   }
@@ -67,10 +66,9 @@ class MyApp extends StatelessWidget {
             brightness: appTheme.brightness,
             primarySwatch: appTheme.themeColor,
             primaryColor: appTheme.themeColor,
-            primaryColorBrightness: Brightness.dark,
           ),
           title: 'Jandan',
-          onGenerateRoute: router.generator,
+          home: const SplashPage(),
         );
       },
     );

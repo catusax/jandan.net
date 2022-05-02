@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:jandan/models/card_item.dart';
 import 'package:jandan/utils/provider.dart';
 
 import '../../../core/http/jandan_api.dart';
-import '../../../router/router_map.dart';
 import '../../../widgets/card/wuliao_card.dart';
 import 'tucao_page.dart';
 
@@ -67,8 +67,11 @@ class _PicsPageState extends State<PicsPage>
         builderDelegate: PagedChildBuilderDelegate<CardItem>(
           itemBuilder: (context, item, index) => InkWell(
             onTap: () {
-              RouteMaps.navigateTo(context, TucaoPage.routeName,
-                  params: {TucaoPage.paramItem: item.toJson()});
+              Navigator.of(context).push(
+                CupertinoPageRoute(builder: (builder) {
+                  return TucaoPage(item: item);
+                }),
+              );
             },
             child: WuliaoCard(
               item: item,

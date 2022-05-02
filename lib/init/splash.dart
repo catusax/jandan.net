@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../router/router_map.dart';
+import '../page/home/homepage.dart';
 
 //类似广告启动页
 class SplashPage extends StatelessWidget {
@@ -28,6 +28,14 @@ class SplashPage extends StatelessWidget {
 
   //页面跳转
   void goHomePage(BuildContext context) {
-    RouteMaps.navigateTo(context, '/home', clearStack: true);
+    Navigator.pushAndRemoveUntil(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (c, a1, a2) => const MyHomePage(),
+          transitionsBuilder: (c, anim, a2, child) =>
+              FadeTransition(opacity: anim, child: child),
+          transitionDuration: const Duration(milliseconds: 200),
+        ),
+        (route) => false);
   }
 }

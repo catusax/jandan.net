@@ -1,13 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:jandan/init/themes.dart';
 import 'package:provider/provider.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
-import '../../router/router_map.dart';
+import '../../init/themes.dart';
 import '../../utils/provider.dart';
 import '../../widgets/layout/identity_dialog.dart';
 import 'easter_egg.dart';
@@ -115,7 +115,12 @@ class _SettingPageState extends State<SettingPage> {
               clickTimes++;
               if (clickTimes == 5) {
                 clickTimes = 0;
-                RouteMaps.navigateTo(context, EasterEggPage.routeName);
+                Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (c, a1, a2) => const EasterEggPage(),
+                  transitionsBuilder: (c, anim, a2, child) =>
+                      FadeTransition(opacity: anim, child: child),
+                  transitionDuration: const Duration(milliseconds: 300),
+                ));
               } else {
                 timer = Timer(const Duration(seconds: 1), () {
                   clickTimes = 0;

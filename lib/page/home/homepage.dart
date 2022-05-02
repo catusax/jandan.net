@@ -1,14 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
-import '../../router/router_map.dart';
 import '../../utils/provider.dart';
 import '../setting/setting_page.dart';
 import 'hot/hot_page.dart';
 import 'news/news_page.dart';
 import 'pics/lomo_page.dart';
-import 'wuliao/wuliao_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -70,10 +69,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       Navigator.of(popupMenuContext).pop();
                       //TODO: BUG,需要navigate两遍才能进入页面，不知道为什么
-                      RouteMaps.navigateTo(context, SettingPage.routeName,
-                          params: {});
-                      RouteMaps.navigateTo(context, SettingPage.routeName,
-                          params: {});
+
+                      Navigator.of(context).push(
+                        CupertinoPageRoute(builder: (builder) {
+                          return const SettingPage();
+                        }),
+                      );
+                      Navigator.of(context).push(
+                        CupertinoPageRoute(builder: (builder) {
+                          return const SettingPage();
+                        }),
+                      );
                       // RouteMaps.navigateTo(
                       //     popupMenuContext, SettingPage.routeName,
                       //     params: {});

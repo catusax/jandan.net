@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:extended_image/extended_image.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
@@ -13,7 +10,6 @@ import '../../init/locator.dart';
 import '../../init/themes.dart';
 import '../../models/card_item.dart';
 import '../../page/image_viewer/image_viewer_page.dart';
-import '../../router/router_map.dart';
 import '../../utils/assets.dart';
 import '../../utils/snackbar.dart';
 import '../text/blod_text.dart';
@@ -167,12 +163,15 @@ class _WuliaoCardState extends State<WuliaoCard> {
         enableLoadState: true,
       )),
       onTap: () {
-        RouteMaps.navigateTo(context, ImageViewerPage.routeName,
-            params: {
-              ImageViewerPage.paramImages: json.encode(widget.item.pics),
-              ImageViewerPage.paramIndex: index.toString(),
-            },
-            transition: TransitionType.fadeIn);
+        Navigator.of(context).push(PageRouteBuilder(
+          pageBuilder: (c, a1, a2) => ImageViewerPage(
+            images: [url],
+            currentIndex: index,
+          ),
+          transitionsBuilder: (c, anim, a2, child) =>
+              FadeTransition(opacity: anim, child: child),
+          transitionDuration: const Duration(milliseconds: 300),
+        ));
       },
     );
   }

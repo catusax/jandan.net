@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../core/http/jandan_api.dart';
 import '../../../models/card_item.dart';
-import '../../../router/router_map.dart';
 import '../../../utils/provider.dart';
 import '../../../widgets/card/wuliao_card.dart';
 import '../pics/tucao_page.dart';
@@ -62,8 +62,11 @@ class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
         builderDelegate: PagedChildBuilderDelegate<CardItem>(
           itemBuilder: (context, item, index) => InkWell(
             onTap: () {
-              RouteMaps.navigateTo(context, TucaoPage.routeName,
-                  params: {TucaoPage.paramItem: item.toJson()});
+              Navigator.of(context).push(
+                CupertinoPageRoute(builder: (builder) {
+                  return TucaoPage(item: item);
+                }),
+              );
             },
             child: WuliaoCard(
               item: item,

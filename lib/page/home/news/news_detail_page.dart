@@ -1,4 +1,5 @@
 import 'package:extended_image/extended_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -12,7 +13,6 @@ import '../../../init/locator.dart';
 import '../../../init/themes.dart';
 import '../../../models/posts/news.dart';
 import '../../../models/posts/post.dart';
-import '../../../router/router_map.dart';
 import '../../../utils/snackbar.dart';
 import '../../image_viewer/image_viewer_page.dart';
 import 'news_tucao_page.dart';
@@ -62,8 +62,11 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
             const Spacer(),
             IconButton(
                 onPressed: () {
-                  RouteMaps.navigateTo(context, NewsTucaoPage.routeName,
-                      params: {NewsTucaoPage.paramPost: widget.post.toJson()});
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(builder: (builder) {
+                      return NewsTucaoPage(post: widget.post);
+                    }),
+                  );
                 },
                 icon: const Icon(Icons.comment)),
             IconButton(
@@ -164,18 +167,19 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
               data: postContent?.post.content,
               onLinkTap: (url, context, attributes, element) {
                 if (url != null) {
-                  launch(url);
+                  launchUrl(Uri.parse(url));
                 }
               },
               onImageTap: (url, renderContext, attributes, element) {
-                RouteMaps.navigateTo(
-                  context,
-                  ImageViewerPage.routeName,
-                  params: {
-                    ImageViewerPage.paramImages: [url],
-                    ImageViewerPage.paramIndex: 0
-                  },
-                );
+                Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (c, a1, a2) => ImageViewerPage(
+                    images: [url!],
+                    currentIndex: 0,
+                  ),
+                  transitionsBuilder: (c, anim, a2, child) =>
+                      FadeTransition(opacity: anim, child: child),
+                  transitionDuration: const Duration(milliseconds: 300),
+                ));
               },
             ),
           ),
