@@ -6,7 +6,7 @@ import '../../../generated/l10n.dart';
 import '../../../init/locator.dart';
 import '../../../init/themes.dart';
 import '../../../models/card_item.dart';
-import '../../../models/wuliao/tucao.dart';
+import '../../../models/pics/tucao.dart';
 import '../../../utils/snackbar.dart';
 import '../../../widgets/card/tucao_card.dart';
 import '../../../widgets/card/wuliao_card.dart';

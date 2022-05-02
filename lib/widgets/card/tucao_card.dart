@@ -8,7 +8,7 @@ import '../../core/http/jandan_api.dart';
 import '../../generated/l10n.dart';
 import '../../init/locator.dart';
 import '../../init/themes.dart';
-import '../../models/wuliao/tucao.dart';
+import '../../models/pics/tucao.dart';
 import '../layout/comment_navigation_bar.dart';
 import '../text/blod_text.dart';
 

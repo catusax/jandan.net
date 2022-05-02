@@ -6,22 +6,22 @@ import 'package:flutter/foundation.dart';
 
 import '../card_item.dart';
 
-class Lomo {
+class Pics {
   final int code;
   final String msg;
   final List<LomoData> data;
-  Lomo({
+  Pics({
     required this.code,
     required this.msg,
     required this.data,
   });
 
-  Lomo copyWith({
+  Pics copyWith({
     int? code,
     String? msg,
     List<LomoData>? data,
   }) {
-    return Lomo(
+    return Pics(
       code: code ?? this.code,
       msg: msg ?? this.msg,
       data: data ?? this.data,
@@ -36,8 +36,8 @@ class Lomo {
     };
   }
 
-  factory Lomo.fromMap(Map<String, dynamic> map) {
-    return Lomo(
+  factory Pics.fromMap(Map<String, dynamic> map) {
+    return Pics(
       code: map['code']?.toInt() ?? 0,
       msg: map['msg'] ?? '',
       data: List<LomoData>.from(map['data']?.map((x) => LomoData.fromMap(x))),
@@ -46,7 +46,7 @@ class Lomo {
 
   String toJson() => json.encode(toMap());
 
-  factory Lomo.fromJson(String source) => Lomo.fromMap(json.decode(source));
+  factory Pics.fromJson(String source) => Pics.fromMap(json.decode(source));
 
   @override
   String toString() => 'Lomo(code: $code, msg: $msg, data: $data)';
@@ -55,7 +55,7 @@ class Lomo {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Lomo &&
+    return other is Pics &&
         other.code == code &&
         other.msg == msg &&
         listEquals(other.data, data);

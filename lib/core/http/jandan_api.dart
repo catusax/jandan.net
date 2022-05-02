@@ -1,25 +1,16 @@
-import 'package:jandan/models/resp/ooxx_tucao_resp.dart';
-
-import '../../models/lomo/lomo.dart';
+import '../../models/pics/hot.dart';
+import '../../models/pics/pics.dart';
+import '../../models/pics/tucao.dart';
 import '../../models/posts/news.dart';
 import '../../models/posts/post.dart';
 import '../../models/posts/post_comments.dart';
 import '../../models/resp/ooxx.dart';
+import '../../models/resp/ooxx_tucao_resp.dart';
 import '../../models/tucao.dart';
-import '../../models/wuliao/hot.dart';
-import '../../models/wuliao/tucao.dart';
-import '../../models/wuliao/wuliao.dart';
 import '../utils/log.dart';
 import 'http.dart';
 
 class JandanApi {
-  static Future<Wuliao> wuliao({int page = 0}) async {
-    final resp = await XHttp.get(
-        "/", {"oxwlxojflwblxbsapi": "jandan.get_pic_comments", "page": page});
-    Log.log.fine(resp);
-    return Wuliao.fromMap(resp);
-  }
-
   static Future<News> news({int page = 0}) async {
     final resp = await XHttp.get("/", {
       "oxwlxojflwblxbsapi": "get_recent_posts",
@@ -50,13 +41,13 @@ class JandanApi {
   }
 
   /// startid 上一页最后一个条目的id
-  static Future<Lomo> lomo(String commentId, {String? startid}) async {
+  static Future<Pics> lomo(String commentId, {String? startid}) async {
     String param = "";
     if (startid != null) param = "?start_id=" + startid;
     final resp = await XHttp.get(
         "https://api.jandan.net/api/v1/comment/list/" + commentId + param);
     Log.log.fine(resp);
-    return Lomo.fromMap(resp);
+    return Pics.fromMap(resp);
   }
 
   static Future<OOXXResp> ooxxComment(bool positive, String commentId) async {
